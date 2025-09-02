@@ -15,6 +15,7 @@ builder.Services.AddTransient<IAuthorizationRepository, AuthorizationRepository>
 builder.Services.AddTransient<ICategoriesRepository, CategoriesRepository>();
 builder.Services.AddTransient<IBrandRepository, BrandRepository>();
 builder.Services.AddTransient<IProductRepository, ProductRepository>();
+builder.Services.AddTransient<IRecordsRepository, RecordsRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
