@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Models.models
 {
@@ -8,14 +9,21 @@ namespace Models.models
         [Key] public int Id { get; set; }
         public string ProductName { get; set; }
         public string ProductDescription { get; set; }
-        public Product(): this("Пусто","Пусто")
+        [ForeignKey("CategorieId")] public Categorie Categorie { get; set; }
+        public int CategorieId { get; set; }
+        [ForeignKey("BrandId")] public Brand Brand { get; set; }
+        public int BrandId { get; set; }
+
+        public Product(): this("Пусто","Пусто",new Brand(), new Categorie())
         {
         }
 
-        public Product(string name, string description)
+        public Product(string name, string description,Brand brand, Categorie categorie )
         {
             ProductName = name;
             ProductDescription = description;
+            Categorie = categorie;
+            Brand = brand;
         }
     }
 }

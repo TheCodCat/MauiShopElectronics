@@ -12,11 +12,13 @@ namespace WebApi.Controllers
     {
         private readonly ICategoriesRepository categoriesRepository;
         private readonly IBrandRepository brandRepository;
+        private readonly IProductRepository productRepository;
 
-        public AdminController(ICategoriesRepository categoriesRepository, IBrandRepository brandRepository )
+        public AdminController(ICategoriesRepository categoriesRepository, IBrandRepository brandRepository, IProductRepository productRepository )
         {
             this.categoriesRepository = categoriesRepository;
             this.brandRepository = brandRepository;
+            this.productRepository = productRepository;
         }
 
         [HttpPost("/addCategorie")]
@@ -57,6 +59,28 @@ namespace WebApi.Controllers
         public async Task<bool> RemoteBrands(int id)
         {
             return await brandRepository.Remote(id);
+        }
+
+        [HttpGet("/getProducts")]
+        public async Task<List<Product>> GetProducts()
+        {
+            return await productRepository.GetProducts();
+        }
+        [HttpGet("/getProduct/{id:int}")]
+        public async Task<Product> GetProduct(int id)
+        {
+            return await productRepository.GetProduct(id);
+        }
+
+        [HttpPost("/addProduct")]
+        public async Task<bool> CreateProduct([FromBody] ProductDTO productDTO)
+        {
+            return await productRepository.Create(productDTO);
+        }
+        [HttpPost("/remoteProduct/{id:int}")]
+        public async Task<bool> RemoteProduct(int id)
+        {
+            return await productRepository.Remote(id);
         }
     }
 }
