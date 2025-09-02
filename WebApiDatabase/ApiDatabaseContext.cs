@@ -7,6 +7,8 @@ namespace WebApiDatabase
     {
         public DbSet<User> Users { get; set; } = null!;
         public DbSet<Categorie> Categories { get; set; } = null!;
+        public DbSet<Brand> Brands { get; set; } = null!;
+        public DbSet<Product> Products { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

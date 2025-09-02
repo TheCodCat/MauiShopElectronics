@@ -13,6 +13,7 @@ builder.Services.AddOpenApi();
 builder.Services.AddDbContext<ApiDatabaseContext>();
 builder.Services.AddTransient<IAuthorizationRepository, AuthorizationRepository>();
 builder.Services.AddTransient<ICategoriesRepository, CategoriesRepository>();
+builder.Services.AddTransient<IBrandRepository, BrandRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

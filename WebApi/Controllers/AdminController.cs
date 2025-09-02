@@ -8,13 +8,15 @@ namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CategoriesController : ControllerBase
+    public class AdminController : ControllerBase
     {
         private readonly ICategoriesRepository categoriesRepository;
+        private readonly IBrandRepository brandRepository;
 
-        public CategoriesController(ICategoriesRepository categoriesRepository)
+        public AdminController(ICategoriesRepository categoriesRepository, IBrandRepository brandRepository )
         {
             this.categoriesRepository = categoriesRepository;
+            this.brandRepository = brandRepository;
         }
 
         [HttpPost("/addCategorie")]
@@ -37,6 +39,24 @@ namespace WebApi.Controllers
         public async Task<List<Categorie>> GetCategories()
         {
             return await categoriesRepository.GetCategories();
+        }
+
+        [HttpGet("/getBrands")]
+        public async Task<List<Brand>> GetBrands()
+        {
+            return await brandRepository.GetBrands();
+        }
+
+        [HttpPost("/createBrand")]
+        public async Task<bool> CreateBrand([FromBody] BrandDTO brandDTO)
+        {
+            return await brandRepository.Create(brandDTO);
+        }
+
+        [HttpPost("/remoteBrands/{id:int}")]
+        public async Task<bool> RemoteBrands(int id)
+        {
+            return await brandRepository.Remote(id);
         }
     }
 }
