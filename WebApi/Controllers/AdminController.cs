@@ -43,7 +43,6 @@ namespace WebApi.Controllers
             return await categoriesRepository.GetCategories();
         }
 
-
         [HttpGet("/getBrands")]
         public async Task<List<Brand>> GetBrands()
         {
@@ -62,8 +61,8 @@ namespace WebApi.Controllers
             return await brandRepository.Remote(id);
         }
 
-        [HttpGet("/getProducts/{categorie}")]
-        public async Task<List<Product>> GetProducts(Categorie categorie)
+        [HttpGet("/getProducts/categories")]
+        public async Task<List<Product>> GetProducts([FromBody] Categorie categorie)
         {
             return await productRepository.GetProducts(categorie);
         }

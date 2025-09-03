@@ -9,7 +9,7 @@ namespace MauiShopElectronics.ViewModels
 {
     public partial class CategoriesProductViewModel : ObservableObject
     {
-        private RestClient client;
+        private RestClient client = new RestClient();
         private Categorie categorie;
         private IConfiguration _configuration;
         [ObservableProperty]
@@ -19,16 +19,20 @@ namespace MauiShopElectronics.ViewModels
         {
             this.categorie = categorie;
         }
-
         public async void OnApperaining()
         {
-            string urlGet = _configuration.GetSection("ConnectionStrings").GetSection("GetProdurts").Value;
+            string urlGet = "http://localhost:5073/getProducts/categories";
             var request = new RestRequest(urlGet, Method.Get);
-            RestResponse response = await client.ExecuteAsync(request);
+            var json = JsonConvert.SerializeObject(categorie);
 
-            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            request.AddHeader("Content-Type", "application/json");
+            request.AddParameter("application/json", json, ParameterType.RequestBody);
+
+            RestResponse restResponse = await client.ExecuteAsync(request);
+
+            if (restResponse.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                Products = JsonConvert.DeserializeObject<List<Product>>(response.Content);
+                Products = JsonConvert.DeserializeObject<List<Product>>(restResponse.Content);
             }
         }
     }

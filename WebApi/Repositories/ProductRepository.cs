@@ -40,7 +40,7 @@ namespace WebApi.Repositories
 
         public async Task<List<Product>> GetProducts(Categorie categorie)
         {
-            var result = apiDatabaseContext.Products.Where(x => x.Id == categorie.Id).ToList();
+            var result = apiDatabaseContext.Products.Include(x => x.Categorie).Where(x => x.CategorieId == categorie.Id).ToList();
             return result;
         }
 
