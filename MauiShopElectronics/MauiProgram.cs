@@ -1,4 +1,5 @@
-﻿using MauiShopElectronics.Services;
+﻿using MauiShopElectronics.Pages;
+using MauiShopElectronics.Services;
 using MauiShopElectronics.ViewModels;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -34,6 +35,7 @@ namespace MauiShopElectronics
             builder.Services.AddTransient<AuthorizationViewModel>();
             builder.Services.AddTransient<MainViewModel>();
             builder.Services.AddSingleton<UserController>();
+            builder.Services.AddTransient<MainPage>();
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif

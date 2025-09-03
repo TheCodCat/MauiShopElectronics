@@ -9,15 +9,17 @@ namespace Models.DTO
         public string ProductDescription { get; set; }
         public Categorie Categorie { get; set; }
         public Brand Brand { get; set; }
-        public ProductDTO() : this("Пусто", "Пусто", new Brand(), new Categorie())
+        public string ImageURL { get; set; }
+        public ProductDTO() : this("Пусто", "Пусто", new Brand(), new Categorie(), string.Empty)
         {
         }
-        public ProductDTO(string name, string description, Brand brand, Categorie categorie)
+        public ProductDTO(string name, string description, Brand brand, Categorie categorie, string url)
         {
             ProductName = name;
             ProductDescription = description;
             Brand = brand;
             Categorie = categorie;
+            ImageURL = url;
         }
     }
 }

@@ -21,7 +21,7 @@ namespace WebApi.Repositories
 
             var brand = apiDatabaseContext.Brands.FirstOrDefault(x => x.Id == productDTO.Brand.Id);
             var categories = apiDatabaseContext.Categories.FirstOrDefault(x => x.Id == productDTO.Categorie.Id);
-            var newProduct = new Product(productDTO.ProductName, productDTO.ProductDescription, brand, categories);
+            var newProduct = new Product(productDTO.ProductName, productDTO.ProductDescription, brand, categories, string.Empty);
             apiDatabaseContext.Products.Add(newProduct);
             apiDatabaseContext.SaveChanges();
 

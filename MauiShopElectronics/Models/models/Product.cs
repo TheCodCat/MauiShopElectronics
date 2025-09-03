@@ -13,17 +13,19 @@ namespace MauiShopElectronics.Models.models
         public int CategorieId { get; set; }
         [ForeignKey("BrandId")] public Brand Brand { get; set; }
         public int BrandId { get; set; }
+        public string ImageURL { get; set; }
 
-        public Product() : this("Пусто", "Пусто", new Brand(), new Categorie())
+        public Product() : this("Пусто", "Пусто", new Brand(), new Categorie(), string.Empty)
         {
         }
 
-        public Product(string name, string description, Brand brand, Categorie categorie)
+        public Product(string name, string description, Brand brand, Categorie categorie, string imageURL)
         {
             ProductName = name;
             ProductDescription = description;
             Categorie = categorie;
             Brand = brand;
+            ImageURL = imageURL;
         }
     }
 }

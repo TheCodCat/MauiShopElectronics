@@ -8,6 +8,7 @@ namespace MauiShopElectronics.Pages
         public MainPage(MainViewModel mainViewModel)
         {
             InitializeComponent();
+            mainViewModel._page = this;
             BindingContext = mainViewModel;
             viewModel = mainViewModel;
         }
@@ -15,6 +16,7 @@ namespace MauiShopElectronics.Pages
         {
             base.OnAppearing();
             viewModel.Apperaining();
+            viewModel._page = this;
         }
     }
 }
