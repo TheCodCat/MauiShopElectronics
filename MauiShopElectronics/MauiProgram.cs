@@ -1,4 +1,5 @@
-﻿using MauiShopElectronics.ViewModels;
+﻿using MauiShopElectronics.Services;
+using MauiShopElectronics.ViewModels;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System.Reflection;
@@ -31,6 +32,8 @@ namespace MauiShopElectronics
                         fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                     });
             builder.Services.AddTransient<AuthorizationViewModel>();
+            builder.Services.AddTransient<MainViewModel>();
+            builder.Services.AddSingleton<UserController>();
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif

@@ -1,7 +1,39 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MauiShopElectronics.Pages.MainPage">
+             x:Class="MauiShopElectronics.Pages.MainPage"
+             xmlns:local="clr-namespace:MauiShopElectronics.Pages">
 
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <VerticalStackLayout Grid.Row="2" Spacing="10" BackgroundColor="Blue">
+            <VerticalStackLayout Margin="20">
+                <Label Text="О компании" FontAttributes="Bold" FontSize="24" TextColor="White"/>
+                <Label TextColor="White" Text="Магазин электроники предлагает широкий ассортимент качественных товаров, сотрудничает с известными брендами и стремится удовлетворить потребности клиентов." FontSize="20"/>
+            </VerticalStackLayout>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <local:CatalogCardComponent ProductsList="{Binding Products}"/>
+
+                <VerticalStackLayout Grid.Column="0" Margin="20">
+                    <Label Text="Контакты" FontAttributes="Bold" FontSize="24" TextColor="White"/>
+                    <Label Text="7 (905) 017-49-38" FontAttributes="Bold" FontSize="20" TextColor="White"/>
+                    <Label Text="Bytes@gmail.com" FontAttributes="Bold" FontSize="20" TextColor="White"/>
+                </VerticalStackLayout>
+                
+                <VerticalStackLayout Grid.Column="1" Margin="20">
+                    <Label Text="Мы на связи" FontAttributes="Bold" FontSize="24" TextColor="White"/>
+                </VerticalStackLayout>
+            </Grid>
+        </VerticalStackLayout>
+    </Grid>
 
 </ContentPage>

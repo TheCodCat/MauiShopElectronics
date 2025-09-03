@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MauiShopElectronics.Models.models;
+using MauiShopElectronics.Services;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using RestSharp;
@@ -10,6 +11,8 @@ namespace MauiShopElectronics.ViewModels
     public partial class AuthorizationViewModel : ObservableObject
     {
         private readonly IConfiguration _configuration;
+        private readonly UserController _userController;
+
         [ObservableProperty]
         private bool isRequired;
 
@@ -21,9 +24,18 @@ namespace MauiShopElectronics.ViewModels
         [ObservableProperty]
         private string password;
 
-        public AuthorizationViewModel(IConfiguration configuration)
+        [ObservableProperty]
+        private User user;
+
+        partial void OnUserChanging(User? oldValue, User newValue)
+        {
+            _userController.User.Value = newValue;
+        }
+
+        public AuthorizationViewModel(IConfiguration configuration, UserController userController)
         {
             _configuration = configuration;
+            _userController = userController;
         }
 
         [RelayCommand]
@@ -48,7 +60,11 @@ namespace MauiShopElectronics.ViewModels
 
             IsRequired = false;
 
-            bool.TryParse(restResponse.Content, out bool IsRequiredStatus);
+            IsRequiredStatus = restResponse.StatusCode switch
+            {
+                System.Net.HttpStatusCode.OK => true,
+                _ => false
+            };
         }
 
         [RelayCommand]
@@ -68,10 +84,17 @@ namespace MauiShopElectronics.ViewModels
             request.AddHeader("Content-Type", "application/json");
             request.AddParameter("application/json", json, ParameterType.RequestBody);
 
-
             RestResponse restResponse = await client.ExecuteAsync(request);
+            IsRequiredStatus = restResponse.StatusCode switch
+            {
+                System.Net.HttpStatusCode.OK => true,
+                _=> false
+            };
 
             IsRequired = false;
+
+            if (restResponse.StatusCode == System.Net.HttpStatusCode.OK)
+                User = JsonConvert.DeserializeObject<User>(restResponse.Content);
         }
     }
 }

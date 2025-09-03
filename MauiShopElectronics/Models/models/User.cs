@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Models.models
+namespace MauiShopElectronics.Models.models
 {
     public class User
     {

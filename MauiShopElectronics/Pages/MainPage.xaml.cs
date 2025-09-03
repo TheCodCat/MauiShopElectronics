@@ -1,10 +1,13 @@
-﻿namespace MauiShopElectronics.Pages
+﻿using MauiShopElectronics.ViewModels;
+
+namespace MauiShopElectronics.Pages
 {
     public partial class MainPage : ContentPage
     {
-        public MainPage()
+        public MainPage(MainViewModel mainViewModel)
         {
             InitializeComponent();
+            BindingContext = mainViewModel;
         }
 
     }

@@ -1,4 +1,6 @@
-﻿namespace MauiShopElectronics
+﻿using MauiShopElectronics.ViewModels;
+
+namespace MauiShopElectronics
 {
     public partial class AppShell : Shell
     {

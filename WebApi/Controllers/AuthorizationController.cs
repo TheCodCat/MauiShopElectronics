@@ -17,19 +17,19 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("/registration")]
-        public async Task<bool> Registration([FromBody] AuthDTO authDTO)
+        public async Task<ActionResult> Registration([FromBody] AuthDTO authDTO)
         {
             var result = await authorizationRepository.CreateUser(authDTO);
 
-            return result;
+            return result ? Ok(result) : BadRequest(result);
         }
 
         [HttpPost("/authorization")]
-        public async Task<User> Authorization([FromBody] AuthDTO authDTO)
+        public async Task<ActionResult> Authorization([FromBody] AuthDTO authDTO)
         {
             var result = await authorizationRepository.GetUser(authDTO);
 
-            return result;
+            return result != null ? Ok(result) : NoContent();
         }
     }
 }
