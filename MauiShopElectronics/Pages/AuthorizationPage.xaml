@@ -16,11 +16,11 @@
         </Grid.RowDefinitions>
 
         <VerticalStackLayout>
-            <Label Text="Регистрация/Авторизация" HorizontalTextAlignment="Center" FontSize="24" IsVisible="{Binding User, Converter={converts:AuthStatutConvert}}}"/>
+            <Label Text="Регистрация/Авторизация" HorizontalTextAlignment="Center" FontSize="24" IsVisible="{Binding User, Converter={converts:AuthStatutConvert}}"/>
 
         </VerticalStackLayout>
 
-        <VerticalStackLayout Grid.Row="1" Spacing="10" Margin="30" IsVisible="{Binding User, Converter={converts:AuthStatutConvert}}}">
+        <VerticalStackLayout Grid.Row="1" Spacing="10" Margin="30" IsVisible="{Binding User, Converter={converts:AuthStatutConvert}}">
             <input:FormView Spacing="10" SubmitCommand="{Binding AuthorizationCommand}">
 
                 <material:TextField Title="Login" AllowClear="True" MaxLength="20" Text="{Binding Login}">

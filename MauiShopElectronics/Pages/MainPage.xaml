@@ -7,9 +7,27 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="1*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+
+        <FlexLayout Grid.Row="1" BindableLayout.ItemsSource="{Binding Products}">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate>
+                    <Border BackgroundColor="Black" HeightRequest="300" WidthRequest="100">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="20"/>
+                        </Border.StrokeShape>
+
+                        <VerticalStackLayout>
+                            <Label Text="asdasd"/>
+                            <Label Text="{Binding ProductName}" FontSize="24"/>
+                            <Label Text="{Binding Brand.BrandName}"/>
+                        </VerticalStackLayout>
+                    </Border>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </FlexLayout>
 
         <VerticalStackLayout Grid.Row="2" Spacing="10" BackgroundColor="Blue">
             <VerticalStackLayout Margin="20">
@@ -21,7 +39,6 @@
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                <local:CatalogCardComponent ProductsList="{Binding Products}"/>
 
                 <VerticalStackLayout Grid.Column="0" Margin="20">
                     <Label Text="Контакты" FontAttributes="Bold" FontSize="24" TextColor="White"/>
