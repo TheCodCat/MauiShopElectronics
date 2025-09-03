@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiShopElectronics.Pages.AuthorizationPage"
+             xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
+             xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
+             Title="AuthorizationPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <Label Text="Регистрация/Авторизация" HorizontalTextAlignment="Center" FontSize="24"/>
+
+        <VerticalStackLayout Grid.Row="1" Spacing="10" Margin="30">
+            <input:FormView Spacing="10" SubmitCommand="{Binding AuthorizationCommand}">
+
+                <material:TextField Title="Login" AllowClear="True" MaxLength="20" Text="{Binding Login}">
+                    <validation:RequiredValidation Message="Login должен быть заполнен"/>
+                    <validation:MinLengthValidation MinLength="4" Message="минимальное количество симвалов - 4"/>
+                </material:TextField>
+
+                <material:TextField Title="Password" AllowClear="True" IsPassword="True" MaxLength="15" Text="{Binding Password}">
+                    <material:TextField.Attachments>
+                        <material:TextFieldPasswordShowHideAttachment/>
+                    </material:TextField.Attachments>
+                    <validation:RequiredValidation Message="пароль должен быть заполнен"/>
+                    <validation:MinLengthValidation MinLength="5" Message="минимальное количество симвалов - 5"/>
+                </material:TextField>
+
+                <BoxView StyleClass="Divider"/>
+
+                <Button Text="Ввойти"
+                    input:FormView.IsSubmitButton="True"/>
+            </input:FormView>
+
+            <Button Text="Регистрация" Command="{Binding RegistrationCommand}"/>
+        </VerticalStackLayout>
+        <ActivityIndicator Grid.RowSpan="3" IsRunning="{Binding IsRequired}" IsVisible="{Binding IsRequired}" BackgroundColor="#90000000"/>
+    </Grid>
+
+
+</ContentPage>
