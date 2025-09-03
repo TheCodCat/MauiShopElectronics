@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using MauiShopElectronics.Models.models;
-using Microsoft.Extensions.Configuration;
+using MauiShopElectronics.Pages;
 using Models.models;
 using Newtonsoft.Json;
 using RestSharp;
@@ -11,13 +12,15 @@ namespace MauiShopElectronics.ViewModels
     {
         private RestClient client = new RestClient();
         private Categorie categorie;
-        private IConfiguration _configuration;
+        public Page _page;
+
         [ObservableProperty]
         private List<Product> products = new List<Product>();
 
-        public CategoriesProductViewModel(Categorie categorie)
+        public CategoriesProductViewModel(Categorie categorie, Page page)
         {
             this.categorie = categorie;
+            _page = page;
         }
         public async void OnApperaining()
         {
@@ -34,6 +37,12 @@ namespace MauiShopElectronics.ViewModels
             {
                 Products = JsonConvert.DeserializeObject<List<Product>>(restResponse.Content);
             }
+        }
+
+        [RelayCommand]
+        public async void SelectProduct(Product product)
+        {
+            await _page.Navigation.PushAsync(new ProductPage(product));
         }
     }
 }

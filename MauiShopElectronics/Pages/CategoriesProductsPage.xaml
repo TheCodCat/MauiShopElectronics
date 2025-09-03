@@ -2,13 +2,27 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiShopElectronics.Pages.CategoriesProductsPage"
+             xmlns:viewModels="clr-namespace:MauiShopElectronics.ViewModels"
              Title="CategoriesProductsPage">
-    
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
-    
+
+    <FlexLayout BindableLayout.ItemsSource="{Binding Products}">
+        <BindableLayout.ItemTemplate>
+            <DataTemplate>
+                <Border BackgroundColor="#FAEBD7" HeightRequest="200">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="20"/>
+                    </Border.StrokeShape>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:CategoriesProductViewModel}}, Path=SelectProductCommand}" CommandParameter="{Binding .}"/>
+                    </Border.GestureRecognizers>
+                    <VerticalStackLayout Margin="5">
+                        <Image Source="{Binding ImageURL}" HeightRequest="100"/>
+                        <Label Text="{Binding ProductName}" TextColor="#A9A9A9"/>
+                        <Label Text="{Binding Brand.BrandName}" TextColor="#A9A9A9"/>
+                    </VerticalStackLayout>
+                </Border>
+            </DataTemplate>
+        </BindableLayout.ItemTemplate>
+    </FlexLayout>
+
 </ContentPage>

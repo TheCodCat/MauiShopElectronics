@@ -9,7 +9,7 @@ public partial class CategoriesProductsPage : ContentPage
 	public CategoriesProductsPage(Categorie categorie)
 	{
 		InitializeComponent();
-        viewModel = new CategoriesProductViewModel(categorie);
+        viewModel = new CategoriesProductViewModel(categorie, this);
 		BindingContext = viewModel;
 	}
 
