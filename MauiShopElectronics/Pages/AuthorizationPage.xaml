@@ -14,13 +14,18 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
 
-        <VerticalStackLayout>
+        <VerticalStackLayout Grid.Column="0" Grid.ColumnSpan="3">
             <Label Text="Регистрация/Авторизация" HorizontalTextAlignment="Center" FontSize="24" IsVisible="{Binding User, Converter={converts:AuthStatutConvert}}"/>
 
         </VerticalStackLayout>
 
-        <VerticalStackLayout Grid.Row="1" Spacing="10" Margin="30" IsVisible="{Binding User, Converter={converts:AuthStatutConvert}}">
+        <VerticalStackLayout Grid.Row="1" Grid.Column="1" Spacing="10" Margin="30" IsVisible="{Binding User, Converter={converts:AuthStatutConvert}}">
             <input:FormView Spacing="10" SubmitCommand="{Binding AuthorizationCommand}">
 
                 <material:TextField Title="Login" AllowClear="True" MaxLength="20" Text="{Binding Login}">
@@ -47,8 +52,8 @@
             <Label Text="{Binding IsRequiredStatus, Converter={converts:StatusRequestAuthConvert}}"/>
         </VerticalStackLayout>
 
-        <local:ProfilePage Grid.Row="1" IsVisible="{Binding User, Converter={converts:ReversAuthStatusConvert}}"/>
-        <ActivityIndicator Grid.RowSpan="3" IsRunning="{Binding IsRequired}" IsVisible="{Binding IsRequired}" BackgroundColor="#90000000"/>
+        <local:ProfilePage Grid.Row="1" Grid.Column="1" IsEnabled="{Binding User, Converter={converts:ReversAuthStatusConvert}}" IsVisible="{Binding User, Converter={converts:ReversAuthStatusConvert}}"/>
+        <ActivityIndicator Grid.RowSpan="3" Grid.ColumnSpan="3" IsRunning="{Binding IsRequired}" IsVisible="{Binding IsRequired}" BackgroundColor="#90000000"/>
     </Grid>
 
 

@@ -31,5 +31,13 @@ namespace WebApi.Controllers
 
             return result != null ? Ok(result) : NoContent();
         }
+
+        [HttpPost("/editProfile")]
+        public async Task<ActionResult> EditProfile([FromBody] User user)
+        {
+            var result = await authorizationRepository.EditUser(user);
+
+            return Ok(result);
+        }
     }
 }

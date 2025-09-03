@@ -9,5 +9,6 @@ namespace WebApi.Repositories
         public Task<bool> Remote(int id);
         public Task<List<Product>> GetProducts();
         public Task<Product> GetProduct(int id);
+        public Task<List<Product>> GetProducts(Categorie categorie);
     }
 }

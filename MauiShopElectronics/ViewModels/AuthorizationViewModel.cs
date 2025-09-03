@@ -12,6 +12,8 @@ namespace MauiShopElectronics.ViewModels
     {
         private readonly IConfiguration _configuration;
         private readonly UserController _userController;
+        private RestClient client = new RestClient();
+        public Page _page;
 
         [ObservableProperty]
         private bool isRequired;
@@ -46,7 +48,6 @@ namespace MauiShopElectronics.ViewModels
 
             await Task.Delay(500);
 
-            var client = new RestClient();
             var request = new RestRequest(urlReg,method: Method.Post);
 
             var authDTO = new AuthDTO(Login, Password);
@@ -75,7 +76,6 @@ namespace MauiShopElectronics.ViewModels
 
             await Task.Delay(500);
 
-            var client = new RestClient();
             var request = new RestRequest(urlReg, method: Method.Post);
 
             var authDTO = new AuthDTO(Login, Password);
@@ -95,6 +95,33 @@ namespace MauiShopElectronics.ViewModels
 
             if (restResponse.StatusCode == System.Net.HttpStatusCode.OK)
                 User = JsonConvert.DeserializeObject<User>(restResponse.Content);
+        }
+
+        [RelayCommand]
+        public async void EditProfile()
+        {
+            IsRequired = true;
+
+            string editURL = _configuration.GetSection("ConnectionStrings").GetSection("Edit").Value;
+            var request = new RestRequest(editURL, Method.Post);
+
+            var json = JsonConvert.SerializeObject(User);
+
+            request.AddHeader("Content-Type", "application/json");
+            request.AddParameter("application/json", json, ParameterType.RequestBody);
+
+            RestResponse restResponse = await client.ExecuteAsync(request);
+            if(restResponse.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                User = JsonConvert.DeserializeObject<User>(restResponse.Content);
+            }
+            IsRequired = false;
+        }
+
+        [RelayCommand]
+        public async void ExitAcount()
+        {
+            User = null;
         }
     }
 }

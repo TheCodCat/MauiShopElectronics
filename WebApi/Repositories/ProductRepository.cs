@@ -38,6 +38,12 @@ namespace WebApi.Repositories
             return apiDatabaseContext.Products.Include(x => x.Brand).Include(x => x.Categorie).ToList();
         }
 
+        public async Task<List<Product>> GetProducts(Categorie categorie)
+        {
+            var result = apiDatabaseContext.Products.Where(x => x.Id == categorie.Id).ToList();
+            return result;
+        }
+
         public async Task<bool> Remote(int id)
         {
             var contains = apiDatabaseContext.Products.FirstOrDefault(x => x.Id == id);

@@ -47,5 +47,16 @@ namespace WebApi.Repositories
             var user = apiDatabaseContext.Users.FirstOrDefault(x => x.Login == authDTO.Login && x.Password == hash);
             return user;
         }
+
+        public async Task<User> EditUser(User user)
+        {
+            var currentUser = apiDatabaseContext.Users.FirstOrDefault(x => x.Id == user.Id);
+            if (currentUser == null) return user;
+
+            currentUser.PhoneNumber = user.PhoneNumber;
+            currentUser.UserName = user.UserName;
+            apiDatabaseContext.SaveChanges();
+            return currentUser;
+        }
     }
 }

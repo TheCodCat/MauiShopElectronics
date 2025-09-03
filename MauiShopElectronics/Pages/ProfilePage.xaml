@@ -7,27 +7,26 @@
              xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
              xmlns:converts="clr-namespace:MauiShopElectronics.Converts">
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-        </Grid.ColumnDefinitions>
+    <VerticalStackLayout Grid.Row="1" Grid.Column="1" Spacing="10">
+        <Label Text="{Binding User.UserName, StringFormat='Имя - {0}'}"/>
+        <Label Text="{Binding User.Login, StringFormat='Login - {0}'}"/>
+        <Label Text="{Binding User.PhoneNumber}"/>
+        <CheckBox IsChecked="{Binding User.IsAdmin}" IsEnabled="False"/>
 
-        <VerticalStackLayout Grid.Row="1" Grid.Column="1">
-            <Label Text="{Binding User.UserName, StringFormat='Имя - {0}'}"/>
-            <Label Text="{Binding User.Login, StringFormat='Login - {0}'}"/>
-            <Label Text="{Binding User.PhoneNumber}"/>
-            <CheckBox IsChecked="{Binding User.IsAdmin}" IsEnabled="False"/>
-            
+        <BoxView StyleClass="Divider"/>
+
+        <input:FormView SubmitCommand="{Binding EditProfileCommand}" Spacing="10">
+            <material:TextField Title="ФИО" Text="{Binding User.UserName}">
+                <validation:RequiredValidation Message="ФИО должно быть заполнено"/>
+            </material:TextField>
+            <material:TextField Title="Номер телефона" Text="{Binding User.PhoneNumber}">
+                <validation:RequiredValidation Message="Номер телефона должен быть заполнен"/>
+                <validation:RegexValidation Pattern="{x:Static input:AdvancedEntry.REGEX_PHONE}"/>
+            </material:TextField>
             <BoxView StyleClass="Divider"/>
-
-            <material:TextField Title="ФИО" Text="{Binding User.UserName}"/>
-        </VerticalStackLayout>
-    </Grid>
+            <Button input:FormView.IsSubmitButton="True" Text="Редактировать"/>
+        </input:FormView>
+        <Button Text="Выйти из акаунта" Command="{Binding ExitAcountCommand}" HorizontalOptions="End"/>
+    </VerticalStackLayout>
 
 </ContentView>

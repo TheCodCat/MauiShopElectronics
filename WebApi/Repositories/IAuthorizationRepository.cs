@@ -7,5 +7,6 @@ namespace WebApi.Repositories
     {
         public Task<User> GetUser(AuthDTO authDTO);
         public Task<bool> CreateUser(AuthDTO authDTO);
+        public Task<User> EditUser(User user);
     }
 }

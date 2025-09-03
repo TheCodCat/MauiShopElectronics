@@ -13,7 +13,10 @@
                     Direction="Row">
             <Image Source="{Binding Product.ImageURL}" HeightRequest="400"/>
             <VerticalStackLayout Spacing="10" Margin="20">
-                <Label Text="{Binding Product.ProductName}" FontSize="24" FontAttributes="Bold"/>
+                <HorizontalStackLayout Spacing="10">
+                    <Label Text="{Binding Product.Brand.BrandName}" FontSize="24" FontAttributes="Bold"/>
+                    <Label Text="{Binding Product.ProductName}" FontSize="24" FontAttributes="Bold"/>
+                </HorizontalStackLayout>
                 <Label Text="{Binding Product.ProductDescription}"/>
             </VerticalStackLayout>
         </FlexLayout>
