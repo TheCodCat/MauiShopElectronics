@@ -10,9 +10,9 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="1*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
@@ -52,8 +52,10 @@
             <Label Text="{Binding IsRequiredStatus, Converter={converts:StatusRequestAuthConvert}}"/>
         </VerticalStackLayout>
 
-        <local:ProfilePage Grid.Row="1" Grid.Column="1" IsEnabled="{Binding User, Converter={converts:ReversAuthStatusConvert}}" IsVisible="{Binding User, Converter={converts:ReversAuthStatusConvert}}"/>
-        <ActivityIndicator Grid.RowSpan="3" Grid.ColumnSpan="3" IsRunning="{Binding IsRequired}" IsVisible="{Binding IsRequired}" BackgroundColor="#90000000"/>
+        <ScrollView Grid.Row="1" Grid.Column="1" IsEnabled="{Binding User, Converter={converts:ReversAuthStatusConvert}}" IsVisible="{Binding User, Converter={converts:ReversAuthStatusConvert}}">
+            <local:ProfilePage Margin="20"/>
+        </ScrollView>
+                <ActivityIndicator Grid.RowSpan="3" Grid.ColumnSpan="3" IsRunning="{Binding IsRequired}" IsVisible="{Binding IsRequired}" BackgroundColor="#90000000"/>
     </Grid>
 
 

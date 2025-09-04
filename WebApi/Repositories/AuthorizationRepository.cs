@@ -58,5 +58,18 @@ namespace WebApi.Repositories
             apiDatabaseContext.SaveChanges();
             return currentUser;
         }
+
+        public async Task<LocalAdressDTO> EditLocalAdress(LocalAdressDTO localAdressDTO)
+        {
+            var user = apiDatabaseContext.Users.FirstOrDefault(x => x.Id == localAdressDTO.UserId);
+            if (user != null)
+            {
+                user.LocalAdress = localAdressDTO.NewLocalAdress;
+                apiDatabaseContext.SaveChanges();
+                return localAdressDTO;
+            }
+            else
+                return new LocalAdressDTO();
+        }
     }
 }

@@ -54,7 +54,7 @@
                                 <Border.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:MainViewModel}}, Path=SelectCategoriesCommand}" CommandParameter="{Binding .}"/>
                                 </Border.GestureRecognizers>
-                                <Label Text="{Binding Title}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                                <Label Text="{Binding Title}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="White"/>
                             </Border>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>

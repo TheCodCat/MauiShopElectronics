@@ -5,7 +5,8 @@
              xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
              xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
              xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
-             xmlns:converts="clr-namespace:MauiShopElectronics.Converts">
+             xmlns:converts="clr-namespace:MauiShopElectronics.Converts"
+             xmlns:validations="clr-namespace:MauiShopElectronics.Validations">
 
     <VerticalStackLayout Grid.Row="1" Grid.Column="1" Spacing="10">
         <Label Text="{Binding User.UserName, StringFormat='Имя - {0}'}"/>
@@ -14,18 +15,36 @@
         <CheckBox IsChecked="{Binding User.IsAdmin}" IsEnabled="False"/>
 
         <BoxView StyleClass="Divider"/>
-
         <input:FormView SubmitCommand="{Binding EditProfileCommand}" Spacing="10">
-            <material:TextField Title="ФИО" Text="{Binding User.UserName}">
-                <validation:RequiredValidation Message="ФИО должно быть заполнено"/>
-            </material:TextField>
-            <material:TextField Title="Номер телефона" Text="{Binding User.PhoneNumber}">
-                <validation:RequiredValidation Message="Номер телефона должен быть заполнен"/>
-                <validation:RegexValidation Pattern="{x:Static input:AdvancedEntry.REGEX_PHONE}"/>
-            </material:TextField>
+                <material:TextField Title="ФИО" Text="{Binding User.UserName}">
+                    <validation:RequiredValidation Message="ФИО должно быть заполнено"/>
+                </material:TextField>
+                <material:TextField Title="Номер телефона" Text="{Binding User.PhoneNumber}">
+                    <validation:RequiredValidation Message="Номер телефона должен быть заполнен"/>
+                    <validation:RegexValidation Pattern="{x:Static input:AdvancedEntry.REGEX_PHONE}"/>
+                </material:TextField>
+                <BoxView StyleClass="Divider"/>
+                <Button input:FormView.IsSubmitButton="True" Text="Редактировать"/>
+            </input:FormView>
             <BoxView StyleClass="Divider"/>
-            <Button input:FormView.IsSubmitButton="True" Text="Редактировать"/>
+            <input:FormView Spacing="10" SubmitCommand="{Binding EditLocalAdressCommand}">
+            <material:TextField Text="{Binding Sity}" Title="Город">
+                    <validation:RequiredValidation Message="Поле должно быть заполненно"/>
+                </material:TextField>
+
+            <material:TextField Text="{Binding Strit}" Title="Улица">
+                    <validation:RequiredValidation Message="Поле должно быть заполненно"/>
+                </material:TextField>
+
+            <material:TextField Text="{Binding HomeNumber}" Title="Кв/дом">
+                    <validation:RequiredValidation Message="Поле должно быть заполненно"/>
+                <validation:RegexValidation Pattern="{x:Static input:AdvancedEntry.REGEX_DIGITSONLY}" Message="Укажите число"/>
+            </material:TextField>
+            <Button Text="Изменить адрес" input:FormView.IsSubmitButton="True"/>
         </input:FormView>
+
+        <material:TextField Text="{Binding FullAdress}" Title="Полный адрес" IsEnabled="False"/>
+
         <Button Text="Выйти из акаунта" Command="{Binding ExitAcountCommand}" HorizontalOptions="End"/>
     </VerticalStackLayout>
 

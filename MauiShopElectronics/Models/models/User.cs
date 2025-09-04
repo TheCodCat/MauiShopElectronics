@@ -9,6 +9,7 @@ namespace MauiShopElectronics.Models.models
         public string Login { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
         public string PhoneNumber { get; set; } = string.Empty;
+        public string LocalAdress { get; set; } = string.Empty;
         public bool IsAdmin { get; set; }
         public User(string login, string password)
         {

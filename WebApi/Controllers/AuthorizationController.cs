@@ -39,5 +39,12 @@ namespace WebApi.Controllers
 
             return Ok(result);
         }
+        [HttpPost("/editLocalAdress")]
+        public async Task<ActionResult> EditLocalAdress([FromBody] LocalAdressDTO localAdressDTO)
+        {
+            var result = await authorizationRepository.EditLocalAdress(localAdressDTO);
+
+            return Ok(result);
+        }
     }
 }

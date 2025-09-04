@@ -6,7 +6,6 @@ using Microsoft.Extensions.Configuration;
 using Models.models;
 using Newtonsoft.Json;
 using RestSharp;
-using System.Threading.Tasks;
 
 namespace MauiShopElectronics.ViewModels
 {

@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using MauiShopElectronics.Models.models;
 using MauiShopElectronics.Services;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts;
 using Newtonsoft.Json;
 using RestSharp;
 
@@ -29,9 +30,35 @@ namespace MauiShopElectronics.ViewModels
         [ObservableProperty]
         private User user;
 
+        [ObservableProperty]
+        private string sity;
+
+        [ObservableProperty]
+        private string strit;
+
+        [ObservableProperty]
+        private string homeNumber;
+
+        [ObservableProperty]
+        private string fullAdress;
+
+        partial void OnSityChanging(string? oldValue, string newValue)
+        {
+            GetFullAdress(newValue, Strit, HomeNumber);
+        }
+        partial void OnStritChanging(string? oldValue, string newValue)
+        {
+            GetFullAdress(Sity, newValue, HomeNumber);
+        }
+        partial void OnHomeNumberChanging(string? oldValue, string newValue)
+        {
+            GetFullAdress(Sity, Strit, newValue);
+        }
+
         partial void OnUserChanging(User? oldValue, User newValue)
         {
             _userController.User.Value = newValue;
+            FullAdress = newValue == null ? string.Empty : newValue.LocalAdress;
         }
 
         public AuthorizationViewModel(IConfiguration configuration, UserController userController)
@@ -122,6 +149,31 @@ namespace MauiShopElectronics.ViewModels
         public async void ExitAcount()
         {
             User = null;
+        }
+
+        [RelayCommand]
+        public async void EditLocalAdress()
+        {
+            string url = _configuration.GetSection("ConnectionStrings").GetSection("EditLocalAdress").Value;
+            var request = new RestRequest(url,Method.Post);
+            request.AddHeader("Content-Type", "application/json");
+
+            string json = JsonConvert.SerializeObject(new LocalAdressDTO(User.Id, FullAdress));
+            request.AddParameter("application/json", json, ParameterType.RequestBody);
+            RestResponse response = await client.ExecuteAsync(request);
+
+            if(response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                Sity = string.Empty;
+                Strit = string.Empty;
+                HomeNumber = string.Empty;
+                FullAdress = JsonConvert.DeserializeObject<LocalAdressDTO>(response.Content).NewLocalAdress;
+            }
+        }
+
+        private void GetFullAdress(string sity, string strit, string homeNumber)
+        {
+            FullAdress = $"{sity}.{strit}.{homeNumber}";
         }
     }
 }
