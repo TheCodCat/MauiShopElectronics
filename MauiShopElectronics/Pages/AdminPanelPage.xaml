@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiShopElectronics.Pages.AdminPanelPage"
+             xmlns:local="clr-namespace:MauiShopElectronics.Pages"
+             xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
+             xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
+             xmlns:converts="clr-namespace:MauiShopElectronics.Converts"
+             xmlns:viewModels="clr-namespace:MauiShopElectronics.ViewModels"
+             x:DataType="viewModels:AdminViewModel"
+             Title="Панель админа">
+    <ScrollView>
+        <VerticalStackLayout>
+            
+            <VerticalStackLayout>
+                <Label Text="Редактирование категорий" HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="24"/>
+                <material:TabView>
+
+                    <material:TabItem Title="Создание">
+                        <material:TabItem.ContentTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <material:TextField Title="Название новой категории" Text="{Binding NameNewCategories}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </material:TabItem.ContentTemplate>
+                    </material:TabItem>
+
+
+                    <material:TabItem Title="Удаление">
+                        <material:TabItem.ContentTemplate>
+                            <DataTemplate>
+                                <Label Text="Second Tab" />
+                            </DataTemplate>
+                        </material:TabItem.ContentTemplate>
+                    </material:TabItem>
+
+                    <material:TabItem Title="Изменение">
+                        <material:TabItem.ContentTemplate>
+                            <DataTemplate>
+                                <Label Text="Third Tab" />
+                            </DataTemplate>
+                        </material:TabItem.ContentTemplate>
+                    </material:TabItem>
+                </material:TabView>
+            </VerticalStackLayout>
+            
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

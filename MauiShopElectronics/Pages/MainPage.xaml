@@ -7,6 +7,19 @@
 
     <ScrollView>
         <VerticalStackLayout>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Border Margin="20" StrokeThickness="10">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="60"/>
+                    </Border.StrokeShape>
+                    <Image Source="logo.png"/>
+                </Border>
+            </Grid>
             <Label Text="Хиты" HorizontalTextAlignment="Center" FontSize="24" FontAttributes="Bold"/>
             
             <VerticalStackLayout Margin="5">

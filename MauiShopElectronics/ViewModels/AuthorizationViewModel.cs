@@ -1,9 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MauiShopElectronics.Models.models;
+using MauiShopElectronics.Pages;
 using MauiShopElectronics.Services;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts;
 using Newtonsoft.Json;
 using RestSharp;
 
@@ -174,6 +174,12 @@ namespace MauiShopElectronics.ViewModels
         private void GetFullAdress(string sity, string strit, string homeNumber)
         {
             FullAdress = $"{sity}.{strit}.{homeNumber}";
+        }
+
+        [RelayCommand]
+        public async void ToAdminPanel()
+        {
+            await _page.Navigation.PushAsync(new AdminPanelPage(_configuration));
         }
     }
 }

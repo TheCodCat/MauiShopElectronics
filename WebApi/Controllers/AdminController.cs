@@ -38,6 +38,7 @@ namespace WebApi.Controllers
         }
 
         [HttpGet("/getCategories")]
+        [EndpointSummary("Получение всех категорий")]
         public async Task<List<Categorie>> GetCategories()
         {
             return await categoriesRepository.GetCategories();

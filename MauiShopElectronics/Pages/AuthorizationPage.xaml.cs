@@ -8,5 +8,6 @@ public partial class AuthorizationPage : ContentPage
 	{
 		InitializeComponent();
 		BindingContext = authorizationViewModel;
+		authorizationViewModel._page = this;
 	}
 }

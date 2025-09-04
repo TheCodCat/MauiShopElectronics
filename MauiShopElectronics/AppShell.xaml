@@ -12,7 +12,7 @@
         <ShellContent ContentTemplate="{DataTemplate pages:MainPage}"/>
     </FlyoutItem>
 
-    <FlyoutItem Title="Регистрация/Авторизация" Route="Authorization">
+    <FlyoutItem Title="Профиль" Route="Authorization">
         <ShellContent ContentTemplate="{DataTemplate pages:AuthorizationPage}"/>
     </FlyoutItem>
 

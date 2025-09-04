@@ -12,7 +12,7 @@
         <Label Text="{Binding User.UserName, StringFormat='Имя - {0}'}"/>
         <Label Text="{Binding User.Login, StringFormat='Login - {0}'}"/>
         <Label Text="{Binding User.PhoneNumber}"/>
-        <CheckBox IsChecked="{Binding User.IsAdmin}" IsEnabled="False"/>
+        <Button Text="Админ панель" IsVisible="{Binding User.IsAdmin}" Command="{Binding ToAdminPanelCommand}"/>
 
         <BoxView StyleClass="Divider"/>
         <input:FormView SubmitCommand="{Binding EditProfileCommand}" Spacing="10">
