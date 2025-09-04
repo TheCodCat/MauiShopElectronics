@@ -12,7 +12,7 @@ namespace MauiShopElectronics.ViewModels
     {
         private readonly IConfiguration _configuration;
         RestClient client = new RestClient();
-
+        #region categories
         [ObservableProperty] 
         private List<Categorie> categories = new List<Categorie>();
 
@@ -22,22 +22,31 @@ namespace MauiShopElectronics.ViewModels
         [ObservableProperty]
         private string nameNewCategories = string.Empty;
 
-        [ObservableProperty]
-        private string nameNewBrand = string.Empty;
 
         [ObservableProperty]
         private string indexRemoteCategorie;
+        #endregion
 
-
+        #region brands
         [ObservableProperty]
         private List<Brand> brands = new List<Brand>();
+
+        [ObservableProperty]
+        private string nameNewBrand = string.Empty;
 
         [ObservableProperty]
         private string indexRemoteBrands;
 
         [ObservableProperty]
         private List<string> brandsString = new List<string>();
+        #endregion
 
+        #region products
+
+        [ObservableProperty]
+        private string nameNewProduct = string.Empty;
+
+        #endregion
         partial void OnCategoriesChanging(List<Categorie>? oldValue, List<Categorie> newValue)
         {
             CategoriesString = newValue?.Select(x => x.Title).ToList() ?? new List<string>();
@@ -150,6 +159,18 @@ namespace MauiShopElectronics.ViewModels
             {
                 GetBrands();
             }
+        }
+
+        [RelayCommand]
+        public async void AddProduct()
+        {
+
+        }
+
+        [RelayCommand]
+        public async void RemoteProduct()
+        {
+
         }
         
     }

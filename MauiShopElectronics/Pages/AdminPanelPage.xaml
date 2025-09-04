@@ -131,6 +131,41 @@
                     </material:TabItem>
 
                 </material:TabView>
+
+                <Label Text="Редактирование товаров" HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="24"/>
+
+                <material:TabView>
+
+                    <material:TabItem Title="Создание">
+                        <material:TabItem.ContentTemplate>
+                            <DataTemplate>
+                                <VerticalStackLayout>
+                                    <Grid ColumnSpacing="20" RowSpacing="10">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="3*"/>
+                                            <ColumnDefinition Width="1*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <input:FormView Grid.Column="1" SubmitCommand="{Binding CreateBrandsCommand}" Spacing="20">
+                                            
+                                            <material:PickerField Title="Категория">
+                                                <validation:RequiredValidation Message="Название должно быть заполненно"/>
+                                            </material:PickerField>
+                                            
+                                            <material:PickerField Title="бренд">
+                                                <validation:RequiredValidation Message="Название должно быть заполненно"/>
+                                            </material:PickerField>
+
+                                            <Button input:FormView.IsSubmitButton="True" Text="Создать" HorizontalOptions="End"/>
+                                        </input:FormView>
+                                    </Grid>
+                                </VerticalStackLayout>
+                            </DataTemplate>
+                        </material:TabItem.ContentTemplate>
+                    </material:TabItem>
+
+                </material:TabView>
+
             </VerticalStackLayout>
 
         </VerticalStackLayout>
