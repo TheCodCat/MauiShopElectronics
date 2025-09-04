@@ -52,7 +52,6 @@
                         </material:TabItem.ContentTemplate>
                     </material:TabItem>
 
-
                     <material:TabItem Title="Удаление">
                         <material:TabItem.ContentTemplate>
 
@@ -72,6 +71,65 @@
 
                         </material:TabItem.ContentTemplate>
                     </material:TabItem>
+                </material:TabView>
+
+                <Label Text="Редактирование брендов" HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="24"/>
+
+                <CollectionView Grid.Column="1" ItemsSource="{Binding Brands}" Margin="10">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Horizontal"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border BackgroundColor="Black" Padding="20,5,20,5">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="20"/>
+                                </Border.StrokeShape>
+                                <Label Text="{Binding BrandName}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="White"/>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <material:TabView>
+                    <material:TabItem Title="Создать">
+                        <material:TabItem.ContentTemplate>
+                            <DataTemplate>
+                                <Grid ColumnSpacing="20" RowSpacing="10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="3*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <input:FormView Grid.Column="1" SubmitCommand="{Binding CreateBrandsCommand}" Spacing="20">
+                                        <material:TextField Title="Название бренда" Text="{Binding NameNewBrand}">
+                                            <validation:RequiredValidation Message="НАзвание должно быть заполненно"/>
+                                        </material:TextField>
+                                        <Button input:FormView.IsSubmitButton="True" Text="Создать" HorizontalOptions="End"/>
+                                    </input:FormView>
+                                </Grid>
+                            </DataTemplate>
+                        </material:TabItem.ContentTemplate>
+                    </material:TabItem>
+
+                    <material:TabItem Title="Удаление">
+                        <material:TabItem.ContentTemplate>
+                            <DataTemplate>
+                                <Grid ColumnSpacing="20" RowSpacing="10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="3*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <input:FormView Grid.Column="1" SubmitCommand="{Binding RemoveBrandCommand}" Spacing="20">
+                                        <material:PickerField SelectedItem="{Binding IndexRemoteBrands}" Title="Категория для удаления" ItemsSource="{Binding BrandsString}"/>
+                                        <Button input:FormView.IsSubmitButton="True" Text="Удалить" HorizontalOptions="End"/>
+                                    </input:FormView>
+                                </Grid>
+                            </DataTemplate>
+                        </material:TabItem.ContentTemplate>
+                    </material:TabItem>
+
                 </material:TabView>
             </VerticalStackLayout>
 

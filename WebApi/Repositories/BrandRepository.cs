@@ -37,8 +37,8 @@ namespace WebApi.Repositories
             if (!apiDatabaseContext.Brands.Contains(contains))
                 return false;
 
-            var brand = apiDatabaseContext.Brands.FirstOrDefault(x => x.Id == id);
-            apiDatabaseContext.Brands.Add(brand);
+
+            apiDatabaseContext.Brands.Remove(contains);
             await apiDatabaseContext.SaveChangesAsync();
 
             return true;
