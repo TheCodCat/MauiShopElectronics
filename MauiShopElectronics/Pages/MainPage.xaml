@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiShopElectronics.Pages.MainPage"
              xmlns:local="clr-namespace:MauiShopElectronics.Pages"
-             xmlns:viewModels="clr-namespace:MauiShopElectronics.ViewModels">
+             xmlns:viewModels="clr-namespace:MauiShopElectronics.ViewModels"
+             xmlns:converts="clr-namespace:MauiShopElectronics.Converts"
+             xmlns:elieev="http://eliseev/base64Image">
 
     <ScrollView>
         <VerticalStackLayout>
@@ -36,10 +38,12 @@
                                 <Border.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:MainViewModel}}, Path=SelectProductCommand}" CommandParameter="{Binding .}"/>
                                 </Border.GestureRecognizers>
-                                <VerticalStackLayout Margin="5"> 
-                                    <Image Source="{Binding ImageURL}" HeightRequest="100"/>
-                                    <Label Text="{Binding ProductName}" TextColor="#A9A9A9"/>
-                                    <Label Text="{Binding Brand.BrandName}" TextColor="#A9A9A9"/>
+                                <VerticalStackLayout>
+                                    <elieev:ImageBase64 Base64Source="{Binding ProductRecordsBytes}" HeightRequest="150"/>
+                                    <VerticalStackLayout Margin="10">
+                                        <Label Text="{Binding ProductName}" TextColor="#A9A9A9"/>
+                                        <Label Text="{Binding Brand.BrandName}" TextColor="#A9A9A9"/>
+                                    </VerticalStackLayout>
                                 </VerticalStackLayout>
                             </Border>
                         </DataTemplate>

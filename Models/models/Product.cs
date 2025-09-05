@@ -13,19 +13,19 @@ namespace Models.models
         public int CategorieId { get; set; }
         [ForeignKey("BrandId")] public Brand Brand { get; set; }
         public int BrandId { get; set; }
-        public string ImageURL { get; set; }
+		public string ProductRecordsBytes { get; set; }
 
-        public Product(): this("Пусто","Пусто",new Brand(), new Categorie(), string.Empty)
+		public Product(): this("Пусто","Пусто",new Brand(), new Categorie(), string.Empty)
         {
         }
 
-        public Product(string name, string description,Brand brand, Categorie categorie, string url )
+        public Product(string name, string description,Brand brand, Categorie categorie, string bytes )
         {
             ProductName = name;
             ProductDescription = description;
             Categorie = categorie;
             Brand = brand;
-            ImageURL = url;
+            ProductRecordsBytes = bytes;
         }
     }
 }

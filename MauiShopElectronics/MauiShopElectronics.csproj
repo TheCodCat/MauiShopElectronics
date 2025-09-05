@@ -71,6 +71,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+		<PackageReference Include="Eliseev.MauiXamlBase64ImageToolkit" Version="1.0.0" />
 		<PackageReference Include="InputKit.Maui" Version="4.5.1" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="9.0.8" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.8" />

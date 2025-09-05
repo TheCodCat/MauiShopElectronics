@@ -36,6 +36,8 @@ namespace MauiShopElectronics
             builder.Services.AddTransient<MainViewModel>();
             builder.Services.AddSingleton<UserController>();
             builder.Services.AddTransient<MainPage>();
+
+            Eliseev.MauiXamlBase64ImageToolkit.Controls.Init();
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif

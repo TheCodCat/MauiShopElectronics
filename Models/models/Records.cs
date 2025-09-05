@@ -9,5 +9,6 @@ namespace Models.models
         [ForeignKey("UserId")] public User User { get; set; }
         public int UserId { get; set; }
         public string ProductRecords { get; set; }
+        public byte[] ProductRecordsBytes { get; set; }
     }
 }

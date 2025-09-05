@@ -22,6 +22,7 @@ namespace MauiShopElectronics.ViewModels
         [ObservableProperty]
         private string nameNewCategories = string.Empty;
 
+        private Categorie currentCategory;
 
         [ObservableProperty]
         private string indexRemoteCategorie;
@@ -39,6 +40,8 @@ namespace MauiShopElectronics.ViewModels
 
         [ObservableProperty]
         private List<string> brandsString = new List<string>();
+
+        private Brand currentBrand;
         #endregion
 
         #region products
@@ -46,8 +49,31 @@ namespace MauiShopElectronics.ViewModels
         [ObservableProperty]
         private string nameNewProduct = string.Empty;
 
-        #endregion
-        partial void OnCategoriesChanging(List<Categorie>? oldValue, List<Categorie> newValue)
+		[ObservableProperty]
+		private string descriptionNewProduct = string.Empty;
+
+		[ObservableProperty]
+        private string selectedCategorie;
+
+
+		[ObservableProperty]
+		private int selectedBrand;
+
+        [ObservableProperty]
+        private string selectedImage = string.Empty;
+
+		partial void OnSelectedBrandChanging(int oldValue, int newValue)
+		{
+            string name = newValue >=0 ? BrandsString[newValue] : string.Empty;
+            currentBrand = Brands.FirstOrDefault(x => x.BrandName == name);
+		}
+
+		partial void OnSelectedCategorieChanging(string? oldValue, string newValue)
+		{
+			currentCategory = Categories.FirstOrDefault(x => x.Title == newValue);
+		}
+		#endregion
+		partial void OnCategoriesChanging(List<Categorie>? oldValue, List<Categorie> newValue)
         {
             CategoriesString = newValue?.Select(x => x.Title).ToList() ?? new List<string>();
         }
@@ -60,6 +86,8 @@ namespace MauiShopElectronics.ViewModels
         public AdminViewModel(IConfiguration configuration)
         {
             _configuration = configuration;
+            string base64 = _configuration.GetSection("Base64NotImage").Value;
+            SelectedImage = base64 ?? string.Empty;
         }
 
         public async void Apperaining()
@@ -159,6 +187,30 @@ namespace MauiShopElectronics.ViewModels
             {
                 GetBrands();
             }
+        }
+
+        [RelayCommand]
+        public async void ChangeImage()
+        {
+            var result = await FilePicker.PickAsync(new PickOptions() { FileTypes = FilePickerFileType.Images });
+
+            if (result == null) return;
+
+			var memory = new MemoryStream();
+            var stream = await result.OpenReadAsync();
+            stream.CopyTo(memory);
+
+            SelectedImage = Convert.ToBase64String(memory.ToArray());
+
+            string url = _configuration.GetSection("ConnectionStrings").GetSection("AddProduct").Value;
+
+            var item = new ProductDTO(NameNewProduct, DescriptionNewProduct, currentBrand, currentCategory, SelectedImage);
+            string json = JsonConvert.SerializeObject(item);
+
+			RestRequest restRequest = new RestRequest(url, Method.Post);
+			restRequest.AddHeader("Content-Type", "application/json");
+			restRequest.AddParameter("application/json",json, ParameterType.RequestBody);
+			RestResponse response = await client.ExecuteAsync(restRequest);
         }
 
         [RelayCommand]

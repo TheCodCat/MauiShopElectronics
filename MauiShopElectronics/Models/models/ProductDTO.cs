@@ -1,7 +1,6 @@
 ﻿using Models.models;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Models.DTO
+namespace Models.models
 {
     public class ProductDTO
     {
@@ -13,13 +12,13 @@ namespace Models.DTO
 		public ProductDTO() : this("Пусто", "Пусто", new Brand(), new Categorie(), string.Empty)
         {
         }
-        public ProductDTO(string name, string description, Brand brand, Categorie categorie, string bytes)
+        public ProductDTO(string name, string description, Brand brand, Categorie categorie, string value)
         {
             ProductName = name;
             ProductDescription = description;
             Brand = brand;
             Categorie = categorie;
-            ProductRecordsBytes = bytes;
+            ProductRecordsBytes = value;
         }
     }
 }
