@@ -43,6 +43,29 @@ namespace MauiShopElectronics.ViewModels
 			var requestHandler = _serviceProvider.GetService<RequestHandler>();
 
 			var result = await requestHandler.ChangeCountProductBascket(productBascket);
+
+			if(result)
+				ProductBasckets = await requestHandler.GetUserBascket(_serviceProvider.GetService<UserController>().User.Value.Id);
+		}
+
+		[RelayCommand]
+		public async void MinusCountProduct(ProductBascket productBascket)
+		{
+			productBascket.Count--;
+			var requestHandler = _serviceProvider.GetService<RequestHandler>();
+
+			bool result;
+			if(productBascket.Count <= 0)
+			{
+				result = await requestHandler.RemoteProductBascket(productBascket);
+			}
+			else
+			{
+				result = await requestHandler.ChangeCountProductBascket(productBascket);
+			}
+
+			if (result)
+				ProductBasckets = await requestHandler.GetUserBascket(_serviceProvider.GetService<UserController>().User.Value.Id);
 		}
 	}
 }

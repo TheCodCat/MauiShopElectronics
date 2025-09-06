@@ -52,14 +52,34 @@ namespace MauiShopElectronics
 
 		public async Task<bool> ChangeCountProductBascket(ProductBascket productBascket)
 		{
-			string url = configuration.GetSection("ConnectionStrings").GetSection("AddBascket").Value;
-			var request = new RestRequest(url, Method.Post);
+			string url = configuration.GetSection("ConnectionStrings").GetSection("ChangeCountBascket").Value;
+			var request = new RestRequest(url, Method.Put);
 			string json = JsonConvert.SerializeObject(productBascket);
+
 			request.AddHeader("Content-Type", "application/json");
 			request.AddParameter("application/json", json, ParameterType.RequestBody);
-			RestResponse response = await restClient.ExecuteAsync(request);
 
-			return true;
+			RestResponse response = await restClient.ExecuteAsync(request);
+			if(response.StatusCode == System.Net.HttpStatusCode.OK)
+				return true;
+
+			else return false;
+		}
+
+		public async Task<bool> RemoteProductBascket(ProductBascket productBascket)
+		{
+			string url = configuration.GetSection("ConnectionStrings").GetSection("RemoteBascket").Value;
+			var request = new RestRequest(url, Method.Delete);
+			string json = JsonConvert.SerializeObject(productBascket);
+
+			request.AddHeader("Content-Type", "application/json");
+			request.AddParameter("application/json", json, ParameterType.RequestBody);
+
+			RestResponse response = await restClient.ExecuteAsync(request);
+			if (response.StatusCode == System.Net.HttpStatusCode.OK)
+				return true;
+
+			else return false;
 		}
 	}
 }

@@ -40,5 +40,13 @@ namespace WebApi.Controllers
 
 			return result;
 		}
+
+		[HttpDelete("/remoteBascket")]
+		public async Task<bool> RemoteBascketProduct([FromBody] ProductBascket productBascket)
+		{
+			var result = await repository.RemoteBascket(productBascket);
+
+			return result;
+		}
 	}
 }

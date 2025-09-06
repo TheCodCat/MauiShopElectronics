@@ -55,5 +55,16 @@ namespace WebApi.Repositories
 		{
 			return _context.Bascket.Include(x => x.Product.Brand).Include(x => x.Product.Categorie).Include(x => x.User).Where(x => x.UserId == userId).ToList();
 		}
+
+		public async Task<bool> RemoteBascket(ProductBascket productBascket)
+		{
+			var item = _context.Bascket.Include(x => x.Product.Categorie).Include(x => x.Product.Brand).FirstOrDefault(x => x.Id == productBascket.Id);
+
+			if (item == null) return false;
+
+			_context.Bascket.Remove(item);
+			_context.SaveChanges();
+			return true;
+		}
 	}
 }
