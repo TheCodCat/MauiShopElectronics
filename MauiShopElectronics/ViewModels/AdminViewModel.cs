@@ -55,6 +55,8 @@ namespace MauiShopElectronics.ViewModels
 		[ObservableProperty]
         private string selectedCategorie;
 
+        [ObservableProperty]
+        private int price;
 
 		[ObservableProperty]
 		private int selectedBrand;
@@ -208,7 +210,7 @@ namespace MauiShopElectronics.ViewModels
         {
 			string url = _configuration.GetSection("ConnectionStrings").GetSection("AddProduct").Value;
 
-			var item = new ProductDTO(NameNewProduct, DescriptionNewProduct, currentBrand, currentCategory, SelectedImage);
+			var item = new ProductDTO(NameNewProduct, DescriptionNewProduct, currentBrand, currentCategory, SelectedImage, Price);
 			string json = JsonConvert.SerializeObject(item);
 
 			RestRequest restRequest = new RestRequest(url, Method.Post);

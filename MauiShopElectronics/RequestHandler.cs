@@ -35,5 +35,19 @@ namespace MauiShopElectronics
 			request.AddParameter("application/json",json, ParameterType.RequestBody);
 			RestResponse response = await restClient.ExecuteAsync(request);
 		}
+
+		public async Task<List<ProductBascket>> GetUserBascket(int userId)
+		{
+			string url = $"{configuration.GetSection("ConnectionStrings").GetSection("GetBascket").Value}/{userId}";
+
+			var request = new RestRequest(url,Method.Get);
+			RestResponse response = await restClient.ExecuteAsync(request);
+
+			var result = JsonConvert.DeserializeObject<List<ProductBascket>>(response.Content);
+			if (result is not null)
+				return result;
+			else
+				return new List<ProductBascket>();
+		}
 	}
 }

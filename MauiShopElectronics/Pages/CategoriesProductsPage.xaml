@@ -5,7 +5,12 @@
              xmlns:viewModels="clr-namespace:MauiShopElectronics.ViewModels"
              xmlns:elieev="http://eliseev/base64Image">
 
-    <FlexLayout BindableLayout.ItemsSource="{Binding Products}">
+    <FlexLayout BindableLayout.ItemsSource="{Binding Products}"<FlexLayout Wrap="Wrap"
+        VerticalOptions="Fill"
+        AlignContent="Start"
+        AlignItems="Center"
+        JustifyContent="Start"
+        Direction="Row">>
         <BindableLayout.ItemTemplate>
             <DataTemplate>
                 <Border BackgroundColor="#FAEBD7">
@@ -20,6 +25,7 @@
                         <VerticalStackLayout Margin="20">
                             <Label Text="{Binding ProductName}" TextColor="#A9A9A9"/>
                             <Label Text="{Binding Brand.BrandName}" TextColor="#A9A9A9"/>
+                            <Label Text="{Binding ProductPrice}" TextColor="#A9A9A9"/>
                         </VerticalStackLayout>
                     </VerticalStackLayout>
                 </Border>

@@ -5,10 +5,9 @@ namespace MauiShopElectronics
 {
     public partial class AppShell : Shell
     {
-        public AppShell(UserController userController)
+        public AppShell()
         {
             InitializeComponent();
-            BindingContext = new ShellViewModels(userController);
         }
 	}
 }

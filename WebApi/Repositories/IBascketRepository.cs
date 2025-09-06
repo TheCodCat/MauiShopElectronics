@@ -6,5 +6,6 @@ namespace WebApi.Repositories
 	{
 
 		public Task<bool> AddBascketProduct(ProductBascket productBascket);
+		public Task<List<ProductBascket>> GetProducts(int userId);
 	}
 }

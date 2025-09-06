@@ -17,6 +17,7 @@
                     <HorizontalStackLayout Spacing="10">
                         <Label Text="{Binding Product.Brand.BrandName}" FontSize="24" FontAttributes="Bold"/>
                         <Label Text="{Binding Product.ProductName}" FontSize="24" FontAttributes="Bold"/>
+                        <Label Text="{Binding Product.ProductPrice}" FontSize="24" FontAttributes="Bold"/>
                     </HorizontalStackLayout>
                     <Button HorizontalOptions="End" Text="В корзину" Command="{Binding AddProductBasketCommand}" CommandParameter="{Binding Product}"/>
                 </VerticalStackLayout>

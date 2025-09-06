@@ -34,6 +34,7 @@ namespace MauiShopElectronics
                     });
             builder.Services.AddTransient<AuthorizationViewModel>();
             builder.Services.AddTransient<MainViewModel>();
+            builder.Services.AddTransient<BascketViewModel>();
             builder.Services.AddSingleton<UserController>();
             builder.Services.AddSingleton<RequestHandler>();
             builder.Services.AddTransient<MainPage>();

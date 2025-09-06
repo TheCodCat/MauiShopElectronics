@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiShopElectronics.Pages.BascketPage"
+             xmlns:eliseev="http://eliseev/base64Image">
+
+    <VerticalStackLayout>
+        <Label Text="Корзина" HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="30"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <CollectionView Grid.Column="1" ItemsSource="{Binding ProductBasckets}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <VerticalStackLayout>
+                            <Border Margin="5">
+                                <Grid ColumnSpacing="10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <eliseev:ImageBase64 Grid.Column="0" Base64Source="{Binding Product.ProductRecordsBytes}" Aspect="AspectFill" WidthRequest="200" HeightRequest="200"/>
+                                    <VerticalStackLayout Grid.Column="2" Spacing="10" Margin="20">
+                                        <HorizontalStackLayout Spacing="5" HorizontalOptions="Center">
+                                            <Button Text="+"/>
+                                            <Label Text="{Binding Count}" FontSize="24"/>
+                                            <Button Text="-"/>
+                                        </HorizontalStackLayout>
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </Border>
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>

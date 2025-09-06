@@ -24,5 +24,13 @@ namespace WebApi.Controllers
 
 			return result;
 		}
+
+		[HttpGet("/getBascketProducts/{userId:int}")]
+		public async Task<List<ProductBascket>> GetUserBascket(int userId)
+		{
+			var result = await repository.GetProducts(userId);
+
+			return result;
+		}
 	}
 }

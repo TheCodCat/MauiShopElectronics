@@ -66,6 +66,7 @@
                                         <VerticalStackLayout Margin="10">
                                             <Label Text="{Binding ProductName}" TextColor="#A9A9A9"/>
                                             <Label Text="{Binding Brand.BrandName}" TextColor="#A9A9A9"/>
+                                            <Label Text="{Binding ProductPrice, StringFormat='-{0} P'}" TextColor="#A9A9A9"/>
                                         </VerticalStackLayout>
                                     </VerticalStackLayout>
                                 </Border>

@@ -15,4 +15,8 @@
         <ShellContent ContentTemplate="{DataTemplate pages:AuthorizationPage}"/>
     </FlyoutItem>
 
+    <FlyoutItem Title="Корзина" Route="Bascket">
+        <ShellContent ContentTemplate="{DataTemplate pages:BascketPage}"/>
+    </FlyoutItem>
+
 </Shell>
