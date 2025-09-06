@@ -5,12 +5,13 @@
              xmlns:viewModels="clr-namespace:MauiShopElectronics.ViewModels"
              xmlns:elieev="http://eliseev/base64Image">
 
-    <FlexLayout BindableLayout.ItemsSource="{Binding Products}"<FlexLayout Wrap="Wrap"
+    <FlexLayout BindableLayout.ItemsSource="{Binding Products}" 
+                Wrap="Wrap"
         VerticalOptions="Fill"
         AlignContent="Start"
         AlignItems="Center"
         JustifyContent="Start"
-        Direction="Row">>
+        Direction="Row">
         <BindableLayout.ItemTemplate>
             <DataTemplate>
                 <Border BackgroundColor="#FAEBD7">

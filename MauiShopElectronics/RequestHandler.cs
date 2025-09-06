@@ -49,5 +49,17 @@ namespace MauiShopElectronics
 			else
 				return new List<ProductBascket>();
 		}
+
+		public async Task<bool> ChangeCountProductBascket(ProductBascket productBascket)
+		{
+			string url = configuration.GetSection("ConnectionStrings").GetSection("AddBascket").Value;
+			var request = new RestRequest(url, Method.Post);
+			string json = JsonConvert.SerializeObject(productBascket);
+			request.AddHeader("Content-Type", "application/json");
+			request.AddParameter("application/json", json, ParameterType.RequestBody);
+			RestResponse response = await restClient.ExecuteAsync(request);
+
+			return true;
+		}
 	}
 }

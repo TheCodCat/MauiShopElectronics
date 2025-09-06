@@ -39,6 +39,18 @@ namespace WebApi.Repositories
 			return true;
 		}
 
+		public async Task<bool> ChangeProductCount(ProductBascket productBascket)
+		{
+			var item = _context.Bascket.Include(x => x.Product.Categorie).Include(x => x.Product.Brand).FirstOrDefault(x => x.Id == productBascket.Id);
+
+			if (item == null) return false;
+			item.Count = productBascket.Count;
+
+			_context.SaveChanges();
+
+			return true;
+		}
+
 		public async Task<List<ProductBascket>> GetProducts(int userId)
 		{
 			return _context.Bascket.Include(x => x.Product.Brand).Include(x => x.Product.Categorie).Include(x => x.User).Where(x => x.UserId == userId).ToList();

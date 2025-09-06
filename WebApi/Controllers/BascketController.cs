@@ -32,5 +32,13 @@ namespace WebApi.Controllers
 
 			return result;
 		}
+
+		[HttpPut("/changeCountProduct")]
+		public async Task<bool> ChangeCountBascketProduct([FromBody] ProductBascket productBascket)
+		{
+			var result = await repository.ChangeProductCount(productBascket);
+
+			return result;
+		}
 	}
 }

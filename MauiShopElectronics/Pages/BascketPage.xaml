@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiShopElectronics.Pages.BascketPage"
-             xmlns:eliseev="http://eliseev/base64Image">
+             xmlns:eliseev="http://eliseev/base64Image"
+             xmlns:viewModel="clr-namespace:MauiShopElectronics.ViewModels">
 
     <VerticalStackLayout>
         <Label Text="Корзина" HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="30"/>
@@ -25,11 +26,18 @@
                                     </Grid.ColumnDefinitions>
 
                                     <eliseev:ImageBase64 Grid.Column="0" Base64Source="{Binding Product.ProductRecordsBytes}" Aspect="AspectFill" WidthRequest="200" HeightRequest="200"/>
+
+                                    <VerticalStackLayout Grid.Column="1">
+                                        <Label Text="{Binding Product.ProductName}"/>
+                                        <Label Text="{Binding Product.ProductDescription}"/>
+                                    </VerticalStackLayout>
+
                                     <VerticalStackLayout Grid.Column="2" Spacing="10" Margin="20">
+                                        <Label Text="{Binding Product.ProductPrice, StringFormat='{0}р. - 1 шт.'}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="24"/>
                                         <HorizontalStackLayout Spacing="5" HorizontalOptions="Center">
-                                            <Button Text="+"/>
+                                            <Button Text="-" TextColor="White"/>
                                             <Label Text="{Binding Count}" FontSize="24"/>
-                                            <Button Text="-"/>
+                                            <Button Text="+" TextColor="White" FontSize="24" Command="{Binding Source={RelativeSource AncestorType={x:Type viewModel:BascketViewModel}}, Path=AddCountProductCommand}" CommandParameter="{Binding .}"/>
                                         </HorizontalStackLayout>
                                     </VerticalStackLayout>
                                 </Grid>
@@ -38,6 +46,9 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+            <VerticalStackLayout Grid.Column="2">
+                <Button Text="{Binding AllPrice, StringFormat='Оплатить {0}'}"/>
+            </VerticalStackLayout>
         </Grid>
     </VerticalStackLayout>
 </ContentPage>
