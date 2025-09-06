@@ -3,28 +3,33 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:eliseev="http://eliseev/base64Image"
              x:Class="MauiShopElectronics.Pages.ProductPage">
-    
-    <ScrollView>
-        <VerticalStackLayout Margin="20">
-            <FlexLayout Wrap="Wrap"
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <ScrollView>
+            <VerticalStackLayout Margin="20">
+                <FlexLayout Wrap="Wrap"
                     VerticalOptions="Fill"
                     AlignContent="Start"
                     AlignItems="Center"
                     JustifyContent="Start"
                     Direction="Row">
-                <eliseev:ImageBase64 x:Name="imageProduct" Base64Source="{Binding Product.ProductRecordsBytes}" WidthRequest="600" HeightRequest="600"/>
-                <VerticalStackLayout Spacing="10" Margin="20" WidthRequest="{Binding Source={x:Reference imageProduct}, Path=HeightRequest}">
-                    <HorizontalStackLayout Spacing="10">
-                        <Label Text="{Binding Product.Brand.BrandName}" FontSize="24" FontAttributes="Bold"/>
-                        <Label Text="{Binding Product.ProductName}" FontSize="24" FontAttributes="Bold"/>
-                        <Label Text="{Binding Product.ProductPrice}" FontSize="24" FontAttributes="Bold"/>
-                    </HorizontalStackLayout>
-                    <Button HorizontalOptions="End" Text="В корзину" Command="{Binding AddProductBasketCommand}" CommandParameter="{Binding Product}"/>
-                </VerticalStackLayout>
-            </FlexLayout>
-            <BoxView StyleClass="Divider"/>
-            <Label Text="{Binding Product.ProductDescription}"/>
-        </VerticalStackLayout>
-    </ScrollView>
+                    <eliseev:ImageBase64 x:Name="imageProduct" Base64Source="{Binding Product.ProductRecordsBytes}" WidthRequest="600" HeightRequest="600"/>
+                    <VerticalStackLayout Spacing="10" Margin="20" WidthRequest="{Binding Source={x:Reference imageProduct}, Path=HeightRequest}">
+                        <HorizontalStackLayout Spacing="10">
+                            <Label Text="{Binding Product.Brand.BrandName}" FontSize="24" FontAttributes="Bold"/>
+                            <Label Text="{Binding Product.ProductName}" FontSize="24" FontAttributes="Bold"/>
+                            <Label Text="{Binding Product.ProductPrice}"  FontSize="24" FontAttributes="Bold"/>
+                        </HorizontalStackLayout>
+                        <Button HorizontalOptions="End" Text="В корзину" Command="{Binding AddProductBasketCommand}" CommandParameter="{Binding Product}"/>
+                    </VerticalStackLayout>
+                </FlexLayout>
+                <BoxView StyleClass="Divider"/>
+                <Label Text="{Binding Product.ProductDescription}"/>
+            </VerticalStackLayout>
+        </ScrollView>
+        <ActivityIndicator IsRunning="{Binding IsRequired}" IsVisible="{Binding IsRequired}" BackgroundColor="#90000000"/>
 
+    </Grid>
 </ContentPage>

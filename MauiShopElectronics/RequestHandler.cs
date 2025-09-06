@@ -19,7 +19,7 @@ namespace MauiShopElectronics
 			this.userController = userController;
 		}
 
-		public async void AddProductBascket(Product product)
+		public async Task<bool> AddProductBascket(Product product)
 		{
 			string url = configuration.GetSection("ConnectionStrings").GetSection("AddBascket").Value;
 
@@ -34,6 +34,11 @@ namespace MauiShopElectronics
 			request.AddHeader("Content-Type", "application/json");
 			request.AddParameter("application/json",json, ParameterType.RequestBody);
 			RestResponse response = await restClient.ExecuteAsync(request);
+
+			if(response.StatusCode == System.Net.HttpStatusCode.OK)
+				return true;
+
+			return false;
 		}
 
 		public async Task<List<ProductBascket>> GetUserBascket(int userId)

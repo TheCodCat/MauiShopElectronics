@@ -23,6 +23,9 @@ namespace MauiShopElectronics.ViewModels
         private Product product;
 
         [ObservableProperty]
+        private bool isRequired;
+
+		[ObservableProperty]
         private User user;
 
         [RelayCommand]
@@ -33,8 +36,9 @@ namespace MauiShopElectronics.ViewModels
                 await Shell.Current.Navigation.PushAsync(new AuthorizationPage(serviceProvider.GetService<AuthorizationViewModel>()));
                 return;
             }
-
-            _handler.AddProductBascket(product);
+            IsRequired = true;
+            var result = await _handler.AddProductBascket(product);
+            IsRequired = false;
         }
     }
 }
