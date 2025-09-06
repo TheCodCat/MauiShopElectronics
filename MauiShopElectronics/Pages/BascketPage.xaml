@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiShopElectronics.Pages.BascketPage"
              xmlns:eliseev="http://eliseev/base64Image"
-             xmlns:viewModel="clr-namespace:MauiShopElectronics.ViewModels">
+             xmlns:viewModel="clr-namespace:MauiShopElectronics.ViewModels"
+             xmlns:converts="clr-namespace:MauiShopElectronics.Converts">
 
     <VerticalStackLayout>
         <Label Text="Корзина" HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="30"/>
@@ -46,7 +47,7 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            <VerticalStackLayout Grid.Column="2">
+            <VerticalStackLayout Grid.Column="2" IsVisible="{Binding ProductBasckets, Converter={converts:VisibleToEmptyBascketConvert}}">
                 <Button Text="{Binding AllPrice, StringFormat='Оплатить {0}'}"/>
             </VerticalStackLayout>
         </Grid>

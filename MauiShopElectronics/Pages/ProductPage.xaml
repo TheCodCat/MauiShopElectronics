@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:eliseev="http://eliseev/base64Image"
-             x:Class="MauiShopElectronics.Pages.ProductPage">
+             x:Class="MauiShopElectronics.Pages.ProductPage"
+             xmlns:converts="clr-namespace:MauiShopElectronics.Converts">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
@@ -22,7 +23,10 @@
                             <Label Text="{Binding Product.ProductName}" FontSize="24" FontAttributes="Bold"/>
                             <Label Text="{Binding Product.ProductPrice}"  FontSize="24" FontAttributes="Bold"/>
                         </HorizontalStackLayout>
-                        <Button HorizontalOptions="End" Text="В корзину" Command="{Binding AddProductBasketCommand}" CommandParameter="{Binding Product}"/>
+                        <HorizontalStackLayout Spacing="10">
+                            <Label VerticalTextAlignment="Center" FontSize="24" Text="{Binding CurrentProductBascket.Count}" IsVisible="{Binding User, Converter={converts:ReversAuthStatusConvert}}"/>
+                            <Button Text="В корзину" Command="{Binding AddProductBasketCommand}" CommandParameter="{Binding Product}"/>
+                        </HorizontalStackLayout>
                     </VerticalStackLayout>
                 </FlexLayout>
                 <BoxView StyleClass="Divider"/>

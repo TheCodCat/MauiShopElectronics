@@ -5,11 +5,18 @@ namespace MauiShopElectronics.Pages;
 
 public partial class ProductPage : ContentPage
 {
+	private ProductViewModel _productViewModel;
 	public ProductPage(Product product, IServiceProvider serviceProvider)
 	{
 		InitializeComponent();
-		var view = new ProductViewModel(serviceProvider);
-		view.Product = product;
-		BindingContext = view;
+		_productViewModel = new ProductViewModel(serviceProvider);
+		_productViewModel.Product = product;
+		BindingContext = _productViewModel;
+	}
+
+	protected override void OnAppearing()
+	{
+		_productViewModel.OnAperaining();
+		base.OnAppearing();
 	}
 }

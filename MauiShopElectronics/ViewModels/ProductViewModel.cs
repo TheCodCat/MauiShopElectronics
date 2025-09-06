@@ -3,7 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using MauiShopElectronics.Models.models;
 using MauiShopElectronics.Pages;
 using MauiShopElectronics.Services;
-using Microsoft.Extensions.DependencyInjection;
+using Models.models;
 
 namespace MauiShopElectronics.ViewModels
 {
@@ -28,17 +28,43 @@ namespace MauiShopElectronics.ViewModels
 		[ObservableProperty]
         private User user;
 
+        [ObservableProperty]
+        private ProductBascket currentProductBascket;
+
+        public async void OnAperaining()
+        {
+            User = _handler.userController.User.Value;
+            if(User != null)
+			    GetCountProduct();
+        }
+
         [RelayCommand]
         public async void AddProductBasket(Product product)
         {
-            if (_handler.userController.User.Value == null)
+            if (User == null)
             {
                 await Shell.Current.Navigation.PushAsync(new AuthorizationPage(serviceProvider.GetService<AuthorizationViewModel>()));
                 return;
             }
             IsRequired = true;
+
             var result = await _handler.AddProductBascket(product);
+            if (result)
+                GetCountProduct();
+
             IsRequired = false;
         }
+
+        private async void GetCountProduct()
+        {
+            var result = await _handler.GetUserBascket(User.Id);
+
+            var item = result.FirstOrDefault(x => x.Product.Id == Product.Id);
+
+			if (item != null)
+			{
+                CurrentProductBascket = item;
+			}
+		}
     }
 }
