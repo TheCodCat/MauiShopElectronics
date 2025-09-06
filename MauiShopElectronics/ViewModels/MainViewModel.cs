@@ -12,6 +12,7 @@ namespace MauiShopElectronics.ViewModels
     public partial class MainViewModel : ObservableObject
     {
         private IConfiguration _configuration;
+        private IServiceProvider serviceProvider;
         private RestClient client = new RestClient();
         public Page _page;
 
@@ -24,9 +25,10 @@ namespace MauiShopElectronics.ViewModels
         [ObservableProperty]
         private List<Product> hitsProducts = new List<Product>();
 
-        public MainViewModel(IConfiguration configuration)
+        public MainViewModel(IConfiguration configuration, IServiceProvider serviceProvider)
         {
             _configuration = configuration;
+            this.serviceProvider = serviceProvider;
 		}
         public async void Apperaining()
         {
@@ -53,13 +55,13 @@ namespace MauiShopElectronics.ViewModels
         [RelayCommand]
         public async void SelectProduct(Product product)
         {
-            await _page.Navigation.PushAsync(new ProductPage(product));
+            await _page.Navigation.PushAsync(new ProductPage(product, serviceProvider));
         }
 
         [RelayCommand]
         public async void SelectCategories(Categorie categorie)
         {
-            await _page.Navigation.PushAsync(new CategoriesProductsPage(categorie));
+            await _page.Navigation.PushAsync(new CategoriesProductsPage(categorie, serviceProvider));
         }
     }
 }

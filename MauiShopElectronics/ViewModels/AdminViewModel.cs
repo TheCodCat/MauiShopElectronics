@@ -201,23 +201,21 @@ namespace MauiShopElectronics.ViewModels
             stream.CopyTo(memory);
 
             SelectedImage = Convert.ToBase64String(memory.ToArray());
-
-            string url = _configuration.GetSection("ConnectionStrings").GetSection("AddProduct").Value;
-
-            var item = new ProductDTO(NameNewProduct, DescriptionNewProduct, currentBrand, currentCategory, SelectedImage);
-            string json = JsonConvert.SerializeObject(item);
-
-			RestRequest restRequest = new RestRequest(url, Method.Post);
-			restRequest.AddHeader("Content-Type", "application/json");
-			restRequest.AddParameter("application/json",json, ParameterType.RequestBody);
-			RestResponse response = await client.ExecuteAsync(restRequest);
         }
 
         [RelayCommand]
         public async void AddProduct()
         {
+			string url = _configuration.GetSection("ConnectionStrings").GetSection("AddProduct").Value;
 
-        }
+			var item = new ProductDTO(NameNewProduct, DescriptionNewProduct, currentBrand, currentCategory, SelectedImage);
+			string json = JsonConvert.SerializeObject(item);
+
+			RestRequest restRequest = new RestRequest(url, Method.Post);
+			restRequest.AddHeader("Content-Type", "application/json");
+			restRequest.AddParameter("application/json", json, ParameterType.RequestBody);
+			RestResponse response = await client.ExecuteAsync(restRequest);
+		}
 
         [RelayCommand]
         public async void RemoteProduct()

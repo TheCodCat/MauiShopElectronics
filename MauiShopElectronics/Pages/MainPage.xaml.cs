@@ -5,7 +5,7 @@ namespace MauiShopElectronics.Pages
     public partial class MainPage : ContentPage
     {
         private MainViewModel viewModel;
-        public MainPage(MainViewModel mainViewModel)
+        public MainPage(MainViewModel mainViewModel, IServiceProvider serviceProvider)
         {
             InitializeComponent();
             mainViewModel._page = this;

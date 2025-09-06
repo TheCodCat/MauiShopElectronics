@@ -5,23 +5,25 @@
              x:Class="MauiShopElectronics.Pages.ProductPage">
     
     <ScrollView>
-
-        <FlexLayout Wrap="Wrap"
+        <VerticalStackLayout Margin="20">
+            <FlexLayout Wrap="Wrap"
                     VerticalOptions="Fill"
-                    AlignContent="Center"
+                    AlignContent="Start"
                     AlignItems="Center"
-                    JustifyContent="Center"
+                    JustifyContent="Start"
                     Direction="Row">
-            <eliseev:ImageBase64 Base64Source="{Binding Product.ProductRecordsBytes}" HeightRequest="400"/>
-            <VerticalStackLayout Spacing="10" Margin="20">
-                <HorizontalStackLayout Spacing="10">
-                    <Label Text="{Binding Product.Brand.BrandName}" FontSize="24" FontAttributes="Bold"/>
-                    <Label Text="{Binding Product.ProductName}" FontSize="24" FontAttributes="Bold"/>
-                </HorizontalStackLayout>
-                <Label Text="{Binding Product.ProductDescription}"/>
-            </VerticalStackLayout>
-        </FlexLayout>
-        
+                <eliseev:ImageBase64 x:Name="imageProduct" Base64Source="{Binding Product.ProductRecordsBytes}" WidthRequest="600" HeightRequest="600"/>
+                <VerticalStackLayout Spacing="10" Margin="20" WidthRequest="{Binding Source={x:Reference imageProduct}, Path=HeightRequest}">
+                    <HorizontalStackLayout Spacing="10">
+                        <Label Text="{Binding Product.Brand.BrandName}" FontSize="24" FontAttributes="Bold"/>
+                        <Label Text="{Binding Product.ProductName}" FontSize="24" FontAttributes="Bold"/>
+                    </HorizontalStackLayout>
+                    <Button HorizontalOptions="End" Text="В корзину" Command="{Binding AddProductBasketCommand}" CommandParameter="{Binding Product}"/>
+                </VerticalStackLayout>
+            </FlexLayout>
+            <BoxView StyleClass="Divider"/>
+            <Label Text="{Binding Product.ProductDescription}"/>
+        </VerticalStackLayout>
     </ScrollView>
 
 </ContentPage>

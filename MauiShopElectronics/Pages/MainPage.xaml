@@ -17,12 +17,15 @@
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
+                <HorizontalStackLayout>
                 <Border Margin="20" StrokeThickness="10" BackgroundColor="White">
                     <Border.StrokeShape>
                         <RoundRectangle CornerRadius="60"/>
                     </Border.StrokeShape>
-                    <Image Source="logo.png"/>
+                        <Image Source="logo.png"/>
                 </Border>
+                        <Label Text="Bytes" VerticalTextAlignment="Center" FontSize="30" FontAttributes="Bold"/>
+                </HorizontalStackLayout>
             </Grid>
 
             <Grid HeightRequest="300">
@@ -50,21 +53,23 @@
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Border BackgroundColor="#FAEBD7">
-                                <Border.StrokeShape>
-                                    <RoundRectangle CornerRadius="20"/>
-                                </Border.StrokeShape>
-                                <Border.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:MainViewModel}}, Path=SelectProductCommand}" CommandParameter="{Binding .}"/>
-                                </Border.GestureRecognizers>
-                                <VerticalStackLayout>
-                                    <elieev:ImageBase64 Base64Source="{Binding ProductRecordsBytes}" HeightRequest="150"/>
-                                    <VerticalStackLayout Margin="10">
-                                        <Label Text="{Binding ProductName}" TextColor="#A9A9A9"/>
-                                        <Label Text="{Binding Brand.BrandName}" TextColor="#A9A9A9"/>
+                            <VerticalStackLayout Margin="5">
+                                <Border BackgroundColor="#FAEBD7">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="5"/>
+                                    </Border.StrokeShape>
+                                    <Border.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:MainViewModel}}, Path=SelectProductCommand}" CommandParameter="{Binding .}"/>
+                                    </Border.GestureRecognizers>
+                                    <VerticalStackLayout>
+                                        <elieev:ImageBase64 Base64Source="{Binding ProductRecordsBytes}" HeightRequest="150"/>
+                                        <VerticalStackLayout Margin="10">
+                                            <Label Text="{Binding ProductName}" TextColor="#A9A9A9"/>
+                                            <Label Text="{Binding Brand.BrandName}" TextColor="#A9A9A9"/>
+                                        </VerticalStackLayout>
                                     </VerticalStackLayout>
-                                </VerticalStackLayout>
-                            </Border>
+                                </Border>
+                            </VerticalStackLayout>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
@@ -85,7 +90,7 @@
                         <DataTemplate>
                             <Border BackgroundColor="Black" Padding="20,5,20,5">
                                 <Border.StrokeShape>
-                                    <RoundRectangle CornerRadius="20"/>
+                                    <RoundRectangle CornerRadius="10"/>
                                 </Border.StrokeShape>
                                 <Border.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:MainViewModel}}, Path=SelectCategoriesCommand}" CommandParameter="{Binding .}"/>
@@ -97,7 +102,23 @@
                 </CollectionView>
                 
             </Grid>
-            
+
+            <Grid HeightRequest="350" Margin="0,50,0,50">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+
+                <Image Grid.RowSpan="3" Grid.ColumnSpan="2" Source="popular.jpg"  Aspect="AspectFill"/>
+                <Label Grid.Row="1" Grid.Column="1" Text="Популярные катерогии" FontSize="24"/>
+
+            </Grid>
+
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>

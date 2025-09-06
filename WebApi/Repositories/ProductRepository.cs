@@ -13,7 +13,8 @@ namespace WebApi.Repositories
         {
             this.apiDatabaseContext = apiDatabaseContext;
         }
-        public async Task<bool> Create(ProductDTO productDTO)
+
+		public async Task<bool> Create(ProductDTO productDTO)
         {
             var brand = apiDatabaseContext.Brands.FirstOrDefault(x => x.Id == productDTO.Brand.Id);
             var categories = apiDatabaseContext.Categories.FirstOrDefault(x => x.Id == productDTO.Categorie.Id);

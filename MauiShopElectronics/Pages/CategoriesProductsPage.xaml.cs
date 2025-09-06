@@ -6,10 +6,10 @@ namespace MauiShopElectronics.Pages;
 public partial class CategoriesProductsPage : ContentPage
 {
 	private CategoriesProductViewModel viewModel;
-	public CategoriesProductsPage(Categorie categorie)
+	public CategoriesProductsPage(Categorie categorie, IServiceProvider serviceProvider)
 	{
 		InitializeComponent();
-        viewModel = new CategoriesProductViewModel(categorie, this);
+        viewModel = new CategoriesProductViewModel(categorie, this, serviceProvider);
 		BindingContext = viewModel;
 	}
 

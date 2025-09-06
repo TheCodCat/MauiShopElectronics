@@ -35,13 +35,12 @@ namespace MauiShopElectronics
             builder.Services.AddTransient<AuthorizationViewModel>();
             builder.Services.AddTransient<MainViewModel>();
             builder.Services.AddSingleton<UserController>();
+            builder.Services.AddSingleton<RequestHandler>();
             builder.Services.AddTransient<MainPage>();
-
             Eliseev.MauiXamlBase64ImageToolkit.Controls.Init();
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
-
             return builder.Build();
         }
     }

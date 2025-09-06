@@ -164,7 +164,7 @@
                                                 </base64Controls:ImageBase64>
                                             </Border>
 
-                                            <input:FormView Grid.Column="1" SubmitCommand="{Binding CreateBrandsCommand}" Spacing="20" Margin="20">
+                                            <input:FormView Grid.Column="1" SubmitCommand="{Binding AddProductCommand}" Spacing="20" Margin="20">
                                                 <material:TextField Text="{Binding NameNewProduct}" Title="Название товара"/>
                                                 <material:PickerField SelectedItem="{Binding SelectedCategorie}" Title="Категории" ItemsSource="{Binding CategoriesString}"/>
 
