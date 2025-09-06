@@ -5,10 +5,12 @@
              xmlns:local="clr-namespace:MauiShopElectronics.Pages"
              xmlns:viewModels="clr-namespace:MauiShopElectronics.ViewModels"
              xmlns:converts="clr-namespace:MauiShopElectronics.Converts"
+             xmlns:models="clr-namespace:Models.models"
              xmlns:elieev="http://eliseev/base64Image">
 
     <ScrollView>
         <VerticalStackLayout>
+
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -22,6 +24,23 @@
                     <Image Source="logo.png"/>
                 </Border>
             </Grid>
+
+            <Grid HeightRequest="300">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+
+                <Image Grid.RowSpan="3" Grid.ColumnSpan="2" Source="newproducts.jpg"  Aspect="AspectFill"/>
+                <Label Grid.Row="1" Grid.Column="1" Text="Новинки" FontSize="24"/>
+
+            </Grid>
+
             <Label Text="Хиты" HorizontalTextAlignment="Center" FontSize="24" FontAttributes="Bold"/>
             
             <VerticalStackLayout Margin="5">

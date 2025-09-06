@@ -27,7 +27,7 @@ namespace MauiShopElectronics.ViewModels
         public MainViewModel(IConfiguration configuration)
         {
             _configuration = configuration;
-        }
+		}
         public async void Apperaining()
         {
             string urlGet = _configuration.GetSection("ConnectionStrings").GetSection("GetProdurts").Value;

@@ -5,8 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:MauiShopElectronics"
     xmlns:pages="clr-namespace:MauiShopElectronics.Pages"
-    Shell.FlyoutBehavior="Flyout"
-    Title="MauiShopElectronics">
+    Shell.FlyoutBehavior="Flyout">
 
     <FlyoutItem Title="Каталог" Route="MainPage">
         <ShellContent ContentTemplate="{DataTemplate pages:MainPage}"/>

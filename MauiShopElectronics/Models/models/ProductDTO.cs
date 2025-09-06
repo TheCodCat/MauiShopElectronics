@@ -1,6 +1,4 @@
-﻿using Models.models;
-
-namespace Models.models
+﻿namespace Models.models
 {
     public class ProductDTO
     {
