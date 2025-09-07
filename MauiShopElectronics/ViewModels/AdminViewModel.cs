@@ -56,7 +56,7 @@ namespace MauiShopElectronics.ViewModels
         private string selectedCategorie;
 
         [ObservableProperty]
-        private int price;
+        private string price;
 
 		[ObservableProperty]
 		private int selectedBrand;
@@ -210,13 +210,16 @@ namespace MauiShopElectronics.ViewModels
         {
 			string url = _configuration.GetSection("ConnectionStrings").GetSection("AddProduct").Value;
 
-			var item = new ProductDTO(NameNewProduct, DescriptionNewProduct, currentBrand, currentCategory, SelectedImage, Price);
-			string json = JsonConvert.SerializeObject(item);
+            if(int.TryParse(Price, out int price))
+            {
+			    var item = new ProductDTO(NameNewProduct, DescriptionNewProduct, currentBrand, currentCategory, SelectedImage,price);
+			    string json = JsonConvert.SerializeObject(item);
 
-			RestRequest restRequest = new RestRequest(url, Method.Post);
-			restRequest.AddHeader("Content-Type", "application/json");
-			restRequest.AddParameter("application/json", json, ParameterType.RequestBody);
-			RestResponse response = await client.ExecuteAsync(restRequest);
+			    RestRequest restRequest = new RestRequest(url, Method.Post);
+			    restRequest.AddHeader("Content-Type", "application/json");
+			    restRequest.AddParameter("application/json", json, ParameterType.RequestBody);
+			    RestResponse response = await client.ExecuteAsync(restRequest);
+            }
 		}
 
         [RelayCommand]

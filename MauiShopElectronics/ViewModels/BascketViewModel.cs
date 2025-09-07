@@ -1,8 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using MauiShopElectronics.Models.models;
 using MauiShopElectronics.Pages;
 using MauiShopElectronics.Services;
+using Microsoft.Extensions.DependencyInjection;
 using Models.models;
+using System;
 
 namespace MauiShopElectronics.ViewModels
 {
@@ -66,6 +69,11 @@ namespace MauiShopElectronics.ViewModels
 
 			if (result)
 				ProductBasckets = await requestHandler.GetUserBascket(_serviceProvider.GetService<UserController>().User.Value.Id);
+		}
+		[RelayCommand]
+		public async void SelectProduct(Product product)
+		{
+			await Shell.Current.Navigation.PushAsync(new ProductPage(product, _serviceProvider));
 		}
 	}
 }

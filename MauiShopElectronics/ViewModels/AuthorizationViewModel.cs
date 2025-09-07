@@ -121,7 +121,9 @@ namespace MauiShopElectronics.ViewModels
             IsRequired = false;
 
             if (restResponse.StatusCode == System.Net.HttpStatusCode.OK)
+            {
                 User = JsonConvert.DeserializeObject<User>(restResponse.Content);
+            }
         }
 
         [RelayCommand]

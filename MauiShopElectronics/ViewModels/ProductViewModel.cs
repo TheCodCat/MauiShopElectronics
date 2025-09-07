@@ -43,7 +43,7 @@ namespace MauiShopElectronics.ViewModels
         {
             if (User == null)
             {
-                await Shell.Current.Navigation.PushAsync(new AuthorizationPage(serviceProvider.GetService<AuthorizationViewModel>()));
+				await Shell.Current.Navigation.PushAsync(new AuthorizationPage(serviceProvider.GetService<AuthorizationViewModel>()));
                 return;
             }
             IsRequired = true;

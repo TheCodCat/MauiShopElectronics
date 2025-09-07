@@ -150,21 +150,22 @@
                                             <ColumnDefinition Width="1*"/>
                                         </Grid.ColumnDefinitions>
 
-                                        <Grid Grid.Column="1">
+                                        <Grid Grid.Column="1" ColumnSpacing="10" Margin="10">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="1*"/>
                                                 <ColumnDefinition Width="2*"/>
                                             </Grid.ColumnDefinitions>
-
-                                            <Border Grid.Column="0" Margin="20">
-                                                <base64Controls:ImageBase64 Base64Source="{Binding SelectedImage}" Aspect="Fill">
-                                                    <base64Controls:ImageBase64.GestureRecognizers>
-                                                        <TapGestureRecognizer Command="{Binding ChangeImageCommand}"/>
-                                                    </base64Controls:ImageBase64.GestureRecognizers>
-                                                </base64Controls:ImageBase64>
-                                            </Border>
-
-                                            <input:FormView Grid.Column="1" SubmitCommand="{Binding AddProductCommand}" Spacing="20" Margin="20">
+                                            <VerticalStackLayout Grid.Column="0" VerticalOptions="Start">
+                                                <Border>
+                                                    <base64Controls:ImageBase64 Base64Source="{Binding SelectedImage}" Aspect="Fill">
+                                                        <base64Controls:ImageBase64.GestureRecognizers>
+                                                            <TapGestureRecognizer Command="{Binding ChangeImageCommand}"/>
+                                                        </base64Controls:ImageBase64.GestureRecognizers>
+                                                    </base64Controls:ImageBase64>
+                                                </Border>
+                                                <Label Text="Фото продукта"/>
+                                            </VerticalStackLayout>
+                                            <input:FormView Spacing="10" Grid.Column="1" SubmitCommand="{Binding AddProductCommand}">
                                                 <material:TextField Text="{Binding NameNewProduct}" Title="Название товара"/>
                                                 <material:PickerField SelectedItem="{Binding SelectedCategorie}" Title="Категории" ItemsSource="{Binding CategoriesString}"/>
 
@@ -173,7 +174,12 @@
 
                                                 <material:EditorField Text="{Binding DescriptionNewProduct}" Title="Описание"/>
 
-                                                <Button input:FormView.IsSubmitButton="True" Text="Создать" HorizontalOptions="End"/>
+                                                <material:TextField Keyboard="Numeratic" Text="{Binding Price}" Title="Цена товара">
+                                                    <validation:RequiredValidation Message="Поле должно быть заполнено"/>
+                                                    <validation:MinValueValidation MinValue="0" Message="число меньше 0"/>
+                                                    <validation:DigitsOnlyValidation Message="Введите число"/>
+                                                </material:TextField>
+                                                <Button Margin="0,10,0,0" input:FormView.IsSubmitButton="True" Text="Создать" HorizontalOptions="End"/>
                                             </input:FormView>
                                         </Grid>
                                     </Grid>

@@ -65,7 +65,6 @@
                                         <elieev:ImageBase64 Base64Source="{Binding ProductRecordsBytes}" HeightRequest="150"/>
                                         <VerticalStackLayout Margin="10">
                                             <Label Text="{Binding ProductName}" TextColor="#A9A9A9"/>
-                                            <Label Text="{Binding Brand.BrandName}" TextColor="#A9A9A9"/>
                                             <Label Text="{Binding ProductPrice, StringFormat='-{0} P'}" TextColor="#A9A9A9"/>
                                         </VerticalStackLayout>
                                     </VerticalStackLayout>
@@ -136,13 +135,14 @@
                         </Grid.ColumnDefinitions>
 
                         <VerticalStackLayout Grid.Column="0" Margin="20">
-                            <Label Text="Контакты" FontAttributes="Bold" FontSize="24" TextColor="White"/>
-                            <Label Text="7 (905) 017-49-38" FontAttributes="Bold" FontSize="20" TextColor="White"/>
-                            <Label Text="Bytes@gmail.com" FontAttributes="Bold" FontSize="20" TextColor="White"/>
+                            <Label Text="Контакты" FontSize="24" TextColor="White"/>
+                            <Label Text="7 (905) 017-49-38" FontSize="20" TextColor="White"/>
+                            <Label Text="Bytes@gmail.com" FontSize="20" TextColor="White"/>
                         </VerticalStackLayout>
 
                         <VerticalStackLayout Grid.Column="1" Margin="20">
-                            <Label Text="Мы на связи" FontAttributes="Bold" FontSize="24" TextColor="White"/>
+                            <Label Text="Мы на связи" FontSize="20" TextColor="White"/>
+                            <Image Source="telegram_logo.png" HeightRequest="64"/>
                         </VerticalStackLayout>
                     </Grid>
                 </VerticalStackLayout>

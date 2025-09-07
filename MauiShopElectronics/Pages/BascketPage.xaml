@@ -6,20 +6,30 @@
              xmlns:viewModel="clr-namespace:MauiShopElectronics.ViewModels"
              xmlns:converts="clr-namespace:MauiShopElectronics.Converts">
 
-    <VerticalStackLayout>
-        <Label Text="Корзина" HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="30"/>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
-            <CollectionView Grid.Column="1" ItemsSource="{Binding ProductBasckets}">
+    <Grid RowSpacing="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Label Text="Корзина" Grid.Row="0" Grid.Column="1" HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="30"/>
+            <CollectionView Grid.Row="1" Grid.Column="1" ItemsSource="{Binding ProductBasckets}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical"/>
+                </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <VerticalStackLayout>
                             <Border Margin="5">
-                                <Grid ColumnSpacing="10">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModel:BascketViewModel}}, Path=SelectProductCommand}" CommandParameter="{Binding .Product}"/>
+                            </Border.GestureRecognizers>
+                            <Grid ColumnSpacing="10">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="1*"/>
@@ -30,7 +40,8 @@
 
                                     <VerticalStackLayout Grid.Column="1">
                                         <Label Text="{Binding Product.ProductName}"/>
-                                        <Label Text="{Binding Product.ProductDescription}"/>
+                                    <BoxView StyleClass="Divider"/>
+                                    <Label Text="{Binding Product.ProductDescription, Converter={converts:DescriptionTextConvert}}"/>
                                     </VerticalStackLayout>
 
                                     <VerticalStackLayout Grid.Column="2" Spacing="10" Margin="20">
@@ -47,9 +58,9 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            <VerticalStackLayout Grid.Column="2" IsVisible="{Binding ProductBasckets, Converter={converts:VisibleToEmptyBascketConvert}}">
-                <Button Text="{Binding AllPrice, StringFormat='Оплатить {0}'}"/>
-            </VerticalStackLayout>
-        </Grid>
-    </VerticalStackLayout>
+        <VerticalStackLayout Grid.Column="1" Grid.Row="2" IsVisible="{Binding ProductBasckets, Converter={converts:VisibleToEmptyBascketConvert}}">
+            <Button Text="{Binding AllPrice, StringFormat='Оплатить {0}'}"/>
+        </VerticalStackLayout>
+    </Grid>
+
 </ContentPage>

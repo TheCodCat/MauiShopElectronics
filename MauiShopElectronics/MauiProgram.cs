@@ -32,7 +32,7 @@ namespace MauiShopElectronics
                         fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                         fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                     });
-            builder.Services.AddTransient<AuthorizationViewModel>();
+            builder.Services.AddSingleton<AuthorizationViewModel>();
             builder.Services.AddTransient<MainViewModel>();
             builder.Services.AddTransient<BascketViewModel>();
             builder.Services.AddSingleton<UserController>();
