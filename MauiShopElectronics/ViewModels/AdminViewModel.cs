@@ -11,7 +11,7 @@ namespace MauiShopElectronics.ViewModels
     public partial class AdminViewModel : ObservableObject
     {
         private readonly IConfiguration _configuration;
-        RestClient client = new RestClient();
+        RestClient client = new RestClient(); 
         #region categories
         [ObservableProperty] 
         private List<Categorie> categories = new List<Categorie>();

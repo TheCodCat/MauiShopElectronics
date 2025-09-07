@@ -2,10 +2,10 @@
 using CommunityToolkit.Mvvm.Input;
 using MauiShopElectronics.Models.models;
 using MauiShopElectronics.Pages;
-using Microsoft.Extensions.Configuration;
 using Models.models;
 using Newtonsoft.Json;
 using RestSharp;
+using System.Collections.ObjectModel;
 
 namespace MauiShopElectronics.ViewModels
 {
@@ -13,17 +13,28 @@ namespace MauiShopElectronics.ViewModels
     {
         private IServiceProvider _serviceProvider;
         private RestClient client = new RestClient();
-        private Categorie categorie;
         public Page _page;
+
+        [ObservableProperty]
+        private Categorie categorie;
 
         [ObservableProperty]
         private List<Product> products = new List<Product>();
 
+        [ObservableProperty]
+        private List<string> allcategorie = new List<string>();
+
+        [ObservableProperty]
+        private ObservableCollection<string> selectCaterogie = new ObservableCollection<string>();
+
         public CategoriesProductViewModel(Categorie categorie, Page page, IServiceProvider serviceProvider)
         {
-            this.categorie = categorie;
+            Categorie = categorie;
             _page = page;
             _serviceProvider = serviceProvider;
+            Allcategorie = serviceProvider.GetService<MainViewModel>().Categorias.Select(x => x.Title).ToList();
+
+            SelectCaterogie = new ObservableCollection<string>(Allcategorie.ToList());
         }
         public async void OnApperaining()
         {

@@ -33,7 +33,8 @@ namespace MauiShopElectronics
                         fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                     });
             builder.Services.AddSingleton<AuthorizationViewModel>();
-            builder.Services.AddTransient<MainViewModel>();
+            builder.Services.AddSingleton<MainViewModel>();
+            builder.Services.AddSingleton<CategoriesProductsPage>();
             builder.Services.AddTransient<BascketViewModel>();
             builder.Services.AddSingleton<UserController>();
             builder.Services.AddSingleton<RequestHandler>();

@@ -15,7 +15,10 @@ namespace MauiShopElectronics.ViewModels
 		[ObservableProperty]
 		private List<ProductBascket> productBasckets = new List<ProductBascket>();
 
-		[ObservableProperty]
+        [ObservableProperty]
+        private int countBascketProduct;
+
+        [ObservableProperty]
 		private int allPrice;
 
 		public BascketViewModel(IServiceProvider serviceProvider)
@@ -38,6 +41,7 @@ namespace MauiShopElectronics.ViewModels
 		partial void OnProductBascketsChanging(List<ProductBascket>? oldValue, List<ProductBascket> newValue)
 		{
 			AllPrice = newValue.Sum(x => x.Product.ProductPrice * x.Count);
+			CountBascketProduct = newValue.Sum(x => x.Count);
 		}
 		[RelayCommand]
 		public async void AddCountProduct(ProductBascket productBascket)
@@ -71,9 +75,9 @@ namespace MauiShopElectronics.ViewModels
 				ProductBasckets = await requestHandler.GetUserBascket(_serviceProvider.GetService<UserController>().User.Value.Id);
 		}
 		[RelayCommand]
-		public async void SelectProduct(Product product)
+		public async void SelectProduct(ProductBascket product)
 		{
-			await Shell.Current.Navigation.PushAsync(new ProductPage(product, _serviceProvider));
+			await Shell.Current.Navigation.PushAsync(new ProductPage(product.Product, _serviceProvider));
 		}
 	}
 }

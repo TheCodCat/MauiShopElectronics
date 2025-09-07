@@ -27,7 +27,7 @@
                         <VerticalStackLayout>
                             <Border Margin="5">
                             <Border.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModel:BascketViewModel}}, Path=SelectProductCommand}" CommandParameter="{Binding .Product}"/>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModel:BascketViewModel}}, Path=SelectProductCommand}" CommandParameter="{Binding .}"/>
                             </Border.GestureRecognizers>
                             <Grid ColumnSpacing="10">
                                     <Grid.ColumnDefinitions>
@@ -39,9 +39,9 @@
                                     <eliseev:ImageBase64 Grid.Column="0" Base64Source="{Binding Product.ProductRecordsBytes}" Aspect="AspectFill" WidthRequest="200" HeightRequest="200"/>
 
                                     <VerticalStackLayout Grid.Column="1">
-                                        <Label Text="{Binding Product.ProductName}"/>
+                                        <Label Text="{Binding Product.ProductName}" FontSize="24"/>
                                     <BoxView StyleClass="Divider"/>
-                                    <Label Text="{Binding Product.ProductDescription, Converter={converts:DescriptionTextConvert}}"/>
+                                    <Label Text="{Binding Product.ProductDescription, Converter={converts:DescriptionTextConvert}}" FontSize="20"/>
                                     </VerticalStackLayout>
 
                                     <VerticalStackLayout Grid.Column="2" Spacing="10" Margin="20">
@@ -58,8 +58,9 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-        <VerticalStackLayout Grid.Column="1" Grid.Row="2" IsVisible="{Binding ProductBasckets, Converter={converts:VisibleToEmptyBascketConvert}}">
-            <Button Text="{Binding AllPrice, StringFormat='Оплатить {0}'}"/>
+        <VerticalStackLayout Spacing="10" Margin="0,0,0,20" Grid.Column="1" Grid.Row="2" IsVisible="{Binding ProductBasckets, Converter={converts:VisibleToEmptyBascketConvert}}">
+            <Label Text="{Binding CountBascketProduct, StringFormat='Количество - {0}'}" FontSize="26"/>
+            <Button Text="{Binding AllPrice, StringFormat='Оплатить {0}'}" FontSize="26"/>
         </VerticalStackLayout>
     </Grid>
 
