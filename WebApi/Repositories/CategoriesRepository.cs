@@ -1,5 +1,6 @@
 ﻿using Models.DTO;
 using Models.models;
+using WebApi.Repositories.Interface;
 using WebApiDatabase;
 
 namespace WebApi.Repositories

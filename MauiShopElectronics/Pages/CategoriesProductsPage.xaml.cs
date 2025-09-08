@@ -1,7 +1,5 @@
 using MauiShopElectronics.ViewModels;
 using Models.models;
-using System.Collections.ObjectModel;
-using UraniumUI.Material.Controls;
 using UraniumUI.Pages;
 
 namespace MauiShopElectronics.Pages;
@@ -20,10 +18,5 @@ public partial class CategoriesProductsPage : UraniumContentPage
     {
         base.OnAppearing();
 		viewModel.OnApperaining();
-    }
-
-    private void MultiplePickerField_SelectedValuesChanged(object sender, object e)
-    {
-        var item = ((ObservableCollection<object>)sender);
     }
 }

@@ -25,7 +25,7 @@ namespace MauiShopElectronics.ViewModels
         private List<string> allcategorie = new List<string>();
 
         [ObservableProperty]
-        private ObservableCollection<string> selectCaterogie = new ObservableCollection<string>();
+        private string selectCaterogie;
 
         public CategoriesProductViewModel(Categorie categorie, Page page, IServiceProvider serviceProvider)
         {
@@ -34,14 +34,8 @@ namespace MauiShopElectronics.ViewModels
             _serviceProvider = serviceProvider;
             Allcategorie = serviceProvider.GetService<MainViewModel>().Categorias.Select(x => x.Title).ToList();
 
-            SelectCaterogie = new ObservableCollection<string>(Allcategorie.Where(x => x == Categorie.Title));
+            SelectCaterogie = Categorie.Title;
         }
-
-        partial void OnSelectCaterogieChanging(ObservableCollection<string>? oldValue, ObservableCollection<string> newValue)
-        {
-            
-        }
-
         public async void OnApperaining()
         {
             string urlGet = "http://localhost:5073/getProducts/categories";

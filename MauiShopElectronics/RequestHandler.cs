@@ -86,5 +86,10 @@ namespace MauiShopElectronics
 
 			else return false;
 		}
+
+		public async Task<List<Reviews>> GetReviews(int productId)
+		{
+			return new List<Reviews>();
+		}
 	}
 }

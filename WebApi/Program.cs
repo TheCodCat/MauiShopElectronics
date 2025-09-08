@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 using WebApi.Repositories;
+using WebApi.Repositories.Interface;
 using WebApiDatabase;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +18,7 @@ builder.Services.AddTransient<IBrandRepository, BrandRepository>();
 builder.Services.AddTransient<IProductRepository, ProductRepository>();
 builder.Services.AddTransient<IRecordsRepository, RecordsRepository>();
 builder.Services.AddTransient<IBascketRepository, BascketRepository>();
+builder.Services.AddTransient<IReviewsRepository, ReviewsRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

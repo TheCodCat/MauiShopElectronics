@@ -40,7 +40,7 @@
     <uranium:UraniumContentPage.Attachments>
         <material:BackdropView Title="Фильтры">
             <VerticalStackLayout>
-                <material:MultiplePickerField SelectedItems="{Binding SelectCaterogie}" ItemsSource="{Binding Allcategorie}"/>
+                <material:PickerField SelectedItem="{Binding SelectCaterogie}" ItemsSource="{Binding Allcategorie}"/>  
             </VerticalStackLayout>
         </material:BackdropView>
     </uranium:UraniumContentPage.Attachments>

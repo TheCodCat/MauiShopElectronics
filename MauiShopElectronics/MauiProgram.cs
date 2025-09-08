@@ -1,4 +1,5 @@
-﻿using MauiShopElectronics.Pages;
+﻿using InputKit.Handlers;
+using MauiShopElectronics.Pages;
 using MauiShopElectronics.Services;
 using MauiShopElectronics.ViewModels;
 using Microsoft.Extensions.Configuration;
@@ -32,6 +33,14 @@ namespace MauiShopElectronics
                         fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                         fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                     });
+
+                    builder
+                    .UseMauiApp<App>()
+                    .ConfigureMauiHandlers(handlers =>
+                    {
+                        // Add following line:
+                        handlers.AddInputKitHandlers(); // 👈
+                    });
             builder.Services.AddSingleton<AuthorizationViewModel>();
             builder.Services.AddSingleton<MainViewModel>();
             builder.Services.AddSingleton<CategoriesProductsPage>();
@@ -40,6 +49,8 @@ namespace MauiShopElectronics
             builder.Services.AddSingleton<RequestHandler>();
             builder.Services.AddTransient<MainPage>();
             Eliseev.MauiXamlBase64ImageToolkit.Controls.Init();
+
+
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif

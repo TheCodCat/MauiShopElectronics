@@ -23,6 +23,9 @@ namespace MauiShopElectronics.ViewModels
         private Product product;
 
         [ObservableProperty]
+        private List<Reviews> reviews;
+
+        [ObservableProperty]
         private bool isRequired;
 
 		[ObservableProperty]
@@ -34,8 +37,11 @@ namespace MauiShopElectronics.ViewModels
         public async void OnAperaining()
         {
             User = _handler.userController.User.Value;
+
             if(User != null)
 			    GetCountProduct();
+
+            Reviews = await _handler.GetReviews(Product.Id);
         }
 
         [RelayCommand]

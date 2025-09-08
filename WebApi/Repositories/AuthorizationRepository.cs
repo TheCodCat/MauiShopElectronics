@@ -2,6 +2,7 @@
 using Models.models;
 using System.Security.Cryptography;
 using System.Text;
+using WebApi.Repositories.Interface;
 using WebApiDatabase;
 
 namespace WebApi.Repositories

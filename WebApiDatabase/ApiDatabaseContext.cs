@@ -10,6 +10,7 @@ namespace WebApiDatabase
         public DbSet<Brand> Brands { get; set; } = null!;
         public DbSet<Product> Products { get; set; } = null!;
         public DbSet<Records> Records { get; set; } = null!;
+        public DbSet<Reviews> Reviews { get; set; } = null!;
 
         public DbSet<ProductBascket> Bascket { get; set; } = null!;
 

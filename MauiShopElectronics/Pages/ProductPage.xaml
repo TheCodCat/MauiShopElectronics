@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:eliseev="http://eliseev/base64Image"
              x:Class="MauiShopElectronics.Pages.ProductPage"
-             xmlns:converts="clr-namespace:MauiShopElectronics.Converts">
+             xmlns:converts="clr-namespace:MauiShopElectronics.Converts"
+             xmlns:pages="clr-namespace:MauiShopElectronics.Pages">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
@@ -31,9 +32,11 @@
                 </FlexLayout>
                 <BoxView StyleClass="Divider"/>
                 <Label Text="{Binding Product.ProductDescription}"/>
+
+                <pages:ReviewsComponent/>
+
             </VerticalStackLayout>
         </ScrollView>
         <ActivityIndicator IsRunning="{Binding IsRequired}" IsVisible="{Binding IsRequired}" BackgroundColor="#90000000"/>
-
     </Grid>
 </ContentPage>

@@ -1,6 +1,6 @@
 ﻿using Models.models;
 
-namespace WebApi.Repositories
+namespace WebApi.Repositories.Interface
 {
     public interface IRecordsRepository
     {
