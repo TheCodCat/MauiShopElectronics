@@ -1,11 +1,15 @@
-﻿namespace MauiShopElectronics
+﻿using MauiShopElectronics.Services;
+
+namespace MauiShopElectronics
 {
     public partial class App : Application
     {
-        public App()
+        public App(IServiceProvider serviceProvider)
         {
             InitializeComponent();
 
+            var usercontroller = serviceProvider.GetService<UserController>();
+            usercontroller.SetUser(usercontroller.GetUser().GetAwaiter().GetResult());
         }
 
         protected override Window CreateWindow(IActivationState? activationState)

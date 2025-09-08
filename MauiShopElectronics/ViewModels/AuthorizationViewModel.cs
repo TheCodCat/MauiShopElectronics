@@ -57,7 +57,7 @@ namespace MauiShopElectronics.ViewModels
 
         partial void OnUserChanging(User? oldValue, User newValue)
         {
-            _userController.User.Value = newValue;
+            _userController.SetUser(newValue);
             FullAdress = newValue == null ? string.Empty : newValue.LocalAdress;
         }
 
@@ -65,6 +65,8 @@ namespace MauiShopElectronics.ViewModels
         {
             _configuration = configuration;
             _userController = userController;
+
+            User = _userController.User.Value;
         }
 
         [RelayCommand]

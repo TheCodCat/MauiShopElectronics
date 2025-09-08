@@ -34,8 +34,14 @@ namespace MauiShopElectronics.ViewModels
             _serviceProvider = serviceProvider;
             Allcategorie = serviceProvider.GetService<MainViewModel>().Categorias.Select(x => x.Title).ToList();
 
-            SelectCaterogie = new ObservableCollection<string>(Allcategorie.ToList());
+            SelectCaterogie = new ObservableCollection<string>(Allcategorie.Where(x => x == Categorie.Title));
         }
+
+        partial void OnSelectCaterogieChanging(ObservableCollection<string>? oldValue, ObservableCollection<string> newValue)
+        {
+            
+        }
+
         public async void OnApperaining()
         {
             string urlGet = "http://localhost:5073/getProducts/categories";
