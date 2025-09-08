@@ -8,7 +8,8 @@
              xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
              xmlns:elieev="http://eliseev/base64Image">
 
-    <FlexLayout BindableLayout.ItemsSource="{Binding Products}" 
+    <ScrollView>
+        <FlexLayout BindableLayout.ItemsSource="{Binding Products}" 
                 Wrap="Wrap"
         VerticalOptions="Fill"
         AlignContent="Start"
@@ -36,11 +37,12 @@
                 </DataTemplate>
             </BindableLayout.ItemTemplate>
         </FlexLayout>
-    
+    </ScrollView>
+
     <uranium:UraniumContentPage.Attachments>
         <material:BackdropView Title="Фильтры">
             <VerticalStackLayout>
-                <material:PickerField SelectedItem="{Binding SelectCaterogie}" ItemsSource="{Binding Allcategorie}"/>  
+                <material:PickerField SelectedIndex="{Binding SelectCaterogie}" ItemsSource="{Binding Allcategorie}" Title="Категория товара"/>  
             </VerticalStackLayout>
         </material:BackdropView>
     </uranium:UraniumContentPage.Attachments>

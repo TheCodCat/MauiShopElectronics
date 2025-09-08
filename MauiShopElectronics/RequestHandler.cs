@@ -1,6 +1,7 @@
 ﻿using MauiShopElectronics.Models.models;
 using MauiShopElectronics.Services;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Maui.Controls;
 using Models.models;
 using Newtonsoft.Json;
 using RestSharp;
@@ -91,5 +92,38 @@ namespace MauiShopElectronics
 		{
 			return new List<Reviews>();
 		}
+
+		public async Task<List<Product>> GetAllProducts()
+		{
+            string urlGet = configuration.GetSection("ConnectionStrings").GetSection("GetProdurts").Value;
+            var request = new RestRequest(urlGet, Method.Get);
+            RestResponse response = await restClient.ExecuteAsync(request);
+
+			var products = new List<Product>();
+			if (response.StatusCode == System.Net.HttpStatusCode.OK)
+			{
+				products = JsonConvert.DeserializeObject<List<Product>>(response.Content);
+			}
+
+			return products;
+        }
+
+		public async Task<List<Product>> GetProductCategorie(Categorie categorie)
+		{
+            string urlGet = "http://localhost:5073/getProducts/categories";
+            var request = new RestRequest(urlGet, Method.Get);
+            var json = JsonConvert.SerializeObject(categorie);
+
+            request.AddHeader("Content-Type", "application/json");
+            request.AddParameter("application/json", json, ParameterType.RequestBody);
+
+            RestResponse restResponse = await restClient.ExecuteAsync(request);
+
+            if (restResponse.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                 return JsonConvert.DeserializeObject<List<Product>>(restResponse.Content) ?? new List<Product>();
+            }
+			return new List<Product>();
+        }
 	}
 }

@@ -5,7 +5,6 @@ using MauiShopElectronics.Pages;
 using Models.models;
 using Newtonsoft.Json;
 using RestSharp;
-using System.Collections.ObjectModel;
 
 namespace MauiShopElectronics.ViewModels
 {
@@ -25,7 +24,7 @@ namespace MauiShopElectronics.ViewModels
         private List<string> allcategorie = new List<string>();
 
         [ObservableProperty]
-        private string selectCaterogie;
+        private int selectCaterogie;
 
         public CategoriesProductViewModel(Categorie categorie, Page page, IServiceProvider serviceProvider)
         {
@@ -34,29 +33,36 @@ namespace MauiShopElectronics.ViewModels
             _serviceProvider = serviceProvider;
             Allcategorie = serviceProvider.GetService<MainViewModel>().Categorias.Select(x => x.Title).ToList();
 
-            SelectCaterogie = Categorie.Title;
+            SelectCaterogie = Allcategorie.IndexOf(Categorie.Title);
         }
         public async void OnApperaining()
         {
-            string urlGet = "http://localhost:5073/getProducts/categories";
-            var request = new RestRequest(urlGet, Method.Get);
-            var json = JsonConvert.SerializeObject(categorie);
+            var request = await _serviceProvider.GetService<RequestHandler>().GetProductCategorie(Categorie);
 
-            request.AddHeader("Content-Type", "application/json");
-            request.AddParameter("application/json", json, ParameterType.RequestBody);
-
-            RestResponse restResponse = await client.ExecuteAsync(request);
-
-            if (restResponse.StatusCode == System.Net.HttpStatusCode.OK)
-            {
-                Products = JsonConvert.DeserializeObject<List<Product>>(restResponse.Content);
-            }
+            Products = request;
         }
 
         [RelayCommand]
         public async void SelectProduct(Product product)
         {
             await _page.Navigation.PushAsync(new ProductPage(product,_serviceProvider));
+        }
+
+        partial void OnSelectCaterogieChanging(int oldValue, int newValue)
+        {
+            ChangeProducts(newValue);
+        }
+
+        private async void ChangeProducts(int id)
+        {
+            if (id < 0)
+                Products = await _serviceProvider.GetService<RequestHandler>().GetAllProducts();
+            else
+            {
+                var categories = _serviceProvider.GetService<MainViewModel>().Categorias;
+                var categorie = categories.FirstOrDefault(x => x.Title == allcategorie[id]);
+                Products = await _serviceProvider.GetService<RequestHandler>().GetProductCategorie(categorie);
+            }
         }
     }
 }

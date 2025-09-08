@@ -38,8 +38,7 @@ namespace MauiShopElectronics
                     .UseMauiApp<App>()
                     .ConfigureMauiHandlers(handlers =>
                     {
-                        // Add following line:
-                        handlers.AddInputKitHandlers(); // 👈
+                        handlers.AddInputKitHandlers();
                     });
             builder.Services.AddSingleton<AuthorizationViewModel>();
             builder.Services.AddSingleton<MainViewModel>();
