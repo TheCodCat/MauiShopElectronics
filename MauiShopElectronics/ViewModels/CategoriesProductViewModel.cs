@@ -3,7 +3,6 @@ using CommunityToolkit.Mvvm.Input;
 using MauiShopElectronics.Models.models;
 using MauiShopElectronics.Pages;
 using Models.models;
-using Newtonsoft.Json;
 using RestSharp;
 
 namespace MauiShopElectronics.ViewModels
@@ -21,7 +20,7 @@ namespace MauiShopElectronics.ViewModels
         private List<Product> products = new List<Product>();
 
         [ObservableProperty]
-        private List<string> allcategorie = new List<string>();
+        private List<Categorie> allcategorie = new List<Categorie>();
 
         [ObservableProperty]
         private int selectCaterogie;
@@ -31,9 +30,7 @@ namespace MauiShopElectronics.ViewModels
             Categorie = categorie;
             _page = page;
             _serviceProvider = serviceProvider;
-            Allcategorie = serviceProvider.GetService<MainViewModel>().Categorias.Select(x => x.Title).ToList();
-
-            SelectCaterogie = Allcategorie.IndexOf(Categorie.Title);
+            Allcategorie = serviceProvider.GetService<MainViewModel>().Categorias;
         }
         public async void OnApperaining()
         {
@@ -60,7 +57,7 @@ namespace MauiShopElectronics.ViewModels
             else
             {
                 var categories = _serviceProvider.GetService<MainViewModel>().Categorias;
-                var categorie = categories.FirstOrDefault(x => x.Title == allcategorie[id]);
+                var categorie = categories.FirstOrDefault(x => x.Title == allcategorie[id].Title);
                 Products = await _serviceProvider.GetService<RequestHandler>().GetProductCategorie(categorie);
             }
         }

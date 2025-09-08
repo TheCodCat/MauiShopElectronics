@@ -1,15 +1,48 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MauiShopElectronics.Pages.ReviewsComponent">
-    <VerticalStackLayout>
+             x:Class="MauiShopElectronics.Pages.ReviewsComponent"
+             xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
+             xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
+             xmlns:converts="clr-namespace:MauiShopElectronics.Converts">
+    
+    <VerticalStackLayout Spacing="10">
+        <BoxView StyleClass="Divider"/>
+        <Label 
+            Text="Оставить отзыв"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" 
+            FontSize="24"
+            FontAttributes="Bold"/>
+        <input:FormView Spacing="20">
+
+            <material:TextField Title="Комментарий" FontSize="16" AllowClear="True"/>
+
+            <input:SelectionView SelectedItem="{Binding SelectCount}" SelectionType="RadioButton" RowSpacing="0" ColumnSpacing="5" ColumnNumber="6" HorizontalOptions="Start">
+                <input:SelectionView.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>0</x:String>
+                        <x:String>1</x:String>
+                        <x:String>2</x:String>
+                        <x:String>3</x:String>
+                        <x:String>4</x:String>
+                        <x:String>5</x:String>
+                    </x:Array>
+                </input:SelectionView.ItemsSource>
+            </input:SelectionView>
+            
+            <Button input:FormView.IsSubmitButton="True" HorizontalOptions="End" Text="Отправить"/>
+            
+        </input:FormView>
+
         <Label 
             Text="Отзывы продукта"
             VerticalOptions="Center" 
             HorizontalOptions="Center" 
             FontSize="24"
             FontAttributes="Bold"/>
-
+        
         <CollectionView ItemsSource="{Binding Reviews}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>

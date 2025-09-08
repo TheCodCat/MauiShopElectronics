@@ -34,6 +34,12 @@ namespace MauiShopElectronics.ViewModels
         [ObservableProperty]
         private ProductBascket currentProductBascket;
 
+        [ObservableProperty]
+        private string selectCount = "0";
+
+        [ObservableProperty]
+        private string reviewsDescription = string.Empty;
+
         public async void OnAperaining()
         {
             User = _handler.userController.User.Value;
@@ -72,5 +78,15 @@ namespace MauiShopElectronics.ViewModels
                 CurrentProductBascket = item;
 			}
 		}
+
+        public async void AddReviews()
+        {
+            Reviews newReviews = new Reviews();
+            newReviews.Product = Product;
+            newReviews.Description = reviewsDescription;
+            newReviews.User = User;
+
+            var result = await _handler.AddReviews();
+        }
     }
 }

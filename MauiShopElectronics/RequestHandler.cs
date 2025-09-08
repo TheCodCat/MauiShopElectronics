@@ -101,6 +101,25 @@ namespace MauiShopElectronics
 				return new List<Reviews>();
         }
 
+		public async Task<bool> AddReviews(Reviews reviews)
+		{
+			string url = configuration.GetSection("ConnectionStrings").GetSection("AddReviews").Value;
+
+			if (url == null)
+				throw new ArgumentNullException("Ссылка не леквидна");
+
+			string json = JsonConvert.SerializeObject(reviews);
+
+            var request = new RestRequest(url,Method.Post);
+            request.AddHeader("Content-Type", "application/json");
+            request.AddParameter("application/json", json, ParameterType.RequestBody);
+            RestResponse response = await restClient.ExecuteAsync(request);
+
+			if (response.StatusCode == System.Net.HttpStatusCode.OK)
+				return true;
+			else return false;
+
+        }
 		public async Task<List<Product>> GetAllProducts()
 		{
             string urlGet = configuration.GetSection("ConnectionStrings").GetSection("GetProdurts").Value;
@@ -133,5 +152,6 @@ namespace MauiShopElectronics
             }
 			return new List<Product>();
         }
+
 	}
 }

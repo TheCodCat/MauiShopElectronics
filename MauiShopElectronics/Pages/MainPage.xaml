@@ -90,7 +90,7 @@
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
                                 <VerticalStackLayout Padding="2">
-                                    <Border BackgroundColor="Black" Padding="20,5,20,5">
+                                    <Border BackgroundColor="#251d3a" Padding="20,5,20,5">
                                         <Border.StrokeShape>
                                             <RoundRectangle CornerRadius="10"/>
                                         </Border.StrokeShape>

@@ -34,7 +34,7 @@
                 </FlexLayout>
                 <BoxView StyleClass="Divider"/>
                 <Label Text="Описание" FontSize="24"/>
-                <Label Text="{Binding Product.ProductDescription}"/>
+                <Label Text="{Binding Product.ProductDescription}" FontSize="20"/>
                 
 
                 <pages:ReviewsComponent/>

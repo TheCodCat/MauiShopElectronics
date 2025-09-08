@@ -20,5 +20,11 @@ namespace WebApi.Controllers
         {
             return await _reviewRepository.GetReviews(productId);
         }
+
+        [HttpPost("/addReviews")]
+        public async Task<bool> AddReviews([FromBody] Reviews reviews)
+        {
+            return await _reviewRepository.AddReviews(reviews);
+        }
     }
 }

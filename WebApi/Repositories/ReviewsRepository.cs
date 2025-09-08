@@ -13,6 +13,15 @@ namespace WebApi.Repositories
         {
             _context = apiDatabaseContext;
         }
+
+        public async Task<bool> AddReviews(Reviews reviews)
+        {
+            _context.Add(reviews);
+            _context.SaveChanges();
+
+            return true;
+        }
+
         public async Task<List<Reviews>> GetReviews(int productId)
         {
             return _context.Reviews.Include(x =>x.User).Where(x => x.ProductId == productId).ToList();
