@@ -90,8 +90,16 @@ namespace MauiShopElectronics
 
 		public async Task<List<Reviews>> GetReviews(int productId)
 		{
-			return new List<Reviews>();
-		}
+			string url = $"{configuration.GetSection("ConnectionStrings").GetSection("GetReviews").Value}/{productId}";
+
+			var request = new RestRequest(url, Method.Get);
+
+            RestResponse response = await restClient.ExecuteAsync(request);
+			if (response.StatusCode == System.Net.HttpStatusCode.OK)
+				return JsonConvert.DeserializeObject<List<Reviews>>(response.Content);
+			else
+				return new List<Reviews>();
+        }
 
 		public async Task<List<Product>> GetAllProducts()
 		{

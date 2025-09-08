@@ -53,7 +53,7 @@
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <VerticalStackLayout Margin="5">
+                            <VerticalStackLayout Padding="5">
                                 <Border BackgroundColor="#FAEBD7">
                                     <Border.StrokeShape>
                                         <RoundRectangle CornerRadius="5"/>
@@ -62,7 +62,7 @@
                                         <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:MainViewModel}}, Path=SelectProductCommand}" CommandParameter="{Binding .}"/>
                                     </Border.GestureRecognizers>
                                     <VerticalStackLayout>
-                                        <elieev:ImageBase64 Base64Source="{Binding ProductRecordsBytes}" HeightRequest="150"/>
+                                        <elieev:ImageBase64 Base64Source="{Binding ProductRecordsBytes}" HeightRequest="250"/>
                                         <VerticalStackLayout Margin="10">
                                             <Label Text="{Binding ProductName}" TextColor="#A9A9A9"/>
                                             <Label Text="{Binding ProductPrice, StringFormat='-{0} P'}" TextColor="#A9A9A9"/>
@@ -78,29 +78,32 @@
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                
-                <CollectionView Grid.Column="1" ItemsSource="{Binding Categorias}" Margin="10">
-                    <CollectionView.ItemsLayout>
-                        <LinearItemsLayout Orientation="Horizontal"/>
-                    </CollectionView.ItemsLayout>
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Border BackgroundColor="Black" Padding="20,5,20,5">
-                                <Border.StrokeShape>
-                                    <RoundRectangle CornerRadius="10"/>
-                                </Border.StrokeShape>
-                                <Border.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:MainViewModel}}, Path=SelectCategoriesCommand}" CommandParameter="{Binding .}"/>
-                                </Border.GestureRecognizers>
-                                <Label Text="{Binding Title}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="White"/>
-                            </Border>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-                
+
+                <ScrollView Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal">
+                    <CollectionView ItemsSource="{Binding Categorias}" Margin="10">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Horizontal"/>
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <VerticalStackLayout Padding="2">
+                                    <Border BackgroundColor="Black" Padding="20,5,20,5">
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="10"/>
+                                        </Border.StrokeShape>
+                                        <Border.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:MainViewModel}}, Path=SelectCategoriesCommand}" CommandParameter="{Binding .}"/>
+                                        </Border.GestureRecognizers>
+                                        <Label Text="{Binding Title}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="White" FontSize="16"/>
+                                    </Border>
+                                </VerticalStackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </ScrollView>
             </Grid>
 
             <Grid HeightRequest="350" Margin="0,50,0,50">

@@ -9,7 +9,25 @@
             HorizontalOptions="Center" 
             FontSize="24"
             FontAttributes="Bold"/>
-        
-        
+
+        <CollectionView ItemsSource="{Binding Reviews}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <VerticalStackLayout Margin="10">
+
+                        <Border StrokeThickness="2" BackgroundColor="#1F2232">
+                            <VerticalStackLayout Spacing="5" Margin="5">
+                                <Label Text="{Binding User.Login, StringFormat='Пользователь - {0}'}" TextColor="#FCFCFC" FontSize="24"/>
+                                <BoxView StyleClass="Divider"/>
+                                <Label Text="{Binding Description}" TextColor="#FCFCFC" FontSize="24"/>
+                                <Label Text="{Binding Evaluation, StringFormat='Оценка {0}/5'}" TextColor="#BBCBCB" FontSize="20"/>
+                            </VerticalStackLayout>
+                        </Border>
+                        
+                    </VerticalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
     </VerticalStackLayout>
 </ContentView>

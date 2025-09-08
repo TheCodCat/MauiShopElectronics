@@ -220,7 +220,12 @@ namespace MauiShopElectronics.ViewModels
 			    restRequest.AddParameter("application/json", json, ParameterType.RequestBody);
 			    RestResponse response = await client.ExecuteAsync(restRequest);
             }
-		}
+
+            NameNewProduct = string.Empty;
+            DescriptionNewProduct = string.Empty;
+            SelectedImage = _configuration.GetSection("Base64NotImage").Value;
+            Price = string.Empty;
+        }
 
         [RelayCommand]
         public async void RemoteProduct()

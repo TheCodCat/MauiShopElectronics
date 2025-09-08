@@ -14,7 +14,6 @@ namespace MauiShopElectronics.ViewModels
         private IConfiguration _configuration;
         private IServiceProvider serviceProvider;
         private RestClient client = new RestClient();
-        public Page _page;
 
         [ObservableProperty]
         private List<Categorie> categorias = new List<Categorie>();
@@ -29,13 +28,14 @@ namespace MauiShopElectronics.ViewModels
         {
             _configuration = configuration;
             this.serviceProvider = serviceProvider;
+            Apperaining();
 		}
         public async void Apperaining()
         {
             string urlGet = _configuration.GetSection("ConnectionStrings").GetSection("GetProdurts").Value;
-            var request = new RestRequest(urlGet,Method.Get);
+            var request = new RestRequest(urlGet, Method.Get);
             RestResponse response = await client.ExecuteAsync(request);
-
+            
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 Products = JsonConvert.DeserializeObject<List<Product>>(response.Content);
@@ -45,23 +45,22 @@ namespace MauiShopElectronics.ViewModels
             string urlCategories = _configuration.GetSection("ConnectionStrings").GetSection("GetCategories").Value;
             response = await client.ExecuteAsync(new RestRequest(urlCategories, Method.Get));
 
-            if(response.StatusCode == System.Net.HttpStatusCode.OK)
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 Categorias = JsonConvert.DeserializeObject<List<Categorie>>(response.Content);
             }
-
         }
 
         [RelayCommand]
         public async void SelectProduct(Product product)
         {
-            await _page.Navigation.PushAsync(new ProductPage(product, serviceProvider));
+            await Shell.Current.Navigation.PushAsync(new ProductPage(product, serviceProvider));
         }
 
         [RelayCommand]
         public async void SelectCategories(Categorie categorie)
         {
-            await _page.Navigation.PushAsync(new CategoriesProductsPage(categorie, serviceProvider));
+            await Shell.Current.Navigation.PushAsync(new CategoriesProductsPage(categorie, serviceProvider));
         }
     }
 }
