@@ -9,13 +9,14 @@
     
     <VerticalStackLayout Spacing="10">
         <BoxView StyleClass="Divider"/>
-        <Label 
+        <Label
+            IsVisible="{Binding User, Converter={converts:ReversAuthStatusConvert}}"
             Text="Оставить отзыв"
             VerticalOptions="Center" 
             HorizontalOptions="Center" 
             FontSize="24"
             FontAttributes="Bold"/>
-        <input:FormView Spacing="20" SubmitCommand="{Binding AddReviewsCommand}">
+        <input:FormView Spacing="20" SubmitCommand="{Binding AddReviewsCommand}" IsVisible="{Binding User, Converter={converts:ReversAuthStatusConvert}}">
 
             <material:TextField Text="{Binding ReviewsDescription}" Title="Комментарий" FontSize="16" AllowClear="True"/>
 
