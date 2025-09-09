@@ -11,6 +11,7 @@ namespace MauiShopElectronics.ViewModels
 {
     public partial class AuthorizationViewModel : ObservableObject
     {
+        private readonly IServiceProvider _serviceProvider;
         private readonly IConfiguration _configuration;
         private readonly UserController _userController;
         private RestClient client = new RestClient();
@@ -61,12 +62,12 @@ namespace MauiShopElectronics.ViewModels
             FullAdress = newValue == null ? string.Empty : newValue.LocalAdress;
         }
 
-        public AuthorizationViewModel(IConfiguration configuration, UserController userController)
+        public AuthorizationViewModel(IConfiguration configuration,IServiceProvider serviceProvider, UserController userController)
         {
             _configuration = configuration;
             _userController = userController;
-
-            User = _userController.User.Value;
+			_serviceProvider = serviceProvider;
+			User = _userController.User.Value;
         }
 
         [RelayCommand]
@@ -185,5 +186,10 @@ namespace MauiShopElectronics.ViewModels
         {
             await _page.Navigation.PushAsync(new AdminPanelPage(_configuration));
         }
-    }
+		[RelayCommand]
+		public async void ToHistoryPanel()
+		{
+			await _page.Navigation.PushAsync(new RecordsPage(_serviceProvider.GetService<RecordsViewModel>()));
+		}
+	}
 }

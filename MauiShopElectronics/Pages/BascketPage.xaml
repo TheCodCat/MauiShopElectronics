@@ -60,7 +60,7 @@
             </CollectionView>
         <VerticalStackLayout Spacing="10" Margin="0,0,0,20" Grid.Column="1" Grid.Row="2" IsVisible="{Binding ProductBasckets, Converter={converts:VisibleToEmptyBascketConvert}}">
             <Label Text="{Binding CountBascketProduct, StringFormat='Количество - {0}'}" FontSize="26"/>
-            <Button Text="{Binding AllPrice, StringFormat='Оплатить {0}'}" FontSize="26"/>
+            <Button Text="{Binding AllPrice, StringFormat='Оплатить {0}'}" FontSize="26" Command="{Binding OrderProductsCommand}"/>
         </VerticalStackLayout>
     </Grid>
 

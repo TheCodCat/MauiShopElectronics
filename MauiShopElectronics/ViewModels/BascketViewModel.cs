@@ -79,5 +79,19 @@ namespace MauiShopElectronics.ViewModels
 		{
 			await Shell.Current.Navigation.PushAsync(new ProductPage(product.Product, _serviceProvider));
 		}
+
+		[RelayCommand]
+		public async void OrderProducts()
+		{
+			var requiredService = _serviceProvider.GetService<RequestHandler>();
+
+			RecordsDTO recordsDTO = new RecordsDTO()
+			{
+				Products = ProductBasckets.Select(x => x.Product).ToList(),
+				UserId = _serviceProvider.GetService<AuthorizationViewModel>().User.Id,
+			};
+
+			var result = await requiredService.OrderProducts(recordsDTO);
+		}
 	}
 }

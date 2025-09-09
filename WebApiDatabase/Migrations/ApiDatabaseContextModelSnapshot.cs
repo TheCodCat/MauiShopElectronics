@@ -112,13 +112,9 @@ namespace WebApiDatabase.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("ProductRecords")
+                    b.Property<string>("ProductRecordsJson")
                         .IsRequired()
                         .HasColumnType("TEXT");
-
-                    b.Property<byte[]>("ProductRecordsBytes")
-                        .IsRequired()
-                        .HasColumnType("BLOB");
 
                     b.Property<int>("UserId")
                         .HasColumnType("INTEGER");

@@ -154,5 +154,35 @@ namespace MauiShopElectronics
 			return new List<Product>();
         }
 
+		public async Task<bool> OrderProducts(RecordsDTO recordsDTO)
+		{
+			string urlPost = configuration.GetSection("ConnectionStrings").GetSection("CreateRecorder").Value;
+			var request = new RestRequest(urlPost, Method.Post);
+
+			var json = JsonConvert.SerializeObject(recordsDTO);
+			request.AddHeader("Content-Type", "application/json");
+			request.AddParameter("application/json", json, ParameterType.RequestBody);
+
+			RestResponse response = await restClient.ExecuteAsync(request);
+
+			if (response.StatusCode == System.Net.HttpStatusCode.OK)
+				return true;
+			else
+				return false;
+		}
+
+		public async Task<List<Records>> GetRecords(int userId)
+		{
+			string urlPost = $"{configuration.GetSection("ConnectionStrings").GetSection("GetRecorder").Value}/{userId}";
+			var request = new RestRequest(urlPost, Method.Get);
+
+
+			RestResponse response = await restClient.ExecuteAsync(request);
+
+			if (response.StatusCode == System.Net.HttpStatusCode.OK)
+				return JsonConvert.DeserializeObject<List<Records>>(response.Content);
+			else
+				return new List<Records>();
+		}
 	}
 }

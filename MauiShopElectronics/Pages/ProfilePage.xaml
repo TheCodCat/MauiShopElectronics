@@ -45,6 +45,7 @@
 
         <material:TextField Text="{Binding FullAdress}" Title="Полный адрес" IsEnabled="False"/>
 
+        <Button Text="История заказов" Command="{Binding ToHistoryPanelCommand}" HorizontalOptions="End"/>
         <Button Text="Выйти из акаунта" Command="{Binding ExitAcountCommand}" HorizontalOptions="End"/>
     </VerticalStackLayout>
 

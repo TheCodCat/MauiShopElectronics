@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Models.DTO;
 using Models.models;
+using Newtonsoft.Json;
 using WebApi.Repositories.Interface;
 using WebApiDatabase;
 
@@ -13,18 +15,25 @@ namespace WebApi.Repositories
             this.apiDatabaseContext = apiDatabaseContext;
         }
 
-        public async Task<bool> Create(Records records)
+        public async Task<bool> Create(RecordsDTO records)
         {
-            if (apiDatabaseContext.Records.Contains(records))
+            try
+            {
+                    var newrecords = new Records();
+
+                    var user = apiDatabaseContext.Users.FirstOrDefault(x => x.Id == records.UserId);
+                    newrecords.User = user;
+                    string json = JsonConvert.SerializeObject(records.Products);
+                    newrecords.ProductRecordsJson = json;
+                    apiDatabaseContext.Records.Add(newrecords);
+                    apiDatabaseContext.SaveChanges();
+
+                    return true;
+            }
+            catch (Exception ex)
+            {
                 return false;
-
-            var user = apiDatabaseContext.Users.FirstOrDefault(x => x.Id == records.UserId);
-            records.User = user;
-            records.ProductRecords = records.ProductRecords;
-            apiDatabaseContext.Records.Add(records);
-            apiDatabaseContext.SaveChanges();
-
-            return true;
+            }
         }
         public async Task<List<Records>> GetRecords()
         {

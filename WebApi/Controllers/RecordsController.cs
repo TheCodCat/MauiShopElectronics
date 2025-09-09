@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Models.DTO;
 using Models.models;
 using WebApi.Repositories.Interface;
 
@@ -22,7 +23,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("/createRecorder")]
-        public async Task<bool> CreateRecords([FromBody] Records records)
+        public async Task<bool> CreateRecords([FromBody] RecordsDTO records)
         {
             var result = await recordsRepository.Create(records);
             return result;
