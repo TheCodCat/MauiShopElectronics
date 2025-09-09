@@ -7,37 +7,43 @@
              xmlns:uranium="http://schemas.enisn-projects.io/dotnet/maui/uraniumui"
              xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
              xmlns:elieev="http://eliseev/base64Image">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
 
-    <ScrollView>
-        <FlexLayout BindableLayout.ItemsSource="{Binding Products}" 
+        <ActivityIndicator IsRunning="{Binding IsRequired}" IsVisible="{Binding IsRequired}" BackgroundColor="#90000000"/>
+        <ScrollView>
+            <FlexLayout BindableLayout.ItemsSource="{Binding Products}" 
                 Wrap="Wrap"
-        VerticalOptions="Fill"
-        AlignContent="Start"
-        AlignItems="Center"
-        JustifyContent="Start"
-        Direction="Row">
-            <BindableLayout.ItemTemplate>
-                <DataTemplate>
-                    <Border BackgroundColor="#FAEBD7">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="20"/>
-                        </Border.StrokeShape>
-                        <Border.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:CategoriesProductViewModel}}, Path=SelectProductCommand}" CommandParameter="{Binding .}"/>
-                        </Border.GestureRecognizers>
-                        <VerticalStackLayout>
-                            <elieev:ImageBase64 Base64Source="{Binding ProductRecordsBytes}" HeightRequest="150"/>
-                            <VerticalStackLayout Margin="20">
-                                <Label Text="{Binding ProductName}" TextColor="#A9A9A9"/>
-                                <Label Text="{Binding Brand.BrandName}" TextColor="#A9A9A9"/>
-                                <Label Text="{Binding ProductPrice}" TextColor="#A9A9A9"/>
+                VerticalOptions="Fill"
+                AlignContent="Start"
+                AlignItems="Center"
+                JustifyContent="Start"
+                Direction="Row">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <Border BackgroundColor="#FAEBD7">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="20"/>
+                            </Border.StrokeShape>
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:CategoriesProductViewModel}}, Path=SelectProductCommand}" CommandParameter="{Binding .}"/>
+                            </Border.GestureRecognizers>
+                            <VerticalStackLayout>
+                                <elieev:ImageBase64 Base64Source="{Binding ProductRecordsBytes}" HeightRequest="150"/>
+                                <VerticalStackLayout Margin="20">
+                                    <Label Text="{Binding ProductName}" TextColor="#A9A9A9"/>
+                                    <Label Text="{Binding Brand.BrandName}" TextColor="#A9A9A9"/>
+                                    <Label Text="{Binding ProductPrice}" TextColor="#A9A9A9"/>
+                                </VerticalStackLayout>
                             </VerticalStackLayout>
-                        </VerticalStackLayout>
-                    </Border>
-                </DataTemplate>
-            </BindableLayout.ItemTemplate>
-        </FlexLayout>
-    </ScrollView>
+                        </Border>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </FlexLayout>
+        </ScrollView>
+    </Grid>
 
     <uranium:UraniumContentPage.Attachments>
         <material:BackdropView Title="Фильтры">

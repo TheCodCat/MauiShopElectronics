@@ -62,6 +62,8 @@
             <Label Text="{Binding CountBascketProduct, StringFormat='Количество - {0}'}" FontSize="26"/>
             <Button Text="{Binding AllPrice, StringFormat='Оплатить {0}'}" FontSize="26" Command="{Binding OrderProductsCommand}"/>
         </VerticalStackLayout>
+
+        <ActivityIndicator Grid.RowSpan="3" Grid.ColumnSpan="3" IsRunning="{Binding IsRequest}" IsVisible="{Binding IsRequest}" BackgroundColor="#90000000"/>
     </Grid>
 
 </ContentPage>

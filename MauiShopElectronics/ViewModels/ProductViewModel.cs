@@ -45,10 +45,14 @@ namespace MauiShopElectronics.ViewModels
         {
             User = _handler.userController.User.Value;
 
-            if(User != null)
+            IsRequired = true;
+
+            if (User != null)
 			    GetCountProduct();
 
             Reviews = await _handler.GetReviews(Product.Id);
+
+            IsRequired = false;
         }
 
         [RelayCommand]

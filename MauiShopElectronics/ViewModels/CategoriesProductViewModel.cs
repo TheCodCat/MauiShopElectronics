@@ -25,6 +25,9 @@ namespace MauiShopElectronics.ViewModels
         [ObservableProperty]
         private int selectCaterogie;
 
+        [ObservableProperty]
+        private bool isRequired;
+
         public CategoriesProductViewModel(Categorie categorie, Page page, IServiceProvider serviceProvider)
         {
             Categorie = categorie;
@@ -58,7 +61,12 @@ namespace MauiShopElectronics.ViewModels
             {
                 var categories = _serviceProvider.GetService<MainViewModel>().Categorias;
                 var categorie = categories.FirstOrDefault(x => x.Title == allcategorie[id].Title);
+
+                IsRequired = true;
+
                 Products = await _serviceProvider.GetService<RequestHandler>().GetProductCategorie(categorie);
+
+                IsRequired = false;
             }
         }
     }

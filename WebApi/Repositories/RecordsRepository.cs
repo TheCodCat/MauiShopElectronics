@@ -14,7 +14,6 @@ namespace WebApi.Repositories
         {
             this.apiDatabaseContext = apiDatabaseContext;
         }
-
         public async Task<bool> Create(RecordsDTO records)
         {
             try

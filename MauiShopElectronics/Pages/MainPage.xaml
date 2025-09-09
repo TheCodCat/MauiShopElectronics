@@ -8,148 +8,157 @@
              xmlns:models="clr-namespace:Models.models"
              xmlns:elieev="http://eliseev/base64Image">
 
-    <ScrollView>
-        <VerticalStackLayout>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        
+        <ActivityIndicator IsRunning="{Binding IsRequest}" IsVisible="{Binding IsRequest}" BackgroundColor="#90000000"/>
+        <ScrollView>
+            <VerticalStackLayout>
 
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <HorizontalStackLayout>
-                <Border Margin="20" StrokeThickness="10" BackgroundColor="White">
-                    <Border.StrokeShape>
-                        <RoundRectangle CornerRadius="60"/>
-                    </Border.StrokeShape>
-                        <Image Source="logo.png"/>
-                </Border>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <HorizontalStackLayout>
+                        <Border Margin="20" StrokeThickness="10" BackgroundColor="White">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="60"/>
+                            </Border.StrokeShape>
+                            <Image Source="logo.png"/>
+                        </Border>
                         <Label Text="Bytes" VerticalTextAlignment="Center" FontSize="30" FontAttributes="Bold"/>
-                </HorizontalStackLayout>
-            </Grid>
+                    </HorizontalStackLayout>
+                </Grid>
 
-            <Grid HeightRequest="300">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="2*"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="1*"/>
-                </Grid.RowDefinitions>
+                <Grid HeightRequest="300">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
 
-                <Image Grid.RowSpan="3" Grid.ColumnSpan="2" Source="newproducts.jpg"  Aspect="AspectFill"/>
-                <Label Grid.Row="1" Grid.Column="1" Text="Новинки" FontSize="24"/>
+                    <Image Grid.RowSpan="3" Grid.ColumnSpan="2" Source="newproducts.jpg"  Aspect="AspectFill"/>
+                    <Label Grid.Row="1" Grid.Column="1" Text="Новинки" FontSize="24"/>
 
-            </Grid>
+                </Grid>
 
-            <Label Text="Хиты" HorizontalTextAlignment="Center" FontSize="24" FontAttributes="Bold"/>
-            
-            <VerticalStackLayout Margin="5">
-                <CollectionView ItemsSource="{Binding HitsProducts}">
-                    <CollectionView.ItemsLayout>
-                        <LinearItemsLayout Orientation="Horizontal"/>
-                    </CollectionView.ItemsLayout>
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <VerticalStackLayout Padding="5">
-                                <Border BackgroundColor="#FAEBD7">
-                                    <Border.StrokeShape>
-                                        <RoundRectangle CornerRadius="5"/>
-                                    </Border.StrokeShape>
-                                    <Border.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:MainViewModel}}, Path=SelectProductCommand}" CommandParameter="{Binding .}"/>
-                                    </Border.GestureRecognizers>
-                                    <VerticalStackLayout>
-                                        <elieev:ImageBase64 Base64Source="{Binding ProductRecordsBytes}" HeightRequest="250"/>
-                                        <VerticalStackLayout Margin="10">
-                                            <Label Text="{Binding ProductName}" TextColor="#A9A9A9"/>
-                                            <Label Text="{Binding ProductPrice, StringFormat='-{0} P'}" TextColor="#A9A9A9"/>
-                                        </VerticalStackLayout>
-                                    </VerticalStackLayout>
-                                </Border>
-                            </VerticalStackLayout>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </VerticalStackLayout>
-            <Label Text="Категории" HorizontalTextAlignment="Center" FontSize="24" FontAttributes="Bold"/>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
+                <Label Text="Хиты" HorizontalTextAlignment="Center" FontSize="24" FontAttributes="Bold"/>
 
-                <ScrollView Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal">
-                    <CollectionView ItemsSource="{Binding Categorias}" Margin="10">
+                <VerticalStackLayout Margin="5">
+                    <CollectionView ItemsSource="{Binding HitsProducts}">
                         <CollectionView.ItemsLayout>
                             <LinearItemsLayout Orientation="Horizontal"/>
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <VerticalStackLayout Padding="2">
-                                    <Border BackgroundColor="#251d3a" Padding="20,5,20,5">
+                                <VerticalStackLayout Padding="5">
+                                    <Border BackgroundColor="#FAEBD7">
                                         <Border.StrokeShape>
-                                            <RoundRectangle CornerRadius="10"/>
+                                            <RoundRectangle CornerRadius="5"/>
                                         </Border.StrokeShape>
                                         <Border.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:MainViewModel}}, Path=SelectCategoriesCommand}" CommandParameter="{Binding .}"/>
+                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:MainViewModel}}, Path=SelectProductCommand}" CommandParameter="{Binding .}"/>
                                         </Border.GestureRecognizers>
-                                        <Label Text="{Binding Title}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="White" FontSize="16"/>
+                                        <VerticalStackLayout>
+                                            <elieev:ImageBase64 Base64Source="{Binding ProductRecordsBytes}" HeightRequest="250"/>
+                                            <VerticalStackLayout Margin="10">
+                                                <Label Text="{Binding ProductName}" TextColor="#A9A9A9"/>
+                                                <Label Text="{Binding ProductPrice, StringFormat='-{0} P'}" TextColor="#A9A9A9"/>
+                                            </VerticalStackLayout>
+                                        </VerticalStackLayout>
                                     </Border>
                                 </VerticalStackLayout>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
-                </ScrollView>
-            </Grid>
-
-            <Grid HeightRequest="350" Margin="0,50,0,50">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="2*"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="1*"/>
-                </Grid.RowDefinitions>
-
-                <Image Grid.RowSpan="3" Grid.ColumnSpan="2" Source="popular.jpg"  Aspect="AspectFill"/>
-                <Label Grid.Row="1" Grid.Column="1" Text="Популярные катерогии" FontSize="24"/>
-
-            </Grid>
-
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <VerticalStackLayout Spacing="10" BackgroundColor="Blue">
-                    <VerticalStackLayout Margin="20">
-                        <Label Text="О компании" FontAttributes="Bold" FontSize="24" TextColor="White"/>
-                        <Label TextColor="White" Text="Магазин электроники предлагает широкий ассортимент качественных товаров, сотрудничает с известными брендами и стремится удовлетворить потребности клиентов." FontSize="20"/>
-                    </VerticalStackLayout>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="1*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <VerticalStackLayout Grid.Column="0" Margin="20">
-                            <Label Text="Контакты" FontSize="24" TextColor="White"/>
-                            <Label Text="7 (905) 017-49-38" FontSize="20" TextColor="White"/>
-                            <Label Text="Bytes@gmail.com" FontSize="20" TextColor="White"/>
-                        </VerticalStackLayout>
-
-                        <VerticalStackLayout Grid.Column="1" Margin="20">
-                            <Label Text="Мы на связи" FontSize="20" TextColor="White"/>
-                            <Image Source="telegram_logo.png" HeightRequest="64"/>
-                        </VerticalStackLayout>
-                    </Grid>
                 </VerticalStackLayout>
-            </Grid>
-        </VerticalStackLayout>
-    </ScrollView>
+                <Label Text="Категории" HorizontalTextAlignment="Center" FontSize="24" FontAttributes="Bold"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <ScrollView Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal">
+                        <CollectionView ItemsSource="{Binding Categorias}" Margin="10">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Horizontal"/>
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <VerticalStackLayout Padding="2">
+                                        <Border BackgroundColor="#251d3a" Padding="20,5,20,5">
+                                            <Border.StrokeShape>
+                                                <RoundRectangle CornerRadius="10"/>
+                                            </Border.StrokeShape>
+                                            <Border.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:MainViewModel}}, Path=SelectCategoriesCommand}" CommandParameter="{Binding .}"/>
+                                            </Border.GestureRecognizers>
+                                            <Label Text="{Binding Title}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="White" FontSize="16"/>
+                                        </Border>
+                                    </VerticalStackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </ScrollView>
+                </Grid>
+
+                <Grid HeightRequest="350" Margin="0,50,0,50">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+
+                    <Image Grid.RowSpan="3" Grid.ColumnSpan="2" Source="popular.jpg"  Aspect="AspectFill"/>
+                    <Label Grid.Row="1" Grid.Column="1" Text="Популярные катерогии" FontSize="24"/>
+
+                </Grid>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <VerticalStackLayout Spacing="10" BackgroundColor="Blue">
+                        <VerticalStackLayout Margin="20">
+                            <Label Text="О компании" FontAttributes="Bold" FontSize="24" TextColor="White"/>
+                            <Label TextColor="White" Text="Магазин электроники предлагает широкий ассортимент качественных товаров, сотрудничает с известными брендами и стремится удовлетворить потребности клиентов." FontSize="20"/>
+                        </VerticalStackLayout>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <VerticalStackLayout Grid.Column="0" Margin="20">
+                                <Label Text="Контакты" FontSize="24" TextColor="White"/>
+                                <Label Text="7 (905) 017-49-38" FontSize="20" TextColor="White"/>
+                                <Label Text="Bytes@gmail.com" FontSize="20" TextColor="White"/>
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Grid.Column="1" Margin="20">
+                                <Label Text="Мы на связи" FontSize="20" TextColor="White"/>
+                                <Image Source="telegram_logo.png" HeightRequest="64"/>
+                            </VerticalStackLayout>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Grid>
+            </VerticalStackLayout>
+        </ScrollView>
+
+    </Grid>
 </ContentPage>

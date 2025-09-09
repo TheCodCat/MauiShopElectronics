@@ -24,6 +24,9 @@ namespace MauiShopElectronics.ViewModels
         [ObservableProperty]
         private List<Product> hitsProducts = new List<Product>();
 
+        [ObservableProperty]
+        private bool isRequest;
+
         public MainViewModel(IConfiguration configuration, IServiceProvider serviceProvider)
         {
             _configuration = configuration;
@@ -34,6 +37,9 @@ namespace MauiShopElectronics.ViewModels
         {
             string urlGet = _configuration.GetSection("ConnectionStrings").GetSection("GetProdurts").Value;
             var request = new RestRequest(urlGet, Method.Get);
+
+            IsRequest = true;
+
             RestResponse response = await client.ExecuteAsync(request);
             
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
@@ -49,6 +55,8 @@ namespace MauiShopElectronics.ViewModels
             {
                 Categorias = JsonConvert.DeserializeObject<List<Categorie>>(response.Content);
             }
+
+            IsRequest = false;
         }
 
         [RelayCommand]

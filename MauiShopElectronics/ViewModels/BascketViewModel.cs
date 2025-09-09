@@ -3,9 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using MauiShopElectronics.Models.models;
 using MauiShopElectronics.Pages;
 using MauiShopElectronics.Services;
-using Microsoft.Extensions.DependencyInjection;
 using Models.models;
-using System;
 
 namespace MauiShopElectronics.ViewModels
 {
@@ -21,6 +19,9 @@ namespace MauiShopElectronics.ViewModels
         [ObservableProperty]
 		private int allPrice;
 
+		[ObservableProperty]
+		private bool isRequest;
+
 		public BascketViewModel(IServiceProvider serviceProvider)
 		{
 			_serviceProvider = serviceProvider;
@@ -31,8 +32,12 @@ namespace MauiShopElectronics.ViewModels
 			var requestHandler = _serviceProvider.GetService<RequestHandler>();
 			if (_serviceProvider.GetService<UserController>().User.Value != null)
 			{
-				ProductBasckets = await requestHandler.GetUserBascket(_serviceProvider.GetService<UserController>().User.Value.Id);
-			}
+                IsRequest = true;
+
+                ProductBasckets = await requestHandler.GetUserBascket(_serviceProvider.GetService<UserController>().User.Value.Id);
+
+				IsRequest = false;
+            }
 			else
 				await Shell.Current.Navigation.PushAsync(new AuthorizationPage(_serviceProvider.GetService<AuthorizationViewModel>()));
 
@@ -49,11 +54,15 @@ namespace MauiShopElectronics.ViewModels
 			productBascket.Count++;
 			var requestHandler = _serviceProvider.GetService<RequestHandler>();
 
-			var result = await requestHandler.ChangeCountProductBascket(productBascket);
+            IsRequest = true;
+
+            var result = await requestHandler.ChangeCountProductBascket(productBascket);
 
 			if(result)
 				ProductBasckets = await requestHandler.GetUserBascket(_serviceProvider.GetService<UserController>().User.Value.Id);
-		}
+
+            IsRequest = false;
+        }
 
 		[RelayCommand]
 		public async void MinusCountProduct(ProductBascket productBascket)
@@ -62,7 +71,10 @@ namespace MauiShopElectronics.ViewModels
 			var requestHandler = _serviceProvider.GetService<RequestHandler>();
 
 			bool result;
-			if(productBascket.Count <= 0)
+
+            IsRequest = true;
+
+            if (productBascket.Count <= 0)
 			{
 				result = await requestHandler.RemoteProductBascket(productBascket);
 			}
@@ -73,7 +85,9 @@ namespace MauiShopElectronics.ViewModels
 
 			if (result)
 				ProductBasckets = await requestHandler.GetUserBascket(_serviceProvider.GetService<UserController>().User.Value.Id);
-		}
+
+            IsRequest = false;
+        }
 		[RelayCommand]
 		public async void SelectProduct(ProductBascket product)
 		{
@@ -92,11 +106,22 @@ namespace MauiShopElectronics.ViewModels
 				UserId = _serviceProvider.GetService<AuthorizationViewModel>().User.Id,
 			};
 
-			var result = await requiredService.OrderProducts(recordsDTO);
+			IsRequest = true;
 
-			//if(result)
-   //             ProductBasckets.Clear();
+            var result = await requiredService.OrderProducts(recordsDTO);
 
-        }
+			if (result)
+			{
+                foreach (var item in recordsDTO.Products)
+                {
+					var remoteBascket = await requiredService.RemoteProductBascket(item);
+                }
+
+				ProductBasckets = new List<ProductBascket>();
+
+                IsRequest = false;
+            }
+
+		}
 	}
 }
