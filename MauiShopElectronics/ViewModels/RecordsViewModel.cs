@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using MauiShopElectronics.Models.models;
 using MauiShopElectronics.Services;
 using Models.models;
+using Newtonsoft.Json;
 
 namespace MauiShopElectronics.ViewModels
 {
@@ -22,7 +24,16 @@ namespace MauiShopElectronics.ViewModels
         {
             var request = serviceProvider.GetService<RequestHandler>();
 
-            var result = await request.GetReviews(userId);
+            var result = await request.GetRecords(userId);
+            if (result.Count == 0) return;
+
+            foreach (var item in result)
+            {
+                item.Products = JsonConvert.DeserializeObject<List<ProductBascket>>(item.ProductRecordsJson);
+                item.AllPriceRecords = item.Products.Select(x => x.Product.ProductPrice * x.Count).Sum();
+            }
+
+            Records = result;
         }
     }
 }

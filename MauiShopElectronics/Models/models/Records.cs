@@ -1,4 +1,5 @@
 ﻿using MauiShopElectronics.Models.models;
+using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -10,5 +11,8 @@ namespace Models.models
         [ForeignKey("UserId")] public User User { get; set; }
         public int UserId { get; set; }
         public string ProductRecordsJson { get; set; }
+        public List<ProductBascket> Products { get; set; }
+        public DateOnly DateOnly { get; set; }
+        public int AllPriceRecords { get; set; }
     }
 }

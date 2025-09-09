@@ -11,9 +11,9 @@ namespace MauiShopElectronics.Converts
 
 			if(value is string text)
 			{
-				if(text.Length >= 20)
+				if(text.Length >= 40)
 				{
-					for (int i = 0; i < 20; i++)
+					for (int i = 0; i < 40; i++)
 					{
 						stringBuilder.Append(text[i]);
 					}

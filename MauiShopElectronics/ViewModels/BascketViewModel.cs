@@ -87,11 +87,16 @@ namespace MauiShopElectronics.ViewModels
 
 			RecordsDTO recordsDTO = new RecordsDTO()
 			{
-				Products = ProductBasckets.Select(x => x.Product).ToList(),
+				DateOnly = DateOnly.FromDateTime(DateTime.Now),
+				Products = ProductBasckets,
 				UserId = _serviceProvider.GetService<AuthorizationViewModel>().User.Id,
 			};
 
 			var result = await requiredService.OrderProducts(recordsDTO);
-		}
+
+			//if(result)
+   //             ProductBasckets.Clear();
+
+        }
 	}
 }

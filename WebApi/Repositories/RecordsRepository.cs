@@ -25,6 +25,8 @@ namespace WebApi.Repositories
                     newrecords.User = user;
                     string json = JsonConvert.SerializeObject(records.Products);
                     newrecords.ProductRecordsJson = json;
+                    newrecords.DateOnly = DateOnly.FromDateTime(DateTime.Now);
+
                     apiDatabaseContext.Records.Add(newrecords);
                     apiDatabaseContext.SaveChanges();
 

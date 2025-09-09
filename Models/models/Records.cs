@@ -9,5 +9,6 @@ namespace Models.models
         [ForeignKey("UserId")] public User User { get; set; }
         public int UserId { get; set; }
         public string ProductRecordsJson { get; set; }
+        public DateOnly DateOnly { get; set; }
     }
 }
