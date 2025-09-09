@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Models.DTO;
 using Models.models;
 using WebApi.Repositories.Interface;
 
@@ -22,7 +23,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("/addReviews")]
-        public async Task<bool> AddReviews([FromBody] Reviews reviews)
+        public async Task<bool> AddReviews([FromBody] ReviewsDTO reviews)
         {
             return await _reviewRepository.AddReviews(reviews);
         }

@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using MauiShopElectronics.Models.models;
 using MauiShopElectronics.Pages;
 using MauiShopElectronics.Services;
+using Models.DTO;
 using Models.models;
 
 namespace MauiShopElectronics.ViewModels
@@ -78,15 +79,20 @@ namespace MauiShopElectronics.ViewModels
                 CurrentProductBascket = item;
 			}
 		}
-
+        [RelayCommand]
         public async void AddReviews()
         {
-            Reviews newReviews = new Reviews();
-            newReviews.Product = Product;
+            ReviewsDTO newReviews = new ReviewsDTO();
+            newReviews.ProductId = Product.Id;
+            newReviews.UserId = User.Id;
             newReviews.Description = reviewsDescription;
-            newReviews.User = User;
 
-            var result = await _handler.AddReviews();
-        }
+            if(int.TryParse(SelectCount, out int evaluation))
+            newReviews.Evaluation = evaluation;
+
+            var result = await _handler.AddReviews(newReviews);
+            if(result)
+				Reviews = await _handler.GetReviews(Product.Id);
+		}
     }
 }

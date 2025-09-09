@@ -2,6 +2,7 @@
 using MauiShopElectronics.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Maui.Controls;
+using Models.DTO;
 using Models.models;
 using Newtonsoft.Json;
 using RestSharp;
@@ -101,7 +102,7 @@ namespace MauiShopElectronics
 				return new List<Reviews>();
         }
 
-		public async Task<bool> AddReviews(Reviews reviews)
+		public async Task<bool> AddReviews(ReviewsDTO reviews)
 		{
 			string url = configuration.GetSection("ConnectionStrings").GetSection("AddReviews").Value;
 

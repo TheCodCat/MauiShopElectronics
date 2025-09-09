@@ -15,9 +15,9 @@
             HorizontalOptions="Center" 
             FontSize="24"
             FontAttributes="Bold"/>
-        <input:FormView Spacing="20">
+        <input:FormView Spacing="20" SubmitCommand="{Binding AddReviewsCommand}">
 
-            <material:TextField Title="Комментарий" FontSize="16" AllowClear="True"/>
+            <material:TextField Text="{Binding ReviewsDescription}" Title="Комментарий" FontSize="16" AllowClear="True"/>
 
             <input:SelectionView SelectedItem="{Binding SelectCount}" SelectionType="RadioButton" RowSpacing="0" ColumnSpacing="5" ColumnNumber="6" HorizontalOptions="Start">
                 <input:SelectionView.ItemsSource>
@@ -46,7 +46,7 @@
         <CollectionView ItemsSource="{Binding Reviews}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <VerticalStackLayout Margin="10">
+                    <VerticalStackLayout Padding="5">
 
                         <Border StrokeThickness="2" BackgroundColor="#1F2232">
                             <VerticalStackLayout Spacing="5" Margin="5">
