@@ -35,7 +35,7 @@
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate>
                                         <VerticalStackLayout Padding="5">
-                                            <Border BackgroundColor="#2a2550">
+                                            <Border BackgroundColor="#2B2D42">
                                                 <Border.StrokeShape>
                                                     <RoundRectangle CornerRadius="10"/>
                                                 </Border.StrokeShape>
@@ -46,7 +46,8 @@
                                                     </Grid.ColumnDefinitions>
                                                     <eliseev:ImageBase64 Base64Source="{Binding Product.ProductRecordsBytes}" Aspect="Fill" WidthRequest="200" HeightRequest="200"/>
                                                     <VerticalStackLayout Grid.Column="1" Spacing="10" Margin="10">
-                                                        <Label Text="{Binding Product.ProductName}" FontSize="20" FontAttributes="Bold"/>
+                                                        <Label Text="{Binding Product.Brand.BrandName}" TextColor="#8D99AE" FontSize="20" FontAttributes="Bold" />
+                                                        <Label Text="{Binding Product.ProductName}" FontSize="20" FontAttributes="Bold" />
                                                         <BoxView StyleClass="Divider"/>
                                                         <Label Text="{Binding Product.ProductDescription, Converter={converts:DescriptionTextConvert}}" FontSize="20"/>
                                                         <HorizontalStackLayout Spacing="10">
@@ -54,9 +55,9 @@
                                                                 <Border.StrokeShape>
                                                                     <RoundRectangle CornerRadius="10"/>
                                                                 </Border.StrokeShape>
-                                                                <Label Text="{Binding Product.ProductPrice, StringFormat='Цена -{0}руб.'}" FontSize="20"/>
+                                                                <Label Text="{Binding Product.ProductPrice, StringFormat='Цена -{0}руб.'}" TextColor="#EDF2F4" FontSize="20"/>
                                                             </Border>
-                                                            <Label Text="{Binding Count, StringFormat='{0}шт.'}" FontSize="20" VerticalTextAlignment="Center"/>
+                                                            <Label Text="{Binding Count, StringFormat='{0}шт.'}" TextColor="#EDF2F4" FontSize="20" VerticalTextAlignment="Center"/>
                                                         </HorizontalStackLayout>
                                                     </VerticalStackLayout>
                                                 </Grid>

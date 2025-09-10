@@ -61,7 +61,7 @@
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
                                 <VerticalStackLayout Padding="5">
-                                    <Border BackgroundColor="#FAEBD7">
+                                    <Border BackgroundColor="#2B2D42">
                                         <Border.StrokeShape>
                                             <RoundRectangle CornerRadius="5"/>
                                         </Border.StrokeShape>
@@ -71,8 +71,9 @@
                                         <VerticalStackLayout>
                                             <elieev:ImageBase64 Base64Source="{Binding ProductRecordsBytes}" HeightRequest="250"/>
                                             <VerticalStackLayout Margin="10">
-                                                <Label Text="{Binding ProductName}" TextColor="#A9A9A9"/>
-                                                <Label Text="{Binding ProductPrice, StringFormat='-{0} P'}" TextColor="#A9A9A9"/>
+                                                <Label Text="{Binding Brand.BrandName}" TextColor="#A9A9A9"/>
+                                                <Label Text="{Binding ProductName}" TextColor="#EDF2F4"/>
+                                                <Label Text="{Binding ProductPrice, StringFormat='-{0} P'}" TextColor="#EDF2F4"/>
                                             </VerticalStackLayout>
                                         </VerticalStackLayout>
                                     </Border>
