@@ -1,7 +1,6 @@
 ﻿using MauiShopElectronics.Models.models;
 using MauiShopElectronics.Services;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Maui.Controls;
 using Models.DTO;
 using Models.models;
 using Newtonsoft.Json;
