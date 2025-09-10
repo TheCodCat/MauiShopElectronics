@@ -23,7 +23,7 @@
                             <Label Text="{Binding Product.Brand.BrandName}" FontSize="24" FontAttributes="Bold"/>
                             <Label Text="{Binding Product.ProductName}" FontSize="24" FontAttributes="Bold"/>
                         </HorizontalStackLayout>
-                        <Border HorizontalOptions="End" Padding="5" BackgroundColor="#2B2D42">
+                        <Border HorizontalOptions="End" Padding="5" BackgroundColor="#8D99AE">
                             <Label Text="{Binding Product.ProductPrice}"  FontSize="24" FontAttributes="Bold"/>
                         </Border>
                         <HorizontalStackLayout Spacing="10" HorizontalOptions="End">

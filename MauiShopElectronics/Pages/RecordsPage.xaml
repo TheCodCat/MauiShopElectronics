@@ -57,7 +57,7 @@
                                                                 </Border.StrokeShape>
                                                                 <Label Text="{Binding Product.ProductPrice, StringFormat='Цена -{0}руб.'}" TextColor="#EDF2F4" FontSize="20"/>
                                                             </Border>
-                                                            <Label Text="{Binding Count, StringFormat='{0}шт.'}" TextColor="#EDF2F4" FontSize="20" VerticalTextAlignment="Center"/>
+                                                            <Label Text="{Binding Count, StringFormat='{0}шт.'}" TextColor="#8D99AE" FontSize="20" VerticalTextAlignment="Center"/>
                                                         </HorizontalStackLayout>
                                                     </VerticalStackLayout>
                                                 </Grid>

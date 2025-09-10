@@ -48,9 +48,9 @@
                                     <VerticalStackLayout Grid.Column="2" Spacing="10" Margin="20">
                                         <Label Text="{Binding Product.ProductPrice, StringFormat='{0}р. - 1 шт.'}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="24"/>
                                         <HorizontalStackLayout Spacing="5" HorizontalOptions="Center">
-                                            <Button Text="-" TextColor="White" Command="{Binding Source={RelativeSource AncestorType={x:Type viewModel:BascketViewModel}}, Path=MinusCountProductCommand}" CommandParameter="{Binding .}"/>
+                                            <Button Text="-" BackgroundColor="#2B2D42" TextColor="White" Command="{Binding Source={RelativeSource AncestorType={x:Type viewModel:BascketViewModel}}, Path=MinusCountProductCommand}" CommandParameter="{Binding .}"/>
                                             <Label Text="{Binding Count}" FontSize="24"/>
-                                            <Button Text="+" TextColor="White" FontSize="24" Command="{Binding Source={RelativeSource AncestorType={x:Type viewModel:BascketViewModel}}, Path=AddCountProductCommand}" CommandParameter="{Binding .}"/>
+                                            <Button Text="+" BackgroundColor="#2B2D42" TextColor="White" FontSize="24" Command="{Binding Source={RelativeSource AncestorType={x:Type viewModel:BascketViewModel}}, Path=AddCountProductCommand}" CommandParameter="{Binding .}"/>
                                         </HorizontalStackLayout>
                                     </VerticalStackLayout>
                                 </Grid>
