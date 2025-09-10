@@ -8,190 +8,271 @@
              xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
              xmlns:converts="clr-namespace:MauiShopElectronics.Converts"
              xmlns:base64Controls="http://eliseev/base64Image"
+             xmlns:eliseev="http://eliseev/base64Image"
              Title="Панель админа">
     <ScrollView>
         <VerticalStackLayout>
 
-            <VerticalStackLayout>
-                <Label Text="Редактирование категорий" HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="24"/>
+            <material:TabView>
+                <material:TabItem Title="Редактирование">
+                    <VerticalStackLayout>
+                        <Label Text="Редактирование категорий" HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="24"/>
 
-                <CollectionView Grid.Column="1" ItemsSource="{Binding Categories}" Margin="10">
-                    <CollectionView.ItemsLayout>
-                        <LinearItemsLayout Orientation="Horizontal"/>
-                    </CollectionView.ItemsLayout>
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Border BackgroundColor="Black" Padding="20,5,20,5">
-                                <Border.StrokeShape>
-                                    <RoundRectangle CornerRadius="20"/>
-                                </Border.StrokeShape>
-                                <Label Text="{Binding Title}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="White"/>
-                            </Border>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                        <CollectionView Grid.Column="1" ItemsSource="{Binding Categories}" Margin="10">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Horizontal"/>
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Border BackgroundColor="Black" Padding="20,5,20,5">
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="20"/>
+                                        </Border.StrokeShape>
+                                        <Label Text="{Binding Title}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="White"/>
+                                    </Border>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
 
-                <material:TabView>
+                        <material:TabView>
 
-                    <material:TabItem Title="Создание">
-                        <material:TabItem.ContentTemplate>
-                            <DataTemplate>
-                                <Grid ColumnSpacing="20" RowSpacing="10">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="1*"/>
-                                        <ColumnDefinition Width="3*"/>
-                                        <ColumnDefinition Width="1*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <input:FormView Grid.Column="1" SubmitCommand="{Binding CreateCategoryCommand}" Spacing="20">
-                                        <material:TextField Title="Название новой категории" Text="{Binding NameNewCategories}">
-                                            <validation:RequiredValidation Message="Категория должна быть выбрана"/>
-                                        </material:TextField>
-                                        <Button input:FormView.IsSubmitButton="True" Text="Создать" HorizontalOptions="End"/>
-                                    </input:FormView>
-                                </Grid>
-                            </DataTemplate>
-                        </material:TabItem.ContentTemplate>
-                    </material:TabItem>
-
-                    <material:TabItem Title="Удаление">
-                        <material:TabItem.ContentTemplate>
-
-                            <DataTemplate>
-                                <Grid ColumnSpacing="20" RowSpacing="10">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="1*"/>
-                                        <ColumnDefinition Width="3*"/>
-                                        <ColumnDefinition Width="1*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <VerticalStackLayout Grid.Column="1" Spacing="20">
-                                        <material:PickerField SelectedItem="{Binding IndexRemoteCategorie}" Title="Категория для удаления" ItemsSource="{Binding CategoriesString}"/>
-                                        <Button Text="Удалить" Command="{Binding RemoveCategoryCommand}" HorizontalOptions="End"/>
-                                    </VerticalStackLayout>
-                                </Grid>
-                            </DataTemplate>
-
-                        </material:TabItem.ContentTemplate>
-                    </material:TabItem>
-                </material:TabView>
-
-                <Label Text="Редактирование брендов" HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="24"/>
-
-                <CollectionView Grid.Column="1" ItemsSource="{Binding Brands}" Margin="10">
-                    <CollectionView.ItemsLayout>
-                        <LinearItemsLayout Orientation="Horizontal"/>
-                    </CollectionView.ItemsLayout>
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Border BackgroundColor="Black" Padding="20,5,20,5">
-                                <Border.StrokeShape>
-                                    <RoundRectangle CornerRadius="20"/>
-                                </Border.StrokeShape>
-                                <Label Text="{Binding BrandName}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="White"/>
-                            </Border>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-
-                <material:TabView>
-                    <material:TabItem Title="Создать">
-                        <material:TabItem.ContentTemplate>
-                            <DataTemplate>
-                                <Grid ColumnSpacing="20" RowSpacing="10">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="1*"/>
-                                        <ColumnDefinition Width="3*"/>
-                                        <ColumnDefinition Width="1*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <input:FormView Grid.Column="1" SubmitCommand="{Binding CreateBrandsCommand}" Spacing="20">
-                                        <material:TextField Title="Название бренда" Text="{Binding NameNewBrand}">
-                                            <validation:RequiredValidation Message="НАзвание должно быть заполненно"/>
-                                        </material:TextField>
-                                        <Button input:FormView.IsSubmitButton="True" Text="Создать" HorizontalOptions="End"/>
-                                    </input:FormView>
-                                </Grid>
-                            </DataTemplate>
-                        </material:TabItem.ContentTemplate>
-                    </material:TabItem>
-
-                    <material:TabItem Title="Удаление">
-                        <material:TabItem.ContentTemplate>
-                            <DataTemplate>
-                                <Grid ColumnSpacing="20" RowSpacing="10">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="1*"/>
-                                        <ColumnDefinition Width="3*"/>
-                                        <ColumnDefinition Width="1*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <input:FormView Grid.Column="1" SubmitCommand="{Binding RemoveBrandCommand}" Spacing="20">
-                                        <material:PickerField SelectedItem="{Binding IndexRemoteBrands}" Title="Категория для удаления" ItemsSource="{Binding BrandsString}">
-                                            <validation:RegexValidation Message="Категория должна быть выбрана"/>
-                                        </material:PickerField>
-                                        <Button input:FormView.IsSubmitButton="True" Text="Удалить" HorizontalOptions="End"/>
-                                    </input:FormView>
-                                </Grid>
-                            </DataTemplate>
-                        </material:TabItem.ContentTemplate>
-                    </material:TabItem>
-
-                </material:TabView>
-
-                <Label Text="Редактирование товаров" HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="24"/>
-
-                <material:TabView>
-
-                    <material:TabItem Title="Создание">
-                        <material:TabItem.ContentTemplate>
-                            <DataTemplate>
-                                <VerticalStackLayout>
-                                    <Grid ColumnSpacing="20" RowSpacing="10">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="1*"/>
-                                            <ColumnDefinition Width="3*"/>
-                                            <ColumnDefinition Width="1*"/>
-                                        </Grid.ColumnDefinitions>
-
-                                        <Grid Grid.Column="1" ColumnSpacing="10" Margin="10">
+                            <material:TabItem Title="Создание">
+                                <material:TabItem.ContentTemplate>
+                                    <DataTemplate>
+                                        <Grid ColumnSpacing="20" RowSpacing="10">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="1*"/>
-                                                <ColumnDefinition Width="2*"/>
+                                                <ColumnDefinition Width="3*"/>
+                                                <ColumnDefinition Width="1*"/>
                                             </Grid.ColumnDefinitions>
-                                            <VerticalStackLayout Grid.Column="0" VerticalOptions="Start">
-                                                <Border>
-                                                    <base64Controls:ImageBase64 Base64Source="{Binding SelectedImage}" Aspect="Fill">
-                                                        <base64Controls:ImageBase64.GestureRecognizers>
-                                                            <TapGestureRecognizer Command="{Binding ChangeImageCommand}"/>
-                                                        </base64Controls:ImageBase64.GestureRecognizers>
-                                                    </base64Controls:ImageBase64>
-                                                </Border>
-                                                <Label Text="Фото продукта"/>
-                                            </VerticalStackLayout>
-                                            <input:FormView Spacing="10" Grid.Column="1" SubmitCommand="{Binding AddProductCommand}">
-                                                <material:TextField Text="{Binding NameNewProduct}" Title="Название товара"/>
-                                                <material:PickerField SelectedItem="{Binding SelectedCategorie}" Title="Категории" ItemsSource="{Binding CategoriesString}"/>
-
-                                                <material:PickerField SelectedIndex="{Binding SelectedBrand}"  Title="бренд" ItemsSource="{Binding BrandsString}">
-                                                </material:PickerField>
-
-                                                <material:EditorField Text="{Binding DescriptionNewProduct}" Title="Описание"/>
-
-                                                <material:TextField Keyboard="Numeratic" Text="{Binding Price}" Title="Цена товара">
-                                                    <validation:RequiredValidation Message="Поле должно быть заполнено"/>
-                                                    <validation:MinValueValidation MinValue="0" Message="число меньше 0"/>
-                                                    <validation:DigitsOnlyValidation Message="Введите число"/>
+                                            <input:FormView Grid.Column="1" SubmitCommand="{Binding CreateCategoryCommand}" Spacing="20">
+                                                <material:TextField Title="Название новой категории" Text="{Binding NameNewCategories}">
+                                                    <validation:RequiredValidation Message="Категория должна быть выбрана"/>
                                                 </material:TextField>
-                                                <Button Margin="0,10,0,0" input:FormView.IsSubmitButton="True" Text="Создать" HorizontalOptions="End"/>
+                                                <Button input:FormView.IsSubmitButton="True" Text="Создать" HorizontalOptions="End"/>
                                             </input:FormView>
                                         </Grid>
-                                    </Grid>
-                                </VerticalStackLayout>
-                            </DataTemplate>
-                        </material:TabItem.ContentTemplate>
-                    </material:TabItem>
+                                    </DataTemplate>
+                                </material:TabItem.ContentTemplate>
+                            </material:TabItem>
 
-                </material:TabView>
+                            <material:TabItem Title="Удаление">
+                                <material:TabItem.ContentTemplate>
 
-            </VerticalStackLayout>
+                                    <DataTemplate>
+                                        <Grid ColumnSpacing="20" RowSpacing="10">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="1*"/>
+                                                <ColumnDefinition Width="3*"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <VerticalStackLayout Grid.Column="1" Spacing="20">
+                                                <material:PickerField SelectedItem="{Binding IndexRemoteCategorie}" Title="Категория для удаления" ItemsSource="{Binding CategoriesString}"/>
+                                                <Button Text="Удалить" Command="{Binding RemoveCategoryCommand}" HorizontalOptions="End"/>
+                                            </VerticalStackLayout>
+                                        </Grid>
+                                    </DataTemplate>
 
+                                </material:TabItem.ContentTemplate>
+                            </material:TabItem>
+                        </material:TabView>
+
+                        <Label Text="Редактирование брендов" HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="24"/>
+
+                        <CollectionView Grid.Column="1" ItemsSource="{Binding Brands}" Margin="10">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Horizontal"/>
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Border BackgroundColor="Black" Padding="20,5,20,5">
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="20"/>
+                                        </Border.StrokeShape>
+                                        <Label Text="{Binding BrandName}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="White"/>
+                                    </Border>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+
+                        <material:TabView>
+                            <material:TabItem Title="Создать">
+                                <material:TabItem.ContentTemplate>
+                                    <DataTemplate>
+                                        <Grid ColumnSpacing="20" RowSpacing="10">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="1*"/>
+                                                <ColumnDefinition Width="3*"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <input:FormView Grid.Column="1" SubmitCommand="{Binding CreateBrandsCommand}" Spacing="20">
+                                                <material:TextField Title="Название бренда" Text="{Binding NameNewBrand}">
+                                                    <validation:RequiredValidation Message="НАзвание должно быть заполненно"/>
+                                                </material:TextField>
+                                                <Button input:FormView.IsSubmitButton="True" Text="Создать" HorizontalOptions="End"/>
+                                            </input:FormView>
+                                        </Grid>
+                                    </DataTemplate>
+                                </material:TabItem.ContentTemplate>
+                            </material:TabItem>
+
+                            <material:TabItem Title="Удаление">
+                                <material:TabItem.ContentTemplate>
+                                    <DataTemplate>
+                                        <Grid ColumnSpacing="20" RowSpacing="10">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="1*"/>
+                                                <ColumnDefinition Width="3*"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <input:FormView Grid.Column="1" SubmitCommand="{Binding RemoveBrandCommand}" Spacing="20">
+                                                <material:PickerField SelectedItem="{Binding IndexRemoteBrands}" Title="Категория для удаления" ItemsSource="{Binding BrandsString}">
+                                                    <validation:RegexValidation Message="Категория должна быть выбрана"/>
+                                                </material:PickerField>
+                                                <Button input:FormView.IsSubmitButton="True" Text="Удалить" HorizontalOptions="End"/>
+                                            </input:FormView>
+                                        </Grid>
+                                    </DataTemplate>
+                                </material:TabItem.ContentTemplate>
+                            </material:TabItem>
+
+                        </material:TabView>
+
+                        <Label Text="Редактирование товаров" HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="24"/>
+
+                        <material:TabView>
+
+                            <material:TabItem Title="Создание">
+                                <material:TabItem.ContentTemplate>
+                                    <DataTemplate>
+                                        <VerticalStackLayout>
+                                            <Grid ColumnSpacing="20" RowSpacing="10">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="1*"/>
+                                                    <ColumnDefinition Width="3*"/>
+                                                    <ColumnDefinition Width="1*"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <Grid Grid.Column="1" ColumnSpacing="10" Margin="10">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="1*"/>
+                                                        <ColumnDefinition Width="2*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <VerticalStackLayout Grid.Column="0" VerticalOptions="Start">
+                                                        <Border>
+                                                            <base64Controls:ImageBase64 Base64Source="{Binding SelectedImage}" Aspect="Fill">
+                                                                <base64Controls:ImageBase64.GestureRecognizers>
+                                                                    <TapGestureRecognizer Command="{Binding ChangeImageCommand}"/>
+                                                                </base64Controls:ImageBase64.GestureRecognizers>
+                                                            </base64Controls:ImageBase64>
+                                                        </Border>
+                                                        <Label Text="Фото продукта"/>
+                                                    </VerticalStackLayout>
+                                                    <input:FormView Spacing="10" Grid.Column="1" SubmitCommand="{Binding AddProductCommand}">
+                                                        <material:TextField Text="{Binding NameNewProduct}" Title="Название товара"/>
+                                                        <material:PickerField SelectedItem="{Binding SelectedCategorie}" Title="Категории" ItemsSource="{Binding CategoriesString}"/>
+
+                                                        <material:PickerField SelectedIndex="{Binding SelectedBrand}"  Title="бренд" ItemsSource="{Binding BrandsString}">
+                                                        </material:PickerField>
+
+                                                        <material:EditorField Text="{Binding DescriptionNewProduct}" Title="Описание"/>
+
+                                                        <material:TextField Keyboard="Numeratic" Text="{Binding Price}" Title="Цена товара">
+                                                            <validation:RequiredValidation Message="Поле должно быть заполнено"/>
+                                                            <validation:MinValueValidation MinValue="0" Message="число меньше 0"/>
+                                                            <validation:DigitsOnlyValidation Message="Введите число"/>
+                                                        </material:TextField>
+                                                        <Button Margin="0,10,0,0" input:FormView.IsSubmitButton="True" Text="Создать" HorizontalOptions="End"/>
+                                                    </input:FormView>
+                                                </Grid>
+                                            </Grid>
+                                        </VerticalStackLayout>
+                                    </DataTemplate>
+                                </material:TabItem.ContentTemplate>
+                            </material:TabItem>
+
+                        </material:TabView>
+
+                    </VerticalStackLayout>
+                </material:TabItem>
+
+                <material:TabItem Title="Заказы">
+                    <VerticalStackLayout>
+                        <Label Text="Пустышка"/>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label
+        Grid.Row="0"
+        Grid.Column="1"
+        Text="История заказов"
+        FontSize="24"
+        VerticalTextAlignment="Center"
+        HorizontalTextAlignment="Center"
+        FontAttributes="Bold"/>
+                            <ScrollView Grid.Row="1" Grid.Column="1">
+                                <CollectionView ItemsSource="{Binding Records}" Margin="10">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <VerticalStackLayout Padding="5">
+                                                <VerticalStackLayout Spacing="10">
+                                                    <Label Text="{Binding User.UserName}" FontSize="24"/>
+                                                    <Label Text="{Binding DateOnly, Converter={converts:DateOnlyTextConvert}}" FontSize="24"/>
+                                                    <Label Text="{Binding MethodOfReceipt, Converter={converts:MethodToReceiptConvert}}" FontSize="24"/>
+                                                </VerticalStackLayout>
+                                                <CollectionView ItemsSource="{Binding Products}">
+                                                    <CollectionView.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <VerticalStackLayout Padding="5">
+                                                                <Border BackgroundColor="#2a2550">
+                                                                    <Border.StrokeShape>
+                                                                        <RoundRectangle CornerRadius="10"/>
+                                                                    </Border.StrokeShape>
+                                                                    <Grid ColumnSpacing="10">
+                                                                        <Grid.ColumnDefinitions>
+                                                                            <ColumnDefinition Width="Auto"/>
+                                                                            <ColumnDefinition Width="1*"/>
+                                                                        </Grid.ColumnDefinitions>
+                                                                        <eliseev:ImageBase64 Base64Source="{Binding Product.ProductRecordsBytes}" Aspect="Fill" WidthRequest="200" HeightRequest="200"/>
+                                                                        <VerticalStackLayout Grid.Column="1" Spacing="10" Margin="10">
+                                                                            <Label Text="{Binding Product.ProductName}" FontSize="20" FontAttributes="Bold"/>
+                                                                            <BoxView StyleClass="Divider"/>
+                                                                            <Label Text="{Binding Product.ProductDescription, Converter={converts:DescriptionTextConvert}}" FontSize="20"/>
+                                                                            <HorizontalStackLayout Spacing="10">
+                                                                                <Border BackgroundColor="#251d3a" HorizontalOptions="Start" Padding="5">
+                                                                                    <Border.StrokeShape>
+                                                                                        <RoundRectangle CornerRadius="10"/>
+                                                                                    </Border.StrokeShape>
+                                                                                    <Label Text="{Binding Product.ProductPrice, StringFormat='Цена -{0}руб.'}" FontSize="20"/>
+                                                                                </Border>
+                                                                                <Label Text="{Binding Count, StringFormat='{0}шт.'}" FontSize="20" VerticalTextAlignment="Center"/>
+                                                                            </HorizontalStackLayout>
+                                                                        </VerticalStackLayout>
+                                                                    </Grid>
+                                                                </Border>
+                                                            </VerticalStackLayout>
+                                                        </DataTemplate>
+                                                    </CollectionView.ItemTemplate>
+                                                </CollectionView>
+                                                <Label Text="{Binding AllPriceRecords, StringFormat='Общая стоимость заказа {0}'}" FontSize="20"/>
+                                                <BoxView StyleClass="Divider"/>
+                                            </VerticalStackLayout>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </ScrollView>
+                        </Grid>
+                    </VerticalStackLayout>
+                </material:TabItem>
+
+            </material:TabView>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

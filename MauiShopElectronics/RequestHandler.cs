@@ -184,5 +184,18 @@ namespace MauiShopElectronics
 			else
 				return new List<Records>();
 		}
+
+		public async Task<List<Records>> GetRecords()
+		{
+			string urlPost = configuration.GetSection("ConnectionStrings").GetSection("GetRecorder").Value;
+			var request = new RestRequest(urlPost, Method.Get);
+
+			RestResponse response = await restClient.ExecuteAsync(request);
+
+			if (response.StatusCode == System.Net.HttpStatusCode.OK)
+				return JsonConvert.DeserializeObject<List<Records>>(response.Content);
+			else
+				return new List<Records>();
+		}
 	}
 }

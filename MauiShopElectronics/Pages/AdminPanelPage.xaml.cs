@@ -6,16 +6,16 @@ namespace MauiShopElectronics.Pages;
 public partial class AdminPanelPage : ContentPage
 {
 	AdminViewModel viewModel;
-	public AdminPanelPage(IConfiguration configuration)
+	public AdminPanelPage(IConfiguration configuration, IServiceProvider serviceProvider)
 	{
 		InitializeComponent();
-		viewModel = new AdminViewModel(configuration);
+		viewModel = new AdminViewModel(configuration, serviceProvider);
 		BindingContext = viewModel;
 	}
 
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
+	protected override void OnAppearing()
+	{
+		base.OnAppearing();
 		viewModel.Apperaining();
-    }
+	}
 }

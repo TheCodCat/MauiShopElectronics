@@ -184,7 +184,7 @@ namespace MauiShopElectronics.ViewModels
         [RelayCommand]
         public async void ToAdminPanel()
         {
-            await _page.Navigation.PushAsync(new AdminPanelPage(_configuration));
+            await _page.Navigation.PushAsync(new AdminPanelPage(_configuration, _serviceProvider));
         }
 		[RelayCommand]
 		public async void ToHistoryPanel()

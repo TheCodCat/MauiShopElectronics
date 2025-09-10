@@ -10,6 +10,7 @@ namespace MauiShopElectronics.ViewModels
 {
     public partial class AdminViewModel : ObservableObject
     {
+        private IServiceProvider serviceProvider;
         private readonly IConfiguration _configuration;
         RestClient client = new RestClient(); 
         #region categories
@@ -74,7 +75,10 @@ namespace MauiShopElectronics.ViewModels
 		{
 			currentCategory = Categories.FirstOrDefault(x => x.Title == newValue);
 		}
-		#endregion
+        #endregion
+
+        [ObservableProperty]
+        private List<Records> records = new List<Records>();
 		partial void OnCategoriesChanging(List<Categorie>? oldValue, List<Categorie> newValue)
         {
             CategoriesString = newValue?.Select(x => x.Title).ToList() ?? new List<string>();
@@ -85,9 +89,10 @@ namespace MauiShopElectronics.ViewModels
             BrandsString = newValue?.Select(x => x.BrandName).ToList() ?? new List<string>();
         }
 
-        public AdminViewModel(IConfiguration configuration)
+        public AdminViewModel(IConfiguration configuration, IServiceProvider serviceProvider)
         {
             _configuration = configuration;
+            this.serviceProvider = serviceProvider;
             string base64 = _configuration.GetSection("Base64NotImage").Value;
             SelectedImage = base64 ?? string.Empty;
         }
@@ -96,6 +101,7 @@ namespace MauiShopElectronics.ViewModels
         {
             GetCategories();
             GetBrands();
+            GetAllRecords();
         }
 
         private async void GetCategories()
@@ -119,6 +125,28 @@ namespace MauiShopElectronics.ViewModels
             if(response.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 Brands = JsonConvert.DeserializeObject<List<Brand>>(response.Content);
+            }
+        }
+
+        private async void GetAllRecords() 
+        {
+            try
+            {
+                var request = serviceProvider.GetService<RequestHandler>();
+
+                var result = await request.GetRecords();
+
+				foreach (var item in result)
+				{
+					item.Products = JsonConvert.DeserializeObject<List<ProductBascket>>(item.ProductRecordsJson);
+					item.AllPriceRecords = item.Products.Select(x => x.Product.ProductPrice * x.Count).Sum();
+				}
+
+				Records = result;
+            }
+            catch
+            {
+
             }
         }
 
@@ -226,12 +254,5 @@ namespace MauiShopElectronics.ViewModels
             SelectedImage = _configuration.GetSection("Base64NotImage").Value;
             Price = string.Empty;
         }
-
-        [RelayCommand]
-        public async void RemoteProduct()
-        {
-
-        }
-        
     }
 }

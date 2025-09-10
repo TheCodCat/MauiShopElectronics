@@ -39,7 +39,7 @@ namespace WebApi.Repositories
         }
         public async Task<List<Records>> GetRecords()
         {
-            return apiDatabaseContext.Records.ToList();
+            return apiDatabaseContext.Records.Include(x => x.User).ToList();
         }
         public async Task<bool> Remote(int userId, int recordId)
         {

@@ -22,11 +22,18 @@ namespace WebApi.Controllers
             return await recordsRepository.GetRecords(userId);
         }
 
-        [HttpPost("/createRecorder")]
+		[HttpGet("/getRecords")]
+		public async Task<List<Records>> GetRecords()
+		{
+			return await recordsRepository.GetRecords();
+		}
+
+		[HttpPost("/createRecorder")]
         public async Task<bool> CreateRecords([FromBody] RecordsDTO records)
         {
             var result = await recordsRepository.Create(records);
             return result;
         }
+
     }
 }
