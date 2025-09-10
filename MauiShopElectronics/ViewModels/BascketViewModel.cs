@@ -1,8 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using MauiShopElectronics.Models;
 using MauiShopElectronics.Models.models;
 using MauiShopElectronics.Pages;
 using MauiShopElectronics.Services;
+using Models;
 using Models.models;
 
 namespace MauiShopElectronics.ViewModels
@@ -21,6 +23,9 @@ namespace MauiShopElectronics.ViewModels
 
 		[ObservableProperty]
 		private bool isRequest;
+
+		[ObservableProperty]
+		private int selectedMethodIndex;
 
 		public BascketViewModel(IServiceProvider serviceProvider)
 		{
@@ -104,6 +109,7 @@ namespace MauiShopElectronics.ViewModels
 				DateOnly = DateOnly.FromDateTime(DateTime.Now),
 				Products = ProductBasckets,
 				UserId = _serviceProvider.GetService<AuthorizationViewModel>().User.Id,
+				MethodOfReceipt = (MethodOfReceipt)SelectedMethodIndex
 			};
 
 			IsRequest = true;

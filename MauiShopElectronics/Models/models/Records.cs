@@ -1,4 +1,5 @@
-﻿using MauiShopElectronics.Models.models;
+﻿using MauiShopElectronics.Models;
+using MauiShopElectronics.Models.models;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -13,6 +14,7 @@ namespace Models.models
         public string ProductRecordsJson { get; set; }
         public List<ProductBascket> Products { get; set; }
         public DateOnly DateOnly { get; set; }
-        public int AllPriceRecords { get; set; }
+		public MethodOfReceipt MethodOfReceipt { get; set; }
+		public int AllPriceRecords { get; set; }
     }
 }

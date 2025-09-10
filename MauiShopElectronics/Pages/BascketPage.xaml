@@ -4,7 +4,8 @@
              x:Class="MauiShopElectronics.Pages.BascketPage"
              xmlns:eliseev="http://eliseev/base64Image"
              xmlns:viewModel="clr-namespace:MauiShopElectronics.ViewModels"
-             xmlns:converts="clr-namespace:MauiShopElectronics.Converts">
+             xmlns:converts="clr-namespace:MauiShopElectronics.Converts"
+             xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui">
 
     <Grid RowSpacing="10">
         <Grid.ColumnDefinitions>
@@ -60,6 +61,16 @@
             </CollectionView>
         <VerticalStackLayout Spacing="10" Margin="0,0,0,20" Grid.Column="1" Grid.Row="2" IsVisible="{Binding ProductBasckets, Converter={converts:VisibleToEmptyBascketConvert}}">
             <Label Text="{Binding CountBascketProduct, StringFormat='Количество - {0}'}" FontSize="26"/>
+
+            <input:SelectionView SelectionType="RadioButton" ColumnNumber="2" ColumnSpacing="10" SelectedIndex="{Binding SelectedMethodIndex}">
+                <input:SelectionView.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Оплата при получении</x:String>
+                        <x:String>Оплата сразу</x:String>
+                    </x:Array>
+                </input:SelectionView.ItemsSource>
+            </input:SelectionView>
+            
             <Button Text="{Binding AllPrice, StringFormat='Оплатить {0}'}" FontSize="26" Command="{Binding OrderProductsCommand}"/>
         </VerticalStackLayout>
 

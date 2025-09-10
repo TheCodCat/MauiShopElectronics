@@ -10,5 +10,6 @@ namespace Models.models
         public int UserId { get; set; }
         public string ProductRecordsJson { get; set; }
         public DateOnly DateOnly { get; set; }
+        public MethodOfReceipt MethodOfReceipt { get; set; }
     }
 }

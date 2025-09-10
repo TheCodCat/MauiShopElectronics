@@ -18,18 +18,19 @@ namespace WebApi.Repositories
         {
             try
             {
-                    var newrecords = new Records();
+                var newrecords = new Records();
 
-                    var user = apiDatabaseContext.Users.FirstOrDefault(x => x.Id == records.UserId);
-                    newrecords.User = user;
-                    string json = JsonConvert.SerializeObject(records.Products);
-                    newrecords.ProductRecordsJson = json;
-                    newrecords.DateOnly = DateOnly.FromDateTime(DateTime.Now);
+                var user = apiDatabaseContext.Users.FirstOrDefault(x => x.Id == records.UserId);
+                newrecords.User = user;
+                string json = JsonConvert.SerializeObject(records.Products);
+                newrecords.ProductRecordsJson = json;
+                newrecords.MethodOfReceipt = records.MethodOfReceipt;
+                newrecords.DateOnly = DateOnly.FromDateTime(DateTime.Now);
 
-                    apiDatabaseContext.Records.Add(newrecords);
-                    apiDatabaseContext.SaveChanges();
+                apiDatabaseContext.Records.Add(newrecords);
+                apiDatabaseContext.SaveChanges();
 
-                    return true;
+                return true;
             }
             catch (Exception ex)
             {

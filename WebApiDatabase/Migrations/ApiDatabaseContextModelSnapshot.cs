@@ -116,6 +116,9 @@ namespace WebApiDatabase.Migrations
                     b.Property<DateOnly>("DateOnly")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("MethodOfReceipt")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("ProductRecordsJson")
                         .IsRequired()
                         .HasColumnType("TEXT");
