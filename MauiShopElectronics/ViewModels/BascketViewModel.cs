@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using MauiShopElectronics.Models;
 using MauiShopElectronics.Models.models;
 using MauiShopElectronics.Pages;
 using MauiShopElectronics.Services;
@@ -93,6 +92,7 @@ namespace MauiShopElectronics.ViewModels
 
             IsRequest = false;
         }
+
 		[RelayCommand]
 		public async void SelectProduct(ProductBascket product)
 		{

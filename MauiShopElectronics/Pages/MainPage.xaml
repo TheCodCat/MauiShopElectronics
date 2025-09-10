@@ -47,7 +47,7 @@
                     </Grid.RowDefinitions>
 
                     <Image Grid.RowSpan="3" Grid.ColumnSpan="2" Source="newproducts.jpg"  Aspect="AspectFill"/>
-                    <Label Grid.Row="1" Grid.Column="1" Text="Новинки" FontSize="24"/>
+                    <Label Grid.Row="1" Grid.Column="1" Text="Новинки" TextColor="White" FontAttributes="Bold" FontSize="24"/>
 
                 </Grid>
 
@@ -126,7 +126,7 @@
                     </Grid.RowDefinitions>
 
                     <Image Grid.RowSpan="3" Grid.ColumnSpan="2" Source="popular.jpg"  Aspect="AspectFill"/>
-                    <Label Grid.Row="1" Grid.Column="1" Text="Популярные катерогии" FontSize="24"/>
+                    <Label Grid.Row="1" Grid.Column="1" Text="Популярные катерогии" TextColor="White" FontAttributes="Bold" FontSize="24"/>
 
                 </Grid>
 

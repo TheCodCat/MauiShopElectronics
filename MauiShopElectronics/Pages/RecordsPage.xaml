@@ -47,9 +47,9 @@
                                                     <eliseev:ImageBase64 Base64Source="{Binding Product.ProductRecordsBytes}" Aspect="Fill" WidthRequest="200" HeightRequest="200"/>
                                                     <VerticalStackLayout Grid.Column="1" Spacing="10" Margin="10">
                                                         <Label Text="{Binding Product.Brand.BrandName}" TextColor="#8D99AE" FontSize="20" FontAttributes="Bold" />
-                                                        <Label Text="{Binding Product.ProductName}" FontSize="20" FontAttributes="Bold" />
+                                                        <Label Text="{Binding Product.ProductName}" FontSize="20" FontAttributes="Bold" TextColor="White" />
                                                         <BoxView StyleClass="Divider"/>
-                                                        <Label Text="{Binding Product.ProductDescription, Converter={converts:DescriptionTextConvert}}" FontSize="20"/>
+                                                        <Label Text="{Binding Product.ProductDescription, Converter={converts:DescriptionTextConvert}}" TextColor="White" FontSize="20"/>
                                                         <HorizontalStackLayout Spacing="10">
                                                             <Border BackgroundColor="#251d3a" HorizontalOptions="Start" Padding="5">
                                                                 <Border.StrokeShape>
