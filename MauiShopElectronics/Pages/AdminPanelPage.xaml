@@ -13,8 +13,8 @@
 
     <Grid ColumnSpacing="10" Margin="10">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="11*"/>
         </Grid.ColumnDefinitions>
 
         <input:SelectionView RowSpacing="5" SelectedIndex="{Binding SelectionIndexCategorie}" Grid.Column="0" SelectionType="Button" ColumnNumber="1">
@@ -22,7 +22,7 @@
                 <x:Array Type="{x:Type x:String}">
                     <x:String>Категории</x:String>
                     <x:String>Бренды</x:String>
-                    <x:String>Товары</x:String>
+                    <x:String>Заказы</x:String>
                 </x:Array>
             </input:SelectionView.ItemsSource>
         </input:SelectionView>
@@ -194,7 +194,7 @@
                     <Label
             Grid.Row="0"
             Grid.Column="1"
-            Text="История заказов"
+            Text="Заказы"
             FontSize="24"
             VerticalTextAlignment="Center"
             HorizontalTextAlignment="Center"
@@ -224,17 +224,17 @@
                                                                 </Grid.ColumnDefinitions>
                                                                 <eliseev:ImageBase64 Base64Source="{Binding Product.ProductRecordsBytes}" Aspect="Fill" WidthRequest="200" HeightRequest="200"/>
                                                                 <VerticalStackLayout Grid.Column="1" Spacing="10" Margin="10">
-                                                                    <Label Text="{Binding Product.ProductName}" FontSize="20" FontAttributes="Bold"/>
+                                                                    <Label Text="{Binding Product.ProductName}" FontSize="20" FontAttributes="Bold" TextColor="White"/>
                                                                     <BoxView StyleClass="Divider"/>
-                                                                    <Label Text="{Binding Product.ProductDescription, Converter={converts:DescriptionTextConvert}}" FontSize="20"/>
+                                                                    <Label Text="{Binding Product.ProductDescription, Converter={converts:DescriptionTextConvert}}" FontSize="20" TextColor="White"/>
                                                                     <HorizontalStackLayout Spacing="10">
                                                                         <Border BackgroundColor="#251d3a" HorizontalOptions="Start" Padding="5">
                                                                             <Border.StrokeShape>
                                                                                 <RoundRectangle CornerRadius="10"/>
                                                                             </Border.StrokeShape>
-                                                                            <Label Text="{Binding Product.ProductPrice, StringFormat='Цена -{0}руб.'}" FontSize="20"/>
+                                                                            <Label Text="{Binding Product.ProductPrice, StringFormat='Цена -{0}руб.'}" FontSize="20" TextColor="White"/>
                                                                         </Border>
-                                                                        <Label Text="{Binding Count, StringFormat='{0}шт.'}" FontSize="20" VerticalTextAlignment="Center"/>
+                                                                        <Label Text="{Binding Count, StringFormat='{0}шт.'}" FontSize="20" VerticalTextAlignment="Center" TextColor="White"/>
                                                                     </HorizontalStackLayout>
                                                                 </VerticalStackLayout>
                                                             </Grid>

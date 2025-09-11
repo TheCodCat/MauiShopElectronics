@@ -12,7 +12,6 @@
         <Label Text="{Binding User.UserName, StringFormat='Имя - {0}'}"/>
         <Label Text="{Binding User.Login, StringFormat='Login - {0}'}"/>
         <Label Text="{Binding User.PhoneNumber}"/>
-        <Button Text="Админ панель" IsVisible="{Binding User.IsAdmin}" Command="{Binding ToAdminPanelCommand}"/>
 
         <BoxView StyleClass="Divider"/>
         <input:FormView SubmitCommand="{Binding EditProfileCommand}" Spacing="10">
@@ -44,8 +43,10 @@
         </input:FormView>
 
         <material:TextField Text="{Binding FullAdress}" Title="Полный адрес" IsEnabled="False"/>
-
-        <Button Text="История заказов" Command="{Binding ToHistoryPanelCommand}" HorizontalOptions="End"/>
+        <HorizontalStackLayout Spacing="10" HorizontalOptions="End">
+            <Button Text="Админ панель" IsVisible="{Binding User.IsAdmin}" Command="{Binding ToAdminPanelCommand}"/>
+            <Button Text="История заказов" Command="{Binding ToHistoryPanelCommand}"/>
+        </HorizontalStackLayout>
         <Button Text="Выйти из акаунта" Command="{Binding ExitAcountCommand}" HorizontalOptions="End"/>
     </VerticalStackLayout>
 
