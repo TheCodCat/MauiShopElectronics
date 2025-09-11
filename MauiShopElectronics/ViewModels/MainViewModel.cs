@@ -27,13 +27,15 @@ namespace MauiShopElectronics.ViewModels
         [ObservableProperty]
         private bool isRequest;
 
+        [ObservableProperty]
+        private string searchIndex;
+
         public MainViewModel(IConfiguration configuration, IServiceProvider serviceProvider)
         {
             _configuration = configuration;
             this.serviceProvider = serviceProvider;
-            Apperaining();
 		}
-        public async void Apperaining()
+        public async Task Apperaining()
         {
             string urlGet = _configuration.GetSection("ConnectionStrings").GetSection("GetProdurts").Value;
             var request = new RestRequest(urlGet, Method.Get);
@@ -69,6 +71,17 @@ namespace MauiShopElectronics.ViewModels
         public async void SelectCategories(Categorie categorie)
         {
             await Shell.Current.Navigation.PushAsync(new CategoriesProductsPage(categorie, serviceProvider));
+        }
+
+
+        partial void OnSearchIndexChanging(string? oldValue, string newValue)
+        {
+            var item = Products.FirstOrDefault(x => $"{x.Brand.BrandName} {x.ProductName}" == newValue);
+
+            if(item is not null)
+            {
+                SelectProduct(item);
+            }
         }
     }
 }

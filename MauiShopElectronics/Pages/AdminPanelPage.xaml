@@ -28,10 +28,10 @@
         </input:SelectionView>
 
         <ScrollView Grid.Column="1" IsVisible="{Binding SelectionIndexCategorie, Converter={converts:ActionCategorieAdminPanelConvert ActionNumber=0 }}">
-            <VerticalStackLayout>
+            <VerticalStackLayout Spacing="10">
                     <Label Text="Редактирование категорий" HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="24"/>
 
-                    <CollectionView Grid.Column="1" ItemsSource="{Binding Categories}" Margin="10">
+                    <CollectionView Grid.Column="1" ItemsSource="{Binding Categories}">
                         <CollectionView.ItemsLayout>
                             <LinearItemsLayout Orientation="Horizontal"/>
                         </CollectionView.ItemsLayout>
@@ -47,105 +47,83 @@
                         </CollectionView.ItemTemplate>
                     </CollectionView>
 
-                <material:TabView>
+                    <Grid ColumnSpacing="20" RowSpacing="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <input:FormView Grid.Column="1" SubmitCommand="{Binding CreateCategoryCommand}" Spacing="20">
+                            <material:TextField Title="Название новой категории" Text="{Binding NameNewCategories}">
+                                <validation:RequiredValidation Message="Категория должна быть выбрана"/>
+                            </material:TextField>
+                            <Button input:FormView.IsSubmitButton="True" Text="Создать" HorizontalOptions="End"/>
+                        </input:FormView>
+                    </Grid>
 
-                    <material:TabItem Title="Создание">
-                        <material:TabItem.ContentTemplate>
-                            <DataTemplate>
-                                <Grid ColumnSpacing="20" RowSpacing="10">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="1*"/>
-                                        <ColumnDefinition Width="3*"/>
-                                        <ColumnDefinition Width="1*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <input:FormView Grid.Column="1" SubmitCommand="{Binding CreateCategoryCommand}" Spacing="20">
-                                        <material:TextField Title="Название новой категории" Text="{Binding NameNewCategories}">
-                                            <validation:RequiredValidation Message="Категория должна быть выбрана"/>
-                                        </material:TextField>
-                                        <Button input:FormView.IsSubmitButton="True" Text="Создать" HorizontalOptions="End"/>
-                                    </input:FormView>
-                                </Grid>
-                            </DataTemplate>
-                        </material:TabItem.ContentTemplate>
-                    </material:TabItem>
+                <BoxView StyleClass="Divider"/>
 
-                    <material:TabItem Title="Удаление">
-                        <material:TabItem.ContentTemplate>
+                <Grid ColumnSpacing="20" RowSpacing="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <VerticalStackLayout Grid.Column="1" Spacing="20">
+                            <material:PickerField SelectedItem="{Binding IndexRemoteCategorie}" Title="Категория для удаления" ItemsSource="{Binding CategoriesString}"/>
+                            <Button Text="Удалить" Command="{Binding RemoveCategoryCommand}" HorizontalOptions="End"/>
+                        </VerticalStackLayout>
+                    </Grid>
 
-                            <DataTemplate>
-                                <Grid ColumnSpacing="20" RowSpacing="10">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="1*"/>
-                                        <ColumnDefinition Width="3*"/>
-                                        <ColumnDefinition Width="1*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <VerticalStackLayout Grid.Column="1" Spacing="20">
-                                        <material:PickerField SelectedItem="{Binding IndexRemoteCategorie}" Title="Категория для удаления" ItemsSource="{Binding CategoriesString}"/>
-                                        <Button Text="Удалить" Command="{Binding RemoveCategoryCommand}" HorizontalOptions="End"/>
-                                    </VerticalStackLayout>
-                                </Grid>
-                            </DataTemplate>
-
-                        </material:TabItem.ContentTemplate>
-                    </material:TabItem>
-                </material:TabView>
+                <BoxView StyleClass="Divider"/>
 
                 <Label Text="Редактирование товаров" HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="24"/>
 
-                    <material:TabView>
 
-                        <material:TabItem Title="Создание">
-                            <material:TabItem.ContentTemplate>
-                                <DataTemplate>
-                                    <VerticalStackLayout>
-                                        <Grid ColumnSpacing="20" RowSpacing="10">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="1*"/>
-                                                <ColumnDefinition Width="3*"/>
-                                                <ColumnDefinition Width="1*"/>
-                                            </Grid.ColumnDefinitions>
+                <VerticalStackLayout>
+                    <Grid ColumnSpacing="20" RowSpacing="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
 
-                                            <Grid Grid.Column="1" ColumnSpacing="10" Margin="10">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="1*"/>
-                                                    <ColumnDefinition Width="2*"/>
-                                                </Grid.ColumnDefinitions>
-                                                <VerticalStackLayout Grid.Column="0" VerticalOptions="Start">
-                                                    <Border>
-                                                        <base64Controls:ImageBase64 Base64Source="{Binding SelectedImage}" Aspect="Fill">
-                                                            <base64Controls:ImageBase64.GestureRecognizers>
-                                                                <TapGestureRecognizer Command="{Binding ChangeImageCommand}"/>
-                                                            </base64Controls:ImageBase64.GestureRecognizers>
-                                                        </base64Controls:ImageBase64>
-                                                    </Border>
-                                                    <Label Text="Фото продукта"/>
-                                                </VerticalStackLayout>
-                                                <input:FormView Spacing="10" Grid.Column="1" SubmitCommand="{Binding AddProductCommand}">
-                                                    <material:TextField Text="{Binding NameNewProduct}" Title="Название товара"/>
-                                                    <material:PickerField SelectedItem="{Binding SelectedCategorie}" Title="Категории" ItemsSource="{Binding CategoriesString}"/>
+                        <Grid Grid.Column="1" ColumnSpacing="10" Margin="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="2*"/>
+                            </Grid.ColumnDefinitions>
+                            <VerticalStackLayout Grid.Column="0" VerticalOptions="Start">
+                                <Border>
+                                    <base64Controls:ImageBase64 Base64Source="{Binding SelectedImage}" Aspect="Fill">
+                                        <base64Controls:ImageBase64.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding ChangeImageCommand}"/>
+                                        </base64Controls:ImageBase64.GestureRecognizers>
+                                    </base64Controls:ImageBase64>
+                                </Border>
+                                <Label Text="Фото продукта"/>
+                            </VerticalStackLayout>
+                            <input:FormView Spacing="10" Grid.Column="1" SubmitCommand="{Binding AddProductCommand}">
+                                <material:TextField Text="{Binding NameNewProduct}" Title="Название товара"/>
+                                <material:PickerField SelectedItem="{Binding SelectedCategorie}" Title="Категории" ItemsSource="{Binding CategoriesString}"/>
 
-                                                    <material:PickerField SelectedIndex="{Binding SelectedBrand}"  Title="бренд" ItemsSource="{Binding BrandsString}">
-                                                    </material:PickerField>
+                                <material:PickerField SelectedIndex="{Binding SelectedBrand}"  Title="бренд" ItemsSource="{Binding BrandsString}">
+                                </material:PickerField>
 
-                                                    <material:EditorField Text="{Binding DescriptionNewProduct}" Title="Описание"/>
+                                <material:EditorField Text="{Binding DescriptionNewProduct}" Title="Описание"/>
 
-                                                    <material:TextField Keyboard="Numeratic" Text="{Binding Price}" Title="Цена товара">
-                                                        <validation:RequiredValidation Message="Поле должно быть заполнено"/>
-                                                        <validation:MinValueValidation MinValue="0" Message="число меньше 0"/>
-                                                        <validation:DigitsOnlyValidation Message="Введите число"/>
-                                                    </material:TextField>
-                                                    <Button Margin="0,10,0,0" input:FormView.IsSubmitButton="True" Text="Создать" HorizontalOptions="End"/>
-                                                </input:FormView>
-                                            </Grid>
-                                        </Grid>
-                                    </VerticalStackLayout>
-                                </DataTemplate>
-                            </material:TabItem.ContentTemplate>
-                        </material:TabItem>
-
-                    </material:TabView>
-
+                                <material:TextField Keyboard="Numeratic" Text="{Binding Price}" Title="Цена товара">
+                                    <validation:RequiredValidation Message="Поле должно быть заполнено"/>
+                                    <validation:MinValueValidation MinValue="0" Message="число меньше 0"/>
+                                    <validation:DigitsOnlyValidation Message="Введите число"/>
+                                </material:TextField>
+                                <Button Margin="0,10,0,0" input:FormView.IsSubmitButton="True" Text="Создать" HorizontalOptions="End"/>
+                            </input:FormView>
+                        </Grid>
+                    </Grid>
                 </VerticalStackLayout>
+
+            </VerticalStackLayout>
         </ScrollView>
         
         <ScrollView Grid.Column="1" IsVisible="{Binding SelectionIndexCategorie, Converter={converts:ActionCategorieAdminPanelConvert ActionNumber=1 }}">
@@ -168,48 +146,36 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
 
-                <material:TabView>
-                    <material:TabItem Title="Создать">
-                        <material:TabItem.ContentTemplate>
-                            <DataTemplate>
-                                <Grid ColumnSpacing="20" RowSpacing="10">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="1*"/>
-                                        <ColumnDefinition Width="3*"/>
-                                        <ColumnDefinition Width="1*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <input:FormView Grid.Column="1" SubmitCommand="{Binding CreateBrandsCommand}" Spacing="20">
-                                        <material:TextField Title="Название бренда" Text="{Binding NameNewBrand}">
-                                            <validation:RequiredValidation Message="НАзвание должно быть заполненно"/>
-                                        </material:TextField>
-                                        <Button input:FormView.IsSubmitButton="True" Text="Создать" HorizontalOptions="End"/>
-                                    </input:FormView>
-                                </Grid>
-                            </DataTemplate>
-                        </material:TabItem.ContentTemplate>
-                    </material:TabItem>
 
-                    <material:TabItem Title="Удаление">
-                        <material:TabItem.ContentTemplate>
-                            <DataTemplate>
-                                <Grid ColumnSpacing="20" RowSpacing="10">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="1*"/>
-                                        <ColumnDefinition Width="3*"/>
-                                        <ColumnDefinition Width="1*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <input:FormView Grid.Column="1" SubmitCommand="{Binding RemoveBrandCommand}" Spacing="20">
-                                        <material:PickerField SelectedItem="{Binding IndexRemoteBrands}" Title="Категория для удаления" ItemsSource="{Binding BrandsString}">
-                                            <validation:RegexValidation Message="Категория должна быть выбрана"/>
-                                        </material:PickerField>
-                                        <Button input:FormView.IsSubmitButton="True" Text="Удалить" HorizontalOptions="End"/>
-                                    </input:FormView>
-                                </Grid>
-                            </DataTemplate>
-                        </material:TabItem.ContentTemplate>
-                    </material:TabItem>
+                <Grid ColumnSpacing="20" RowSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <input:FormView Grid.Column="1" SubmitCommand="{Binding CreateBrandsCommand}" Spacing="20">
+                        <material:TextField Title="Название бренда" Text="{Binding NameNewBrand}">
+                            <validation:RequiredValidation Message="НАзвание должно быть заполненно"/>
+                        </material:TextField>
+                        <Button input:FormView.IsSubmitButton="True" Text="Создать" HorizontalOptions="End"/>
+                    </input:FormView>
+                </Grid>
 
-                </material:TabView>
+                <BoxView StyleClass="Divider"/>
+
+                <Grid ColumnSpacing="20" RowSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <input:FormView Grid.Column="1" SubmitCommand="{Binding RemoveBrandCommand}" Spacing="20">
+                        <material:PickerField SelectedItem="{Binding IndexRemoteBrands}" Title="Категория для удаления" ItemsSource="{Binding BrandsString}">
+                            <validation:RegexValidation Message="Категория должна быть выбрана"/>
+                        </material:PickerField>
+                        <Button input:FormView.IsSubmitButton="True" Text="Удалить" HorizontalOptions="End"/>
+                    </input:FormView>
+                </Grid>
             </VerticalStackLayout>
         </ScrollView>
         
