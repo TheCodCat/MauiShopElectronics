@@ -78,6 +78,9 @@ namespace MauiShopElectronics.ViewModels
         #endregion
 
         [ObservableProperty]
+        private int selectionIndexCategorie = 0;
+
+        [ObservableProperty]
         private List<Records> records = new List<Records>();
 		partial void OnCategoriesChanging(List<Categorie>? oldValue, List<Categorie> newValue)
         {
@@ -253,6 +256,11 @@ namespace MauiShopElectronics.ViewModels
             DescriptionNewProduct = string.Empty;
             SelectedImage = _configuration.GetSection("Base64NotImage").Value;
             Price = string.Empty;
+        }
+
+        partial void OnSelectionIndexCategorieChanging(int oldValue, int newValue)
+        {
+            
         }
     }
 }
