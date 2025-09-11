@@ -27,10 +27,13 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <VerticalStackLayout Padding="5">
-                            <HorizontalStackLayout Spacing="10">
-                                <Label Text="{Binding DateOnly, Converter={converts:DateOnlyTextConvert}}" FontSize="24"/>
-                                <Label Text="{Binding MethodOfReceipt, Converter={converts:MethodToReceiptConvert}}" FontSize="24"/>
-                            </HorizontalStackLayout>
+                            <VerticalStackLayout Spacing="5">
+                                    <Label Text="Тут будет статус доставки" FontSize="24"/>
+                                <HorizontalStackLayout Spacing="10">
+                                    <Label Text="{Binding DateOnly, Converter={converts:DateOnlyTextConvert}}" FontSize="24"/>
+                                    <Label Text="{Binding MethodOfReceipt, Converter={converts:MethodToReceiptConvert}}" FontSize="24"/>
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
                             <CollectionView ItemsSource="{Binding Products}">
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate>

@@ -209,9 +209,9 @@
                                     <DataTemplate>
                                         <VerticalStackLayout Padding="5">
                                             <VerticalStackLayout Spacing="10">
-                                                <Label Text="{Binding User.UserName}" FontSize="24"/>
                                                 <Label Text="{Binding DateOnly, Converter={converts:DateOnlyTextConvert}}" FontSize="24"/>
                                                 <Label Text="{Binding MethodOfReceipt, Converter={converts:MethodToReceiptConvert}}" FontSize="24"/>
+                                                <Label Text="Тут будет статус доставки" FontSize="24"/>
                                             </VerticalStackLayout>
                                             <CollectionView ItemsSource="{Binding Products}">
                                                 <CollectionView.ItemTemplate>
@@ -248,6 +248,8 @@
                                                 </CollectionView.ItemTemplate>
                                             </CollectionView>
                                             <Label Text="{Binding AllPriceRecords, StringFormat='Общая стоимость заказа {0}'}" FontSize="20"/>
+                                            <Label Text="Тут статус доставки" FontSize="20"/>
+                                            
                                             <BoxView StyleClass="Divider"/>
                                         </VerticalStackLayout>
                                     </DataTemplate>
