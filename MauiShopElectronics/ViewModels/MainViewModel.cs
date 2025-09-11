@@ -83,5 +83,13 @@ namespace MauiShopElectronics.ViewModels
                 SelectProduct(item);
             }
         }
+
+        [RelayCommand]
+        private async void OpenToChanel()
+        {
+            string url = _configuration.GetSection("configuration").Value;
+            if(url is not null)
+                await Browser.Default.OpenAsync(url);
+        }
     }
 }

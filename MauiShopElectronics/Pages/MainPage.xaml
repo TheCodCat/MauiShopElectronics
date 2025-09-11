@@ -160,7 +160,11 @@
 
                             <VerticalStackLayout Grid.Column="1" Margin="20">
                                 <Label Text="Мы на связи" FontSize="20" TextColor="White"/>
-                                <Image Source="telegram_logo.png" HeightRequest="64"/>
+                                <Image Source="telegram_logo.png" HeightRequest="64">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding OpenToChanelCommand}"/>
+                                    </Image.GestureRecognizers>
+                                </Image>
                             </VerticalStackLayout>
                         </Grid>
                     </VerticalStackLayout>
