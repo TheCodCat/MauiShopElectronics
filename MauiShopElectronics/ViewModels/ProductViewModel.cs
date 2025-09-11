@@ -61,13 +61,18 @@ namespace MauiShopElectronics.ViewModels
             if (User == null)
             {
 				await Shell.Current.Navigation.PushAsync(new AuthorizationPage(serviceProvider.GetService<AuthorizationViewModel>()));
-                return;
             }
             IsRequired = true;
 
-            var result = await _handler.AddProductBascket(product);
-            if (result)
-                GetCountProduct();
+            if (CurrentProductBascket is null)
+            {
+                var result = await _handler.AddProductBascket(product);
+                if (result)
+                    GetCountProduct();
+            }
+            else
+                await Shell.Current.Navigation.PushAsync(new BascketPage(serviceProvider.GetService<BascketViewModel>()));
+
 
             IsRequired = false;
         }

@@ -199,59 +199,65 @@
             VerticalTextAlignment="Center"
             HorizontalTextAlignment="Center"
             FontAttributes="Bold"/>
-                    <ScrollView Grid.Row="1" Grid.Column="1">
-                        <CollectionView ItemsSource="{Binding Records}" Margin="10">
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate>
-                                    <VerticalStackLayout Padding="5">
-                                        <VerticalStackLayout Spacing="10">
-                                            <Label Text="{Binding User.UserName}" FontSize="24"/>
-                                            <Label Text="{Binding DateOnly, Converter={converts:DateOnlyTextConvert}}" FontSize="24"/>
-                                            <Label Text="{Binding MethodOfReceipt, Converter={converts:MethodToReceiptConvert}}" FontSize="24"/>
+                    <VerticalStackLayout Spacing="10"  Grid.Row="1" Grid.Column="1">
+
+                        <material:AutoCompleteTextField Title="Поиск по логину" SelectedText="{Binding SelectUserName}" ItemsSource="{Binding SearchUsers}"/>
+
+                        <ScrollView>
+                            <CollectionView ItemsSource="{Binding SearchRecords}" Margin="10">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <VerticalStackLayout Padding="5">
+                                            <VerticalStackLayout Spacing="10">
+                                                <Label Text="{Binding User.UserName}" FontSize="24"/>
+                                                <Label Text="{Binding DateOnly, Converter={converts:DateOnlyTextConvert}}" FontSize="24"/>
+                                                <Label Text="{Binding MethodOfReceipt, Converter={converts:MethodToReceiptConvert}}" FontSize="24"/>
+                                            </VerticalStackLayout>
+                                            <CollectionView ItemsSource="{Binding Products}">
+                                                <CollectionView.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <VerticalStackLayout Padding="5">
+                                                            <Border BackgroundColor="#2a2550">
+                                                                <Border.StrokeShape>
+                                                                    <RoundRectangle CornerRadius="10"/>
+                                                                </Border.StrokeShape>
+                                                                <Grid ColumnSpacing="10">
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="Auto"/>
+                                                                        <ColumnDefinition Width="1*"/>
+                                                                    </Grid.ColumnDefinitions>
+                                                                    <eliseev:ImageBase64 Base64Source="{Binding Product.ProductRecordsBytes}" Aspect="Fill" WidthRequest="200" HeightRequest="200"/>
+                                                                    <VerticalStackLayout Grid.Column="1" Spacing="10" Margin="10">
+                                                                        <Label Text="{Binding Product.ProductName}" FontSize="20" FontAttributes="Bold" TextColor="White"/>
+                                                                        <BoxView StyleClass="Divider"/>
+                                                                        <Label Text="{Binding Product.ProductDescription, Converter={converts:DescriptionTextConvert}}" FontSize="20" TextColor="White"/>
+                                                                        <HorizontalStackLayout Spacing="10">
+                                                                            <Border BackgroundColor="#251d3a" HorizontalOptions="Start" Padding="5">
+                                                                                <Border.StrokeShape>
+                                                                                    <RoundRectangle CornerRadius="10"/>
+                                                                                </Border.StrokeShape>
+                                                                                <Label Text="{Binding Product.ProductPrice, StringFormat='Цена -{0}руб.'}" FontSize="20" TextColor="White"/>
+                                                                            </Border>
+                                                                            <Label Text="{Binding Count, StringFormat='{0}шт.'}" FontSize="20" VerticalTextAlignment="Center" TextColor="White"/>
+                                                                        </HorizontalStackLayout>
+                                                                    </VerticalStackLayout>
+                                                                </Grid>
+                                                            </Border>
+                                                        </VerticalStackLayout>
+                                                    </DataTemplate>
+                                                </CollectionView.ItemTemplate>
+                                            </CollectionView>
+                                            <Label Text="{Binding AllPriceRecords, StringFormat='Общая стоимость заказа {0}'}" FontSize="20"/>
+                                            <BoxView StyleClass="Divider"/>
                                         </VerticalStackLayout>
-                                        <CollectionView ItemsSource="{Binding Products}">
-                                            <CollectionView.ItemTemplate>
-                                                <DataTemplate>
-                                                    <VerticalStackLayout Padding="5">
-                                                        <Border BackgroundColor="#2a2550">
-                                                            <Border.StrokeShape>
-                                                                <RoundRectangle CornerRadius="10"/>
-                                                            </Border.StrokeShape>
-                                                            <Grid ColumnSpacing="10">
-                                                                <Grid.ColumnDefinitions>
-                                                                    <ColumnDefinition Width="Auto"/>
-                                                                    <ColumnDefinition Width="1*"/>
-                                                                </Grid.ColumnDefinitions>
-                                                                <eliseev:ImageBase64 Base64Source="{Binding Product.ProductRecordsBytes}" Aspect="Fill" WidthRequest="200" HeightRequest="200"/>
-                                                                <VerticalStackLayout Grid.Column="1" Spacing="10" Margin="10">
-                                                                    <Label Text="{Binding Product.ProductName}" FontSize="20" FontAttributes="Bold" TextColor="White"/>
-                                                                    <BoxView StyleClass="Divider"/>
-                                                                    <Label Text="{Binding Product.ProductDescription, Converter={converts:DescriptionTextConvert}}" FontSize="20" TextColor="White"/>
-                                                                    <HorizontalStackLayout Spacing="10">
-                                                                        <Border BackgroundColor="#251d3a" HorizontalOptions="Start" Padding="5">
-                                                                            <Border.StrokeShape>
-                                                                                <RoundRectangle CornerRadius="10"/>
-                                                                            </Border.StrokeShape>
-                                                                            <Label Text="{Binding Product.ProductPrice, StringFormat='Цена -{0}руб.'}" FontSize="20" TextColor="White"/>
-                                                                        </Border>
-                                                                        <Label Text="{Binding Count, StringFormat='{0}шт.'}" FontSize="20" VerticalTextAlignment="Center" TextColor="White"/>
-                                                                    </HorizontalStackLayout>
-                                                                </VerticalStackLayout>
-                                                            </Grid>
-                                                        </Border>
-                                                    </VerticalStackLayout>
-                                                </DataTemplate>
-                                            </CollectionView.ItemTemplate>
-                                        </CollectionView>
-                                        <Label Text="{Binding AllPriceRecords, StringFormat='Общая стоимость заказа {0}'}" FontSize="20"/>
-                                        <BoxView StyleClass="Divider"/>
-                                    </VerticalStackLayout>
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
-                    </ScrollView>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </ScrollView>
+                    </VerticalStackLayout>
                 </Grid>
             </VerticalStackLayout>
         </ScrollView>
+        
     </Grid>
 </ContentPage>

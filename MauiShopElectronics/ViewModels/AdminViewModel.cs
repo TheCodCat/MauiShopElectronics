@@ -82,7 +82,16 @@ namespace MauiShopElectronics.ViewModels
 
         [ObservableProperty]
         private List<Records> records = new List<Records>();
-		partial void OnCategoriesChanging(List<Categorie>? oldValue, List<Categorie> newValue)
+
+        [ObservableProperty]
+        private List<Records> searchRecords = new List<Records>();
+
+        [ObservableProperty]
+        private List<string> searchUsers = new List<string>();
+
+        [ObservableProperty]
+        private string selectUserName = string.Empty;
+        partial void OnCategoriesChanging(List<Categorie>? oldValue, List<Categorie> newValue)
         {
             CategoriesString = newValue?.Select(x => x.Title).ToList() ?? new List<string>();
         }
@@ -146,6 +155,8 @@ namespace MauiShopElectronics.ViewModels
 				}
 
 				Records = result;
+                SearchRecords = Records;
+                SearchUsers = Records.Select(x => x.User.Login).Distinct().ToList();
             }
             catch
             {
@@ -258,9 +269,16 @@ namespace MauiShopElectronics.ViewModels
             Price = string.Empty;
         }
 
-        partial void OnSelectionIndexCategorieChanging(int oldValue, int newValue)
+        partial void OnSelectUserNameChanging(string? oldValue, string newValue)
         {
-            
+            if(newValue != string.Empty)
+            {
+                SearchRecords = Records.Where(x => x.User.Login.Contains(newValue)).ToList();
+            }
+            else
+            {
+                SearchRecords = Records;
+            }
         }
     }
 }
